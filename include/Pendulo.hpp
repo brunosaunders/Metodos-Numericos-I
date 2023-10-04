@@ -1,3 +1,5 @@
+#ifndef PENDULO_HPP
+#define PENDULO_HPP
 #include "Polinomio.hpp"
 /**
  * Representação do polinômio que modela a oscilação de um pêndulo: 
@@ -5,7 +7,6 @@
 */
 class Pendulo:public Polinomio { 
 public:
-    Pendulo (double a3,double a2) { 
-        Polinomio({a3,0,9*a2,3});
-    }
+    Pendulo (double a3,double a2) : Polinomio({a3,0,9*a2,3}){}
 }; 
+#endif

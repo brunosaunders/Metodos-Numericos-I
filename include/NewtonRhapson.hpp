@@ -1,9 +1,11 @@
+#ifndef NEWTONRAPHSON_HPP
+#define NEWTONRAPHSON_HPP
 #include "Polinomio.hpp"
-#include "Metodos.hpp"
-namespace newton { 
-    class NewtonRhapson:public Metodos{};
-    class NewtonRhapsonFL: public Metodos{};
-    //Ou: 
-    void NewtonRhapson(Polinomio);
-    void NewtonRhapsonFL(Polinomio); 
+#include "Metodo.hpp"
+class NewtonRaphson:public Metodo{ 
+    NewtonRaphson(int max_passos,double erro): Metodo(max_passos,erro) {}
+    void original(Polinomio); 
+    void modificado(Polinomio); 
+    void derivada_numerica(Polinomio); 
 };
+#endif
