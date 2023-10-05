@@ -1,6 +1,10 @@
 #VSCode
 *.vscode
 
+.idea
+cmake-build-debug
+build
+
 # Prerequisites
 *.d
 
