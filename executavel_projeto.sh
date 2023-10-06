@@ -1,24 +1,26 @@
 #!/bin/bash
+## Script de build e execução
+# ATENÇÂO: Esse script deve permanecer na raiz do projeto para que possa ser executado corretamente
+PROJECT_NAME="Metodos-Numericos-I"
+PROJECT_ROOT_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
-# Define the build directory
-build_dir="build"
-
-# Check if the build directory exists
-if [ ! -d "$build_dir" ]; then
-    echo "Creating the $build_dir directory..."
-    mkdir "$build_dir"
+# Checagem para saber se o script se encontra na raiz do projeto
+if [ "$PROJECT_NAME" != "$(basename $PROJECT_ROOT_PATH)" ]; then
+    exit 1
 fi
 
-# Navigate to the build directory
-cd "$build_dir"
+BUILD_DIR="build"
+BUILD_PATH=$PROJECT_ROOT_PATH/$BUILD_DIR
 
-# Run CMake to generate build files
-cmake ..
+# Checa se o diretório de build é presente
+if [ ! -d "$BUILD_PATH" ]; then
+    echo "Criando o diretório $BUILD_DIR"
+    mkdir "$BUILD_PATH"
+fi
 
-# Build the project using make
-make
-
-# Run the executable
-./metodos
-
-cd ..
+# Entra no diretório de build, gera os arquivos de build, faz ação de build e faz a execução do programa 
+(cd $BUILD_PATH &&
+    cmake .. &&
+    make &&
+    "$BUILD_PATH/metodos"
+)
