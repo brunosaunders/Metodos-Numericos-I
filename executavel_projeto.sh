@@ -20,7 +20,7 @@ fi
 
 # Entra no diretório de build, gera os arquivos de build, faz ação de build e faz a execução do programa 
 (cd $BUILD_PATH &&
-    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_INCLUDE_HEADERS_IN_COMPILE_COMMANDS=1 .. &&
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. &&
     cmake --build . &&
     "$BUILD_PATH/metodos"
 )

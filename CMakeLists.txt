@@ -1,13 +1,15 @@
-cmake_minimum_required(VERSION 3.0)
-
-project(metodos)
-
+cmake_minimum_required(VERSION 3.13.0)
 set(CMAKE_CXX_STANDARD 17)
 
-file(GLOB SOURCES src/main.cpp src/*/*.cpp)
+project(metodos LANGUAGES CXX)
 
-add_executable(metodos src/main.cpp ${SOURCES})
+add_executable(${PROJECT_NAME})
 
-target_include_directories(metodos PUBLIC "${CMAKE_SOURCE_DIR}/include")
+# Arquivos Executaveis
+add_subdirectory(src)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
+# Arquivos Header
+add_subdirectory(include)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
