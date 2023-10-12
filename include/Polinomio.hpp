@@ -15,5 +15,6 @@ public:
 
     /*acessa o coeficiente a_i*/
     double operator[] (int i) const;
+    double p(double x) const;
 }; 
 #endif

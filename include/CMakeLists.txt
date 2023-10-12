@@ -5,4 +5,5 @@ target_sources(${PROJECT_NAME} PRIVATE
     NewtonRaphsonFL.hpp
     Pendulo.hpp
     Derivacao.hpp
+    Vizualizador.hpp
 )
