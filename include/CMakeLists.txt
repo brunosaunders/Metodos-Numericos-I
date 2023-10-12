@@ -3,4 +3,5 @@ target_sources(${PROJECT_NAME} PRIVATE
     Metodo.hpp
     NewtonRaphson.hpp
     Pendulo.hpp
+    Derivacao.hpp
 )
