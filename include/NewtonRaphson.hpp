@@ -8,6 +8,6 @@ class NewtonRaphson:public Metodo{
         NewtonRaphson(int max_passos,double erro): Metodo(max_passos,erro) {}
         void original(Polinomio); 
         void modificado(Polinomio); 
-        void derivada_numerica(Polinomio); 
+        double derivada_numerica(Polinomio polinomio, double x_inicial); 
 };
 #endif

@@ -8,7 +8,7 @@ public:
     void print_tabela();
     int get_passos();
     
-private: 
+protected:
     /*Tabela(vetor) que guarda o histórico do método, por exemplo: [x_0,x_1,...,x_n]*/
     std::vector<double> tabela; 
     int max_iteracoes;
