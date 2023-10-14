@@ -13,8 +13,10 @@ public:
     Polinomio funcao;
 
     int max_iteracoes;
+    bool raiz_valida;
     int num_passos;
     double erro;
+
 
     double get_raiz();
 
