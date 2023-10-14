@@ -1,41 +1,21 @@
 #include "NewtonRaphson.hpp"
-#include "Derivacao.hpp"
-#include <cmath>
+#include <stdexcept>
 
-double NewtonRaphson::derivada_numerica(Polinomio polinomio, double x_0) {
 
-    int k = 1;
-    double x_k = 0.0, raiz = 0.0;
-    bool continuar_iteracao = true;
-    Derivacao d;
+NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio funcao) {
+    this->max_iteracoes = max_iteracoes;
+    this->erro = erro;
+    this->funcao = funcao;
+}
 
-    // Checando se o x inicial já é próximo o suficiente da raíz.
-    if (std::abs(polinomio.p(x_0)) < this->erro) {
-
-        raiz = x_0;
-        continuar_iteracao = false;
-
+double NewtonRaphson::get_raiz() {
+    if (this->iteracoes_de_x.size() < 1) {
+        throw std::domain_error("Erro: raiz não calculada, chame calcula_raiz antes de acessar a raiz");
     }
 
-    this->tabela.push_back(x_0);
+    return this->iteracoes_de_x.back();
+}
 
-    while (continuar_iteracao) {
-
-        x_k = x_0 - (polinomio.p(x_0)/d.derivar(polinomio, x_0));
-        this->tabela.push_back(x_k);
-
-        if ((std::abs(polinomio.p(x_k)) < this->erro) || (std::abs(x_k - x_0) < this->erro) || (k >= this->max_iteracoes)) {
-
-            raiz = x_k;
-            continuar_iteracao = false; 
-
-        }
-
-        x_0 = x_k;
-        k++;
-
-    }
-
-    return raiz;
-
+void NewtonRaphson::calcula_raiz(double x0) {
+    /* TODO: Ismael */
 }
