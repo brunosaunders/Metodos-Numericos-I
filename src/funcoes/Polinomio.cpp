@@ -1,6 +1,7 @@
 #include <vector>
 #include <cmath>
 #include <stdexcept>
+#include <iostream>
 
 #include "Polinomio.hpp"
 
@@ -19,7 +20,7 @@ double Polinomio::get_valor_funcao(double x) const {
     int grau = this->get_grau();
 
     for (auto &item : this->coeficientes) {
-        valor += item * (std::pow(10, grau--));
+        valor += item * (std::pow(x, grau--));
     }
     return valor;
 }

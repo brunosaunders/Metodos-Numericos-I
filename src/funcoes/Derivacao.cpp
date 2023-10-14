@@ -35,15 +35,15 @@ double Derivacao::derivar(Polinomio polinomio, double x, double h, int metodo) {
 
     if (metodo == DERIVACAO_REGRESSIVA) {
 
-        res = (polinomio.p(x-h) - polinomio.p(x))/(-h);
+        res = (polinomio.get_valor_funcao(x-h) - polinomio.get_valor_funcao(x))/(-h);
 
     } else if (metodo == DERIVACAO_CENTRADA) {
 
-        res = (polinomio.p(x+h) - polinomio.p(x-h))/(2*h);
+        res = (polinomio.get_valor_funcao(x+h) - polinomio.get_valor_funcao(x-h))/(2*h);
 
     } else if (metodo == DERIVACAO_PROGRESSIVA) {
 
-        res = (polinomio.p(x+h) - polinomio.p(x))/h;
+        res = (polinomio.get_valor_funcao(x+h) - polinomio.get_valor_funcao(x))/h;
 
     } else {
 
