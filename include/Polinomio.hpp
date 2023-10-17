@@ -5,16 +5,15 @@
 class Polinomio { 
 public:
     Polinomio(); 
-    Polinomio(std::vector<double>); 
+    Polinomio(std::vector<double> coeficientes); 
+
     int get_grau() const;
-    double p(double) const; //Método que retorna P(x) 
-    Polinomio funcao_derivada() const;
+    double get_valor_funcao(double x) const; // Método que retorna P(x) 
+    std::vector<double> coeficientes; 
+
+    Polinomio get_funcao_derivada() const;
 
     /*acessa o coeficiente a_i*/
     double operator[] (int i) const;
-
-private: 
-    int grau; 
-    std::vector<double> coeficientes; 
 }; 
 #endif
