@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 
-NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio funcao) {
+NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio& funcao) {
     this->set_max_iteracoes(max_iteracoes);
     this->set_erro(erro);
     this->set_funcao(funcao);
@@ -41,12 +41,19 @@ void NewtonRaphson::set_erro(double e) {
     this->erro = e;
 }
 
-Polinomio NewtonRaphson::get_funcao() const {
+Polinomio& NewtonRaphson::get_funcao() {
     return this->funcao;
 }
 
-void NewtonRaphson::set_funcao(Polinomio f) {
-    this->funcao = funcao;
+void NewtonRaphson::set_funcao(Polinomio& f) {
+    this->funcao = f;
+}
+
+std::vector<double>& NewtonRaphson::get_iteracoes_de_x() {
+    return this->iteracoes_de_x;
+}
+void NewtonRaphson::set_iteracoes_de_x(std::vector<double>& i) {
+    this->iteracoes_de_x = i;
 }
 
 double NewtonRaphson::get_raiz() {

@@ -9,7 +9,7 @@ class NewtonRaphsonFL: public NewtonRaphson{
         double lambda;
 
     public:
-        NewtonRaphsonFL(int max_passos, double erro, Polinomio funcao, double lambda);
+        NewtonRaphsonFL(int max_passos, double erro, Polinomio& funcao, double lambda);
 
         double get_lambda() const;
         void set_lambda(double l);

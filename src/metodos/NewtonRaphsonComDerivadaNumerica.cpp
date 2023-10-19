@@ -13,11 +13,11 @@ void NewtonRaphsonComDerivadaNumerica::calcula_raiz(double x0) {
         continuar_iteracao = false;
     }
 
-    this->iteracoes_de_x.push_back(x0);
+    this->get_iteracoes_de_x().push_back(x0);
 
     while (continuar_iteracao) {
         x_k = x0 - (this->get_funcao().get_valor_funcao(x0)/this->derivador.derivar(this->get_funcao(), x0));
-        this->iteracoes_de_x.push_back(x_k);
+        this->get_iteracoes_de_x().push_back(x_k);
 
         /* Resultado do método é invalidado por estouro do número máximo de iterações */
         if (k > this->get_max_iteracoes()) {
@@ -35,5 +35,5 @@ void NewtonRaphsonComDerivadaNumerica::calcula_raiz(double x0) {
         k++;
     }
 
-    this->set_num_passos(this->iteracoes_de_x.size());
+    this->set_num_passos(this->get_iteracoes_de_x().size());
 }

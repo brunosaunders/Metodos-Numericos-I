@@ -12,11 +12,13 @@ private:
     double erro;
     Polinomio funcao; 
 
-public: 
+protected:
     /* [x_0,x_1,...,x_n], onde x_n é a raiz encontrada*/
     std::vector<double> iteracoes_de_x;
 
-    NewtonRaphson (int max_iteracoes,double erro, Polinomio funcao); 
+public: 
+
+    NewtonRaphson (int max_iteracoes,double erro, Polinomio& funcao); 
 
     int get_max_iteracoes() const;
     void set_max_iteracoes(int m);
@@ -30,8 +32,11 @@ public:
     double get_erro() const;
     void set_erro(double e);
 
-    Polinomio get_funcao() const;
-    void set_funcao(Polinomio f);
+    Polinomio& get_funcao();
+    void set_funcao(Polinomio& f);
+
+    std::vector<double>& get_iteracoes_de_x();
+    void set_iteracoes_de_x(std::vector<double>& i);
 
     double get_raiz();
 

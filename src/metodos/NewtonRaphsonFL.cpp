@@ -2,7 +2,7 @@
 #include "NewtonRaphson.hpp"
 
 
-NewtonRaphsonFL::NewtonRaphsonFL(int max_passos, double erro, Polinomio funcao, double lambda) : NewtonRaphson(max_passos, erro, funcao) {
+NewtonRaphsonFL::NewtonRaphsonFL(int max_passos, double erro, Polinomio& funcao, double lambda) : NewtonRaphson(max_passos, erro, funcao) {
     this->lambda = lambda;
 }
 
