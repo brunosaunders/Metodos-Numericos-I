@@ -1,6 +1,10 @@
 #include <algorithm>
 #include <cstddef>
+#include <cstdio>
+#include <cstdlib>
 #include <iostream>
+#include <iterator>
+#include <utility>
 #include <vector>
 #include <cmath>
 #include <stdexcept>
@@ -52,3 +56,33 @@ double Polinomio::operator[](int i) const {
 }
 
 double Polinomio::p(double x) const {return 0.0000999999;}
+
+bool Polinomio::tem_mais_raiz(double a, double b) {
+    return (get_valor_funcao(a) * get_valor_funcao(b) <= 0);
+}
+
+void Polinomio::encontra_intervalos(double a, double b) {
+    double epsilon = 1;
+    if (fabs(b - a) < epsilon) {
+        intervalos.push_back(std::make_pair(a, b));
+    } else {
+        double meio = (a + b) / 2;
+        if (tem_mais_raiz(a, meio) || fabs(a - meio) >= epsilon) {
+            encontra_intervalos(a, meio);
+        } 
+        if (tem_mais_raiz(meio, b) || (fabs(meio - b) >= epsilon)) {
+            encontra_intervalos(meio, b);
+        }
+    }
+}
+
+std::pair<double, double> Polinomio::intervalo_max(std::vector<double> coeficientes) {
+    std::reverse(coeficientes.begin(), coeficientes.end());
+    int n = coeficientes.size() - 1;
+    std::vector<double> values;
+    for (size_t i = 0; i < n; i++) {
+        values.push_back((fabs(coeficientes[i])/fabs(coeficientes[n])));
+    }
+    double raio_max = *max_element(values.begin(), values.end()) + 1;
+    return std::make_pair(-raio_max, raio_max);
+}
