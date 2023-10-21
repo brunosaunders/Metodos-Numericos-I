@@ -7,12 +7,6 @@ void NewtonRaphsonComDerivadaNumerica::calcula_raiz(double x0) {
     double x_k = 0.0, raiz = 0.0;
     bool continuar_iteracao = true;
 
-    // Checando se o x inicial já é próximo o suficiente da raíz.
-    if (std::abs(this->get_funcao().get_valor_funcao(x0)) < this->get_erro()) {
-        raiz = x0;
-        continuar_iteracao = false;
-    }
-
     this->get_iteracoes_de_x().push_back(x0);
 
     while (continuar_iteracao) {
