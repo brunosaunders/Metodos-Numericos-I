@@ -21,6 +21,16 @@ public:
     bool tem_mais_raiz(double a, double b);
 
     void encontra_intervalos(double a, double b);
+    
+    Polinomio divide(Polinomio p);
+
+    Polinomio divide(double valor);
+
+    Polinomio multiplica(double valor);
+
+    Polinomio soma(Polinomio p);
+
+    Polinomio subtrai(Polinomio p);
 
     std::pair<double, double> intervalo_max(std::vector<double> coef);
 
