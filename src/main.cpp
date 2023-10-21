@@ -1,20 +1,31 @@
 #include <iostream>
 #include "Polinomio.hpp"
-#include "NewtonRaphson.hpp"
+#include "NewtonRaphsonComDerivadaNumerica.hpp"
+#include "NewtonRaphsonFL.hpp"
 
 void print_vector(std::vector<double> v) {
     std::cout << "[";
-    for (auto &item : v) {
+    for (auto& item : v) {
         std::cout << item << " ";
     }
     std::cout << "]\n";
 }
 
 int main() {
-    std::vector<double> coef = {-2, 1, 1}; // Cria um vetor de coeficientes para o polinômio com a3 = 1, a2 = 1 e a1 = -2
-    Polinomio p(coef); // Cria um polinômio usando o vetor de coeficientes
-    NewtonRaphson nr(10, 0.001, p); // Cria um objeto da classe NewtonRaphson com os parâmetros dados com max_iteracoes = 10, erro = 0.001 e funcao = p
-    nr.calcula_raiz(0.5); // Calcula a raiz da função usando o método de Newton-Raphson com x0 = 0.5
-    std::cout << "A raiz encontrada foi: " << nr.get_raiz() << std::endl; // Imprime a raiz encontrada
+    Polinomio p = Polinomio({ 1.0, 0, -9.0, 3.0 }); // x³ - 9x + 3 ----> Derivada = 3x^2 - 9
+    std::cout << p.get_grau() << std::endl;
+    std::cout << p.get_valor_funcao(10.0) << std::endl;
+
+    print_vector(p.get_funcao_derivada().coeficientes);
+
+    NewtonRaphsonComDerivadaNumerica numerica(1000, 0.001, p);
+    NewtonRaphsonFL fl(1000, 0.001, p, 0.05);
+
+    numerica.calcula_raiz(0.5);
+    fl.calcula_raiz(0.5);
+
+    print_vector(numerica.get_iteracoes_de_x());
+    print_vector(fl.get_iteracoes_de_x());
+
     return 0;
 }
