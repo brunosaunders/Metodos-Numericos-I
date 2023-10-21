@@ -5,9 +5,14 @@
 #include "Derivacao.hpp"
 
 class NewtonRaphsonFL: public NewtonRaphson{ 
-    public:
-        NewtonRaphsonFL(int max_passos, double erro, Polinomio funcao, double lambda);
+    private:
         double lambda;
+
+    public:
+        NewtonRaphsonFL(int max_passos, double erro, Polinomio& funcao, double lambda);
+
+        double get_lambda() const;
+        void set_lambda(double l);
 
         void calcula_raiz(double x0);
 
