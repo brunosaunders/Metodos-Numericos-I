@@ -83,3 +83,42 @@ std::pair<double, double> Polinomio::intervalo_max(std::vector<double> coeficien
     return std::make_pair(-raio_max, raio_max);
 }
 
+
+Polinomio Polinomio::multiplica(double valor) {
+    for (int i=0; i < this->coeficientes.size(); i++) {
+        this->coeficientes[i] *= valor;
+    }
+    return Polinomio(this->coeficientes);
+}
+
+Polinomio Polinomio::divide(double valor) {
+    return this->multiplica(1/valor);
+}
+
+Polinomio Polinomio::soma(Polinomio p) {
+    int this_grau = this->get_grau();
+    int other_grau = p.get_grau();
+
+    if (other_grau < this_grau) {
+        int distance = this_grau - other_grau;
+        std::vector<double> results = this->coeficientes;
+
+        for (int i = distance; i < other_grau; i++) {
+            results[i] += p.coeficientes[i];
+        }
+        return Polinomio(results);
+    }
+
+    int distance = other_grau - this_grau;
+        std::vector<double> results = p.coeficientes;
+
+        for (int i = distance; i < other_grau; i++) {
+            results[i] += this->coeficientes[i];
+        }
+        return Polinomio(results);
+}
+
+Polinomio Polinomio::subtrai(Polinomio p) {
+    Polinomio other = p.multiplica(-1);
+    return this->soma(other);
+}
