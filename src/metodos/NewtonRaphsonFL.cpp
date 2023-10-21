@@ -1,3 +1,4 @@
+#include <iostream>
 #include "NewtonRaphsonFL.hpp"
 #include "NewtonRaphson.hpp"
 
