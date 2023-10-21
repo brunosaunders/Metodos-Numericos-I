@@ -33,6 +33,8 @@ Polinomio Polinomio::get_funcao_derivada() const {
         novos_coeficientes.push_back(coeficiente * grau--);
     }
 
+    novos_coeficientes.pop_back();
+
     return Polinomio(novos_coeficientes);
 }
 
