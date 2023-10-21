@@ -15,5 +15,13 @@ public:
 
     /*acessa o coeficiente a_i*/
     double operator[] (int i) const;
+
+    bool tem_mais_raiz(double a, double b);
+
+    void encontra_intervalos(double a, double b);
+
+    std::pair<double, double> intervalo_max(std::vector<double> coef);
+
+    std::vector<std::pair<double, double>> intervalos;
 }; 
 #endif
