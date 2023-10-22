@@ -18,7 +18,7 @@ public:
 
     bool tem_mais_raiz(double a, double b);
 
-    void encontra_intervalos(double a, double b);
+    void encontra_intervalos(double a, double b, int n_raizes);
     
     Polinomio divide(Polinomio p);
 
@@ -26,11 +26,17 @@ public:
 
     Polinomio multiplica(double valor);
 
+    Polinomio multiplica(Polinomio p);
+
     Polinomio soma(Polinomio p);
 
     Polinomio subtrai(Polinomio p);
 
-    std::pair<double, double> intervalo_max(std::vector<double> coef);
+    void print();
+
+    int numero_raizes(double a, double b);
+
+    std::pair<double, double> intervalo_max();
 
     std::vector<std::pair<double, double>> intervalos;
 }; 
