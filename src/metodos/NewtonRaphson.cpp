@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include <iostream>
 
-
 NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio& funcao) {
     this->set_max_iteracoes(max_iteracoes);
     this->set_erro(erro);
@@ -102,3 +101,4 @@ void NewtonRaphson::calcula_raiz(double x0) {
 
     this->num_passos = this->iteracoes_de_x.size();
 }
+
