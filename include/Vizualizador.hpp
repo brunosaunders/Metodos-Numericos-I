@@ -4,6 +4,7 @@
 
 #include "Polinomio.hpp"
 #include <vector>
+#include <iostream>
 
 namespace vizualizador
 {
