@@ -1,5 +1,6 @@
 #include "NewtonRaphson.hpp"
 #include <stdexcept>
+#include <iostream>
 
 
 NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio& funcao) {
@@ -69,5 +70,35 @@ double NewtonRaphson::get_raiz() {
 }
 
 void NewtonRaphson::calcula_raiz(double x0) {
-    /* TODO: Ismael */
+    int k = 1;
+    double x_k = x0;
+    bool continuar_iteracao = true;
+
+    this->iteracoes_de_x.push_back(x_k);
+
+    Polinomio f_derivada = this->funcao.get_funcao_derivada();
+
+    while (continuar_iteracao) {
+        double f_x = this->funcao.get_valor_funcao(x0);
+        double f_derivada_x = f_derivada.get_valor_funcao(x0);
+
+        x_k = x0 - (f_x / f_derivada_x);
+        this->iteracoes_de_x.push_back(x_k);
+
+        /* Resultado do método é invalidado por estouro do número máximo de iterações */
+        if (k > this->max_iteracoes) {
+            this->raiz_valida = false;
+            this->num_passos = this->max_iteracoes;
+            return;
+        }
+
+        if ((std::abs(f_x) < this->erro) && (std::abs(x_k - x0) < this->erro)) {
+            continuar_iteracao = false;
+        }
+
+        x0 = x_k;
+        k++;
+    }
+
+    this->num_passos = this->iteracoes_de_x.size();
 }

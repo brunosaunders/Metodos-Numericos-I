@@ -1,9 +1,12 @@
 #include <iostream>
+#include <iomanip>
 #include "Polinomio.hpp"
 #include "NewtonRaphsonComDerivadaNumerica.hpp"
 #include "NewtonRaphsonFL.hpp"
+#include "NewtonRaphson.hpp"
 
-void print_vector(std::vector<double> v) {
+void print_vector(std::vector<double> v, int precisao) {
+    std::cout << std::fixed << std::setprecision(precisao);
     std::cout << "[";
     for (auto& item : v) {
         std::cout << item << " ";
@@ -12,20 +15,19 @@ void print_vector(std::vector<double> v) {
 }
 
 int main() {
-    Polinomio p = Polinomio({ 1.0, 0, -9.0, 3.0 }); // x³ - 9x + 3 ----> Derivada = 3x^2 - 9
-    std::cout << p.get_grau() << std::endl;
-    std::cout << p.get_valor_funcao(10.0) << std::endl;
+    int precisao = 6;
+    std::vector<double> coef = {-2, 1, 1}; 
+    Polinomio p(coef); 
+    NewtonRaphson nr(100, 0.001, p); 
+    NewtonRaphsonFL nr_fl(100, 0.001, p, 0.5);
+    NewtonRaphsonComDerivadaNumerica nr_d(100, 0.001, p);
 
-    print_vector(p.get_funcao_derivada().coeficientes);
-
-    NewtonRaphsonComDerivadaNumerica numerica(1000, 0.001, p);
-    NewtonRaphsonFL fl(1000, 0.001, p, 0.05);
-
-    numerica.calcula_raiz(0.5);
-    fl.calcula_raiz(0.5);
-
-    print_vector(numerica.get_iteracoes_de_x());
-    print_vector(fl.get_iteracoes_de_x());
-
+    nr.calcula_raiz(1.5); 
+    nr_fl.calcula_raiz(1.5);
+    nr_d.calcula_raiz(1.5);
+    
+    print_vector(nr.get_iteracoes_de_x(), precisao);
+    print_vector(nr_fl.get_iteracoes_de_x(), precisao);
+    print_vector(nr_d.get_iteracoes_de_x(), precisao);
     return 0;
 }
