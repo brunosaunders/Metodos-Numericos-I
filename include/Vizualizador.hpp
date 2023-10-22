@@ -24,7 +24,7 @@ namespace vizualizador
         double e2; // erro obtido por |f(x_{k})|
         int iteracoes;  
     };
-    void print_quadro_comparativo(std::vector<EntradasLinhaQuadroComparativo> linhas,int,int) ; 
+    void print_quadro_comparativo(std::vector<EntradasLinhaQuadroComparativo> linhas,int,int,double*) ; 
 }
 
 #endif

@@ -32,25 +32,26 @@ namespace  vizualizador {
         tamanhos_blocos[8] = 2*TAM_TAB + 2;
     }
     
-    void forma_saidas(std::vector<SaidasLinhaQuadroComparativo> *saidas_linhas, std::vector<EntradasLinhaQuadroComparativo> *linhas,int max_iteracoes) { 
+    void forma_saidas(std::vector<SaidasLinhaQuadroComparativo> *saidas_linhas, std::vector<EntradasLinhaQuadroComparativo> *linhas,int max_iteracoes,double *intervalo) { 
         EntradasLinhaQuadroComparativo* entrada; 
         for (int i = 0; i < linhas->size(); i++ ){ 
             entrada = &(linhas->at(i)); 
-        int num_metodo = entrada->metodo; 
-        Pendulo funcao_pendulo(entrada->a3,entrada->a2);
-        NewtonRaphson *metodo;
-        if (num_metodo == ORIGINAL) 
-            metodo = &NewtonRaphson(max_iteracoes,entrada->epsilon,funcao_pendulo); 
-        else if(num_metodo == FL) 
-            metodo = &NewtonRaphsonFL(max_iteracoes,entrada->epsilon,funcao_pendulo,entrada->lambda); 
-        else metodo = &NewtonRaphsonComDerivadaNumerica(max_iteracoes,entrada->epsilon,funcao_pendulo);
-
-        int num_iteracoes = metodo->get_num_passos(); 
-        double x_k = (metodo->get_iteracoes_de_x())[num_iteracoes]; 
-        double e1 = std::abs(x_k - metodo->get_iteracoes_de_x()[(num_iteracoes -1)]);
-        double e2 = std::abs(funcao_pendulo.get_valor_funcao(x_k));  
-        SaidasLinhaQuadroComparativo linha{entrada,x_k,e1,e2,num_iteracoes};
-        saidas_linhas->push_back(linha); 
+            int num_metodo = entrada->metodo; 
+            Pendulo funcao_pendulo(entrada->a3,entrada->a2);
+            NewtonRaphson *metodo;
+            if (num_metodo == ORIGINAL) {metodo = new NewtonRaphson(max_iteracoes,entrada->epsilon,funcao_pendulo);}
+            else if(num_metodo == FL) {metodo = new NewtonRaphsonFL(max_iteracoes,entrada->epsilon,funcao_pendulo,entrada->lambda); }
+            else{ metodo = new NewtonRaphsonComDerivadaNumerica(max_iteracoes,entrada->epsilon,funcao_pendulo);}
+    
+            metodo->calcula_raiz((intervalo[0] + intervalo[1] )/2);
+            int num_iteracoes = metodo->get_num_passos(); 
+            //Possíveis erros aqui: ainda há de ser implementado, e esta sendo acessado diretamente, o que pode gerar error.
+            double x_k = (metodo->get_iteracoes_de_x())[num_iteracoes]; 
+            double e1 = std::abs(x_k - metodo->get_iteracoes_de_x()[(num_iteracoes -1)]);
+            double e2 = std::abs(funcao_pendulo.get_valor_funcao(x_k));  
+            SaidasLinhaQuadroComparativo linha{entrada,x_k,e1,e2,num_iteracoes};
+            saidas_linhas->push_back(linha); 
+            delete metodo; 
         } 
     }
 
@@ -152,11 +153,11 @@ namespace  vizualizador {
         std::cout.unsetf(std::ios::fixed);
     }
 
-    void print_quadro_comparativo(std::vector<EntradasLinhaQuadroComparativo> linhas,int precisao,int max_iteracoes){ 
+    void print_quadro_comparativo(std::vector<EntradasLinhaQuadroComparativo> linhas,int precisao,int max_iteracoes,double *intervalo){ 
         int tamanho_bloco[9]; 
         calcula_tamanho_blocos(tamanho_bloco);
         std::vector<SaidasLinhaQuadroComparativo> saidas_linhas; 
-        forma_saidas(&saidas_linhas, &linhas, max_iteracoes);
+        forma_saidas(&saidas_linhas, &linhas, max_iteracoes, intervalo);
         max_espaco_linha(&saidas_linhas,tamanho_bloco,precisao); 
 
         print_header(tamanho_bloco);        
