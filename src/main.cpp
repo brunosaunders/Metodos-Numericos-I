@@ -22,9 +22,9 @@ int main() {
     NewtonRaphsonFL nr_fl(100, 0.001, p, 0.5);
     NewtonRaphsonComDerivadaNumerica nr_d(100, 0.001, p);
 
-    nr.calcula_raiz(0.5); 
-    nr_fl.calcula_raiz(0.5);
-    nr_d.calcula_raiz(0.5);
+    nr.calcula_raiz(1.5); 
+    nr_fl.calcula_raiz(1.5);
+    nr_d.calcula_raiz(1.5);
     
     print_vector(nr.get_iteracoes_de_x(), precisao);
     print_vector(nr_fl.get_iteracoes_de_x(), precisao);
