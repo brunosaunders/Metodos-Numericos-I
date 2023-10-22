@@ -3,9 +3,10 @@
 #include "Vizualizador.hpp"
 #include <string>
 #include <cmath>
-#include "Metodo.hpp"
 #include "NewtonRaphson.hpp"
 #include "Pendulo.hpp"
+#include "NewtonRaphsonFL.hpp"
+#include "NewtonRaphsonComDerivadaNumerica.hpp"
 
 namespace  vizualizador { 
     const int NUM_BLOCOS = 9; 
@@ -31,21 +32,25 @@ namespace  vizualizador {
         tamanhos_blocos[8] = 2*TAM_TAB + 2;
     }
     
-    void forma_saidas(std::vector<SaidasLinhaQuadroComparativo> *saidas_linhas, std::vector<EntradasLinhaQuadroComparativo> *linhas) { 
+    void forma_saidas(std::vector<SaidasLinhaQuadroComparativo> *saidas_linhas, std::vector<EntradasLinhaQuadroComparativo> *linhas,int max_iteracoes) { 
         EntradasLinhaQuadroComparativo* entrada; 
         for (int i = 0; i < linhas->size(); i++ ){ 
             entrada = &(linhas->at(i)); 
-            
-            NewtonRaphson metodo(100,100); // VALOR 100 ARBITRARIO TODO: Ajustar valores do erro e max iteração
-            int num_metodo = entrada->metodo;
-            Pendulo funcao_pendulo(entrada->a3,entrada->a2);
-            num_metodo == ORIGINAL?metodo.original(funcao_pendulo) : num_metodo == FL? metodo.modificado(funcao_pendulo) : metodo.derivada_numerica(funcao_pendulo); 
-            int num_iteracoes = metodo.get_passos(); 
-            double x_k = metodo.get_Tabela_x(num_iteracoes); 
-            double e1 = std::abs(x_k - metodo.get_Tabela_x(num_iteracoes -1));
-            double e2 = std::abs(funcao_pendulo.p(x_k));  
-            SaidasLinhaQuadroComparativo linha{entrada,x_k,e1,e2,num_iteracoes};
-            saidas_linhas->push_back(linha); 
+        int num_metodo = entrada->metodo; 
+        Pendulo funcao_pendulo(entrada->a3,entrada->a2);
+        NewtonRaphson *metodo;
+        if (num_metodo == ORIGINAL) 
+            metodo = &NewtonRaphson(max_iteracoes,entrada->epsilon,funcao_pendulo); 
+        else if(num_metodo == FL) 
+            metodo = &NewtonRaphsonFL(max_iteracoes,entrada->epsilon,funcao_pendulo,entrada->lambda); 
+        else metodo = &NewtonRaphsonComDerivadaNumerica(max_iteracoes,entrada->epsilon,funcao_pendulo);
+
+        int num_iteracoes = metodo->get_num_passos(); 
+        double x_k = (metodo->get_iteracoes_de_x())[num_iteracoes]; 
+        double e1 = std::abs(x_k - metodo->get_iteracoes_de_x()[(num_iteracoes -1)]);
+        double e2 = std::abs(funcao_pendulo.get_valor_funcao(x_k));  
+        SaidasLinhaQuadroComparativo linha{entrada,x_k,e1,e2,num_iteracoes};
+        saidas_linhas->push_back(linha); 
         } 
     }
 
@@ -147,11 +152,11 @@ namespace  vizualizador {
         std::cout.unsetf(std::ios::fixed);
     }
 
-    void print_quadro_comparativo(std::vector<EntradasLinhaQuadroComparativo> linhas,int precisao){ 
+    void print_quadro_comparativo(std::vector<EntradasLinhaQuadroComparativo> linhas,int precisao,int max_iteracoes){ 
         int tamanho_bloco[9]; 
         calcula_tamanho_blocos(tamanho_bloco);
         std::vector<SaidasLinhaQuadroComparativo> saidas_linhas; 
-        forma_saidas(&saidas_linhas, &linhas);
+        forma_saidas(&saidas_linhas, &linhas, max_iteracoes);
         max_espaco_linha(&saidas_linhas,tamanho_bloco,precisao); 
 
         print_header(tamanho_bloco);        
@@ -161,4 +166,5 @@ namespace  vizualizador {
             print_linha_quadro_comparativo(&saidas_linhas[i], tamanho_bloco, precisao); 
         }
     } 
+
 }

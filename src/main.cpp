@@ -37,20 +37,9 @@ void teste_vizualizador() {
 
         entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{metodo, a3, a2, lambda,epsilon});
     }
-    // std::vector<vizualizador::EntradasLinhaQuadroComparativo> entradas {
-    //     {2, 4123.4124, 1245.2133002, 123.2, 999.3939},
-    //     {0, 10.9, 22.0, 72.2},
-    //     {1, 10.9, 22.0, 72.2},
-    //     {0, 5.6, 11.0, 41.3},
-    //     {1, 7.8, 16.5, 63.7},
-    //     {2, 15.2, 31.4, 121.9},
-    //     {0, 3.2, 7.0, 31.6},
-    //     {1, 12.5, 28.8, 112.4},
-    //     {2, 21.7, 42.3, 167.8},
-    //     {0, 6.1, 13.7, 55.9}
-    // };
-    vizualizador::print_quadro_comparativo(entradas, 2);
+    vizualizador::print_quadro_comparativo(entradas, 6,10);
 }
+
 int main() {
     int precisao = 6;
     std::vector<double> coef = {-2, 1, 1}; 

@@ -1,7 +1,7 @@
 #ifndef VIZUALIZADOR_HPP
 #define VIZUALIZADOR_HPP 
 
-#include "Metodo.hpp"
+
 #include "Polinomio.hpp"
 #include <vector>
 
@@ -24,10 +24,7 @@ namespace vizualizador
         double e2; // erro obtido por |f(x_{k})|
         int iteracoes;  
     };
-    void calcula_tamanho_blocos(int *); 
-    void print_header(int *tamanho_blocos);
-    void print_quadro_comparativo(std::vector<EntradasLinhaQuadroComparativo> linhas,int) ; 
-    void print_linha_quadro_comparativo(SaidasLinhaQuadroComparativo *linha, int *tamanho_blocos,int); 
+    void print_quadro_comparativo(std::vector<EntradasLinhaQuadroComparativo> linhas,int,int) ; 
 }
 
 #endif
