@@ -52,13 +52,6 @@ void testa_passos() {
 
 
 int main() {
-    // Polinomio p = Polinomio({ 1.0, 0, -9.0, 3.0 }); // x³ - 9x + 3 ----> Derivada = 3x^2 - 9
-    // std::cout << p.get_grau() << std::endl;
-    // std::cout << p.get_valor_funcao(10.0) << std::endl;
-
-    // print_vector(p.get_funcao_derivada().coeficientes);
-
-
     //Testa passos
     testa_passos();
     return 0;
