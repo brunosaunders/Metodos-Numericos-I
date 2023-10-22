@@ -1,7 +1,9 @@
 target_sources(${PROJECT_NAME} PRIVATE
     Polinomio.hpp
-    Metodo.hpp
+    NewtonRaphsonComDerivadaNumerica.hpp
     NewtonRaphson.hpp
+    NewtonRaphsonFL.hpp
     Pendulo.hpp
+    Derivacao.hpp
     Vizualizador.hpp
 )
