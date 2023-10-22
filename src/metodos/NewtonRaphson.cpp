@@ -74,10 +74,7 @@ void NewtonRaphson::calcula_raiz(double x0) {
     double x_k = x0;
     bool continuar_iteracao = true;
 
-
     this->iteracoes_de_x.push_back(x_k);
-
-    Polinomio f_derivada = this->funcao.get_funcao_derivada();
 
     Polinomio f_derivada = this->funcao.get_funcao_derivada();
 
