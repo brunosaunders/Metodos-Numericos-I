@@ -57,8 +57,6 @@ int main() {
     print_vector(nr_fl.get_iteracoes_de_x(), precisao);
     print_vector(nr_d.get_iteracoes_de_x(), precisao);
     teste_vizualizador();
-
-    teste_vizualizador(); 
     return 0;
 }
 
