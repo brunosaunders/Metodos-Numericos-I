@@ -37,7 +37,8 @@ void teste_vizualizador() {
 
         entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{metodo, a3, a2, lambda,epsilon});
     }
-    vizualizador::print_quadro_comparativo(entradas, 6,10);
+    double intervalo[2] {1.23,34.9};
+    vizualizador::print_quadro_comparativo(entradas, 6,10,intervalo);
 }
 
 int main() {
