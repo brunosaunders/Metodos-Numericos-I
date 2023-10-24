@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 
+#include "NewtonRaphson.hpp"
+
 namespace Passos {
     class Passo {
     public:
@@ -18,7 +20,7 @@ namespace Passos {
         Passo(int k, double xk, double xk_1, double fxk, double fxk_1, double e1, double e2);
     };
 
-    void exibirPassos(const std::string& nomeMetodo, double a3, double a2, double lambda, double epsilon, int maxIteracoes);
+    void exibir_passos(NewtonRaphson* metodo);
 }
 
 #endif

@@ -1,6 +1,12 @@
 #include <iostream>
+#include <string>
+#include <iomanip>
+#include <sstream>
+
 #include "NewtonRaphsonFL.hpp"
 #include "NewtonRaphson.hpp"
+
+
 
 
 NewtonRaphsonFL::NewtonRaphsonFL(int max_passos, double erro, Polinomio& funcao, double lambda) : NewtonRaphson(max_passos, erro, funcao) {
@@ -65,4 +71,21 @@ void NewtonRaphsonFL::calcula_raiz(double x0) {
         //Incrementar o k
         k++;
     }
+}
+
+std::string NewtonRaphsonFL::get_nome() {
+    return "Newton Raphson FL";
+}
+
+std::string NewtonRaphsonFL::get_nome_abreviado() {
+    return "NR-FL";
+}
+
+std::string NewtonRaphsonFL::get_classe(int precision) {
+    Polinomio p = this->get_funcao();
+
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(precision) << this->get_nome_abreviado() << "(a3: " << p[0] << ", a2: " << p[2]/9 << ", lambda: " << this->lambda << ", erro: " << this->get_erro() << ")";
+
+    return ss.str();
 }

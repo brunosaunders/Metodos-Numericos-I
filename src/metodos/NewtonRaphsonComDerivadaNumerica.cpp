@@ -1,6 +1,10 @@
+#include <cmath>
+#include <string>
+#include <iomanip>
+#include <sstream>
+
 #include "NewtonRaphsonComDerivadaNumerica.hpp"
 #include "Derivacao.hpp"
-#include <cmath>
 
 void NewtonRaphsonComDerivadaNumerica::calcula_raiz(double x0) {
     int k = 1;
@@ -30,4 +34,12 @@ void NewtonRaphsonComDerivadaNumerica::calcula_raiz(double x0) {
     }
 
     this->set_num_passos(this->get_iteracoes_de_x().size());
+}
+
+std::string NewtonRaphsonComDerivadaNumerica::get_nome() {
+    return "Newton Raphson Derivada Numérica";
+}
+
+std::string NewtonRaphsonComDerivadaNumerica::get_nome_abreviado() {
+    return "NR-D";
 }

@@ -1,6 +1,8 @@
 #include "NewtonRaphson.hpp"
 #include <stdexcept>
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 
 
 NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio& funcao) {
@@ -68,6 +70,24 @@ double NewtonRaphson::get_raiz() {
 
     return this->iteracoes_de_x.back();
 }
+
+std::string NewtonRaphson::get_nome_abreviado() {
+    return "NR";
+}   
+
+std::string NewtonRaphson::get_nome() {
+    return "Newton Raphson";
+}
+
+std::string NewtonRaphson::get_classe(int precisao) {
+    Polinomio p = this->get_funcao();
+
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(precisao) << this->get_nome_abreviado() << "(a3: " << p[0] << ", a2: " << p[2]/9 << ", erro: " << this->get_erro() << ")";
+
+    return ss.str();
+}
+
 
 void NewtonRaphson::calcula_raiz(double x0) {
     int k = 1;

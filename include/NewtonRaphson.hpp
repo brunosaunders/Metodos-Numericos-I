@@ -2,6 +2,8 @@
 #define NewtonRaphson_HPP 
 
 #include <vector>
+#include <string>
+
 #include "Polinomio.hpp"
 
 class NewtonRaphson { 
@@ -19,6 +21,8 @@ protected:
 public: 
 
     NewtonRaphson (int max_iteracoes,double erro, Polinomio& funcao); 
+
+    virtual ~NewtonRaphson() {}
 
     int get_max_iteracoes() const;
     void set_max_iteracoes(int m);
@@ -40,7 +44,11 @@ public:
 
     double get_raiz();
 
+    virtual std::string get_nome();
+    virtual std::string get_nome_abreviado();
+    virtual std::string get_classe(int precisao);
+
     /* roda o método numérico salvando informações no vetor iteracoes_de_x */
-    void calcula_raiz(double x0);
+    virtual void calcula_raiz(double x0);
 }; 
 #endif

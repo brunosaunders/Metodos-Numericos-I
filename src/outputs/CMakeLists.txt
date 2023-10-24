@@ -1,7 +1,4 @@
 target_sources(${PROJECT_NAME} PRIVATE
     Passos.cpp
-<<<<<<< HEAD
+    Utils.cpp
 )
-=======
-)
->>>>>>> b6fb176 (CMakelists)
