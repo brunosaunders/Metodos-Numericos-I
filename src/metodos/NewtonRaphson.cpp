@@ -122,3 +122,4 @@ void NewtonRaphson::calcula_raiz(double x0) {
 
     this->num_passos = this->iteracoes_de_x.size();
 }
+

@@ -19,7 +19,6 @@ protected:
     std::vector<double> iteracoes_de_x;
 
 public: 
-
     NewtonRaphson (int max_iteracoes,double erro, Polinomio& funcao); 
 
     virtual ~NewtonRaphson() {}

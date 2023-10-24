@@ -5,7 +5,7 @@
 
 #include "NewtonRaphsonFL.hpp"
 #include "NewtonRaphson.hpp"
-
+#include <cmath>
 
 
 
