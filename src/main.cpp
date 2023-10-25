@@ -1,62 +1,75 @@
 #include <iostream>
 #include <iomanip>
+#include <cmath>
+#include <random>
+#include <vector> 
+#include <iterator> 
+
 #include "Polinomio.hpp"
 #include "NewtonRaphsonComDerivadaNumerica.hpp"
 #include "NewtonRaphsonFL.hpp"
+#include "Passos.hpp"
 #include "NewtonRaphson.hpp"
-#include "Vizualizador.hpp"
-#include <vector> 
-#include <iterator> 
 #include "Pendulo.hpp"
-#include <iomanip>
-#include <cmath>
-#include <random>
+#include "Utils.hpp"
+// #include "Vizualizador.hpp"
+#include "QuadroComparativo.hpp"
 
-void print_vector(std::vector<double> v, int precisao) {
-    std::cout << std::fixed << std::setprecision(precisao);
-    std::cout << "[";
-    for (auto& item : v) {
-        std::cout << item << " ";
-    }
-    std::cout << "]\n";
+
+void testa_passos() {
+    Pendulo p(1, 1);
+    NewtonRaphson* nr = new NewtonRaphson(100, 0.001, p);
+    NewtonRaphson* nr_d = new NewtonRaphsonComDerivadaNumerica(100, 0.00001, p);
+    std::vector<double> x0s({5, 0, 2});
+
+    metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr);
+    metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr_d);    
 }
 
-void teste_vizualizador() {
-    std::vector<vizualizador::EntradasLinhaQuadroComparativo> entradas;
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<double> double_dist(1.0, 1000.0);
+void testa_quadro_comparativo() {
+    // std::vector<vizualizador::EntradasLinhaQuadroComparativo> entradas;
+    std::vector<NewtonRaphson*> metodos;
 
-    for (int i = 0; i < 100; i++) {
-        int metodo = i % 3;  // Alternar entre os três métodos (0, 1, 2)
-        double a3 = double_dist(gen);
-        double a2 = double_dist(gen);
-        double lambda = double_dist(gen);
-        double epsilon = double_dist(gen);
+    // for (int i=1; i < 10; i++) {
+    //     for (int j=1; j < 10; j++) {
+    //         double a3 = j;
+    //         double a2 = i;
+    //         double epsilon = 0.0001;
 
-        entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{metodo, a3, a2, lambda,epsilon});
-    }
-    double intervalo[2] {1.23,34.9};
-    vizualizador::print_quadro_comparativo(entradas, 6,10,intervalo);
+    //         entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{1, a3, a2, 0.5, epsilon});
+    //     }
+    // }
+
+    // entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{0, 1, 1, 0, 0.0001});
+    // entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{0, 1, -1, 0, 0.0001});
+
+    Polinomio p = Pendulo(1.3332, 1);
+    Polinomio p2 = Pendulo(-9, 2);
+    Polinomio p3 = Pendulo(5, 2);
+    metodos.push_back(new NewtonRaphson(100, 0.001, p));
+    metodos.push_back(new NewtonRaphsonFL(100, 0.001, p, 0.5));
+    metodos.push_back(new NewtonRaphsonComDerivadaNumerica(100, 0.001, p));
+
+    metodos.push_back(new NewtonRaphson(100, 0.001, p2));
+    metodos.push_back(new NewtonRaphsonFL(100, 0.001, p2, 0.5));
+    metodos.push_back(new NewtonRaphsonComDerivadaNumerica(100, 0.001, p2));
+
+    metodos.push_back(new NewtonRaphson(100, 0.001, p3));
+    metodos.push_back(new NewtonRaphsonFL(100, 0.001, p3, 0.5));
+    metodos.push_back(new NewtonRaphsonComDerivadaNumerica(100, 0.001, p3));
+
+    double intervalo[2] {0, 10};
+    // vizualizador::print_quadro_comparativo(entradas, 4, 100, intervalo);
+    metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(metodos);
+
 }
 
 int main() {
-    int precisao = 6;
-    std::vector<double> coef = {-2, 1, 1}; 
-    Polinomio p(coef); 
-    NewtonRaphson nr(100, 0.001, p); 
-    NewtonRaphsonFL nr_fl(100, 0.001, p, 0.5);
-    NewtonRaphsonComDerivadaNumerica nr_d(100, 0.001, p);
+    // testa_quadro_comparativo();
 
-    nr.calcula_raiz(1.5); 
-    nr_fl.calcula_raiz(1.5);
-    nr_d.calcula_raiz(1.5);
-
-    print_vector(nr.get_iteracoes_de_x(), precisao);
-    print_vector(nr_fl.get_iteracoes_de_x(), precisao);
-    print_vector(nr_d.get_iteracoes_de_x(), precisao);
-    teste_vizualizador();
+    //Testa passos
+    testa_passos();
     return 0;
 }
 

@@ -32,9 +32,7 @@ Polinomio Polinomio::get_funcao_derivada() const {
     for (int i = 0; i < this->coeficientes.size() - 1; i++) {
         novos_coeficientes.push_back(this->coeficientes[i] * grau--);
     }
-
-    novos_coeficientes.pop_back();
-
+    
     return Polinomio(novos_coeficientes);
 }
 
