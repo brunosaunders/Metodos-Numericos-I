@@ -1,26 +1,18 @@
-#ifndef PASSOS_HPP
-#define PASSOS_HPP
+#ifndef METODOS_NUMERICOS1_OUTPUTS_PASSOS
+#define METODOS_NUMERICOS1_OUTPUTS_PASSOS
 
 #include <vector>
 #include <string>
 
 #include "NewtonRaphson.hpp"
 
-namespace Passos {
-    class Passo {
-    public:
-        int k;
-        double xk;
-        double xk_1;
-        double fxk;
-        double fxk_1;
-        double e1;
-        double e2;
-
-        Passo(int k, double xk, double xk_1, double fxk, double fxk_1, double e1, double e2);
-    };
-
-    void exibir_passos(NewtonRaphson* metodo);
+namespace metodos_numericos1 {
+    namespace outputs {
+        class Passos {
+            public:
+                static void exibir_passos(NewtonRaphson* metodo);
+        };
+    }
 }
 
 #endif

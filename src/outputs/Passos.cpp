@@ -10,19 +10,12 @@
 #include "Derivacao.hpp"
 #include "NewtonRaphsonComDerivadaNumerica.hpp"
 #include "Pendulo.hpp"
-#include "Utils.hpp"
 #include "Tabela.hpp"
 
 
-namespace Passos {
-    Passo::Passo(int k, double xk, double xk_1, double fxk, double fxk_1, double e1, double e2)
-        : k(k), xk(xk), xk_1(xk_1), fxk(fxk), fxk_1(fxk_1), e1(e1), e2(e2) {}
-
-    void exibir_passos_todos_intervalos(NewtonRaphson* metodo) {
-        // TODO: Chamar exibir_passos para cada intervalo do método.
-    }
-
-    void exibir_passos(NewtonRaphson* metodo) {
+namespace metodos_numericos1 {
+    namespace outputs {
+        void Passos::exibir_passos(NewtonRaphson* metodo) {
         std::cout << std::endl;
         
         double x0 = 5; // Valor inicial arbitrário
@@ -97,5 +90,6 @@ namespace Passos {
         }
 
         metodos_numericos1::outputs::Tabela::exibir_tampa_tabela(largura_total_tabela);
+        }
     }
 }
