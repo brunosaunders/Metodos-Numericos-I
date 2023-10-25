@@ -17,11 +17,25 @@ namespace metodos_numericos1::outputs {
             int largura_numeros = largura_total - 2*padding;
 
             std::cout << std::scientific << std::setprecision(precisao) << std::setw(largura_numeros + padding) << numero << std::setw(padding) << "|";
+            std::cout << std::defaultfloat;
         }
 
         void Tabela::formata_numero_normal(double numero, int largura_total, int padding) {
             int largura_numeros = largura_total - 2*padding;
             std::cout << std::defaultfloat << std::setw(largura_numeros + padding) << numero << std::setw(padding) << "|";
+        }
+
+        void Tabela::formata_numero(double numero, int largura_total, int padding) {
+            std::string n = std::to_string(numero);
+            int size = n.size();
+
+            int novo_padding = (largura_total + 2 * padding - size) / 2;
+            std::cout << std::setprecision(1) << std::setw(size + novo_padding) << numero << std::setw(novo_padding) << "|";
+        }
+
+        void Tabela::formata_palavra(std::string palavra, int largura_total, int padding) {
+            int largura_numeros = largura_total - 2*padding;
+            std::cout << std::defaultfloat << std::setw(largura_numeros + padding) << palavra << std::setw(padding) << "|";
         }
 
         void Tabela::exibir_tampa_tabela(int tamanho) {

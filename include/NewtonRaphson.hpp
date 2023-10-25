@@ -14,6 +14,7 @@ private:
     double erro;
     Polinomio funcao; 
     std::vector<double> isolamento_raizes;
+    bool quebra;
 
 protected:
     /* [x_0,x_1,...,x_n], onde x_n é a raiz encontrada*/
@@ -47,6 +48,11 @@ public:
 
     virtual double get_lambda();
     void calcula_raizes();
+
+    int get_total_iteracoes();
+    double get_media_iteracoes();
+
+    std::string get_quebra();
 private:
     /* roda o método numérico salvando informações no vetor iteracoes_de_x */
     virtual void calcula_raiz(double x0);

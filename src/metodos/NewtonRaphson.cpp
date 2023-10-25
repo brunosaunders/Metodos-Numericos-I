@@ -47,6 +47,24 @@ void NewtonRaphson::set_funcao(Polinomio& f) {
     this->funcao = f;
 }
 
+int NewtonRaphson::get_total_iteracoes() {
+    int acumulador = 0;
+    for (auto& iteracoes_de_x: this->iteracoes_de_x) {
+        acumulador += iteracoes_de_x.size();
+    }
+    return acumulador;
+}
+
+double NewtonRaphson::get_media_iteracoes() {
+    int total_iteracoes = this->get_total_iteracoes();
+    return total_iteracoes / (double) this->iteracoes_de_x.size();
+}
+
+std::string NewtonRaphson::get_quebra() {
+    if (this->quebra) return "Sim";
+    return "Não";
+}
+
 std::vector<double>& NewtonRaphson::get_iteracoes_de_x(int index) {
     if (index > this->iteracoes_de_x.size()) {
         std::stringstream ss;
@@ -137,10 +155,13 @@ void NewtonRaphson::calcula_raiz(double x0) {
 }
 
 void NewtonRaphson::calcula_raizes() {
+    double fator_de_risco = 0.3;
     int raizes_disponiveis_para_calculo = this->isolamento_raizes.size();
 
     for (int i=0; i < raizes_disponiveis_para_calculo; i++) {
         this->calcula_raiz(this->isolamento_raizes[i]);
+
+        if (this->get_raiz(i) >= fator_de_risco) this->quebra = true;
     }
 }
 

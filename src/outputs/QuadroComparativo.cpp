@@ -97,6 +97,27 @@ namespace metodos_numericos1::outputs {
             metodos_numericos1::outputs::Tabela::formata_cabecalho("quebra?", largura_quebra);
             std::cout << std::endl;
 
+            int k = 1;
+            for (auto& metodo : metodos) {
+                Polinomio p = metodo->get_funcao();
+                std::cout << "|";
+                metodos_numericos1::outputs::Tabela::formata_numero_normal(k, largura_k, padding);
+                metodos_numericos1::outputs::Tabela::formata_palavra(metodo->get_nome_abreviado(), largura_metodo,  padding);
+                metodos_numericos1::outputs::Tabela::formata_numero_normal(p[0], largura_a3, padding);
+                metodos_numericos1::outputs::Tabela::formata_numero_normal(p[2]/9, largura_a2, padding);
+                metodos_numericos1::outputs::Tabela::formata_numero_normal(metodo->get_lambda(), largura_a2, padding);
+                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(0), precisao_max, largura_raizes , padding);
+                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(1), precisao_max, largura_raizes , padding);
+                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(2), precisao_max, largura_raizes , padding);
+                metodos_numericos1::outputs::Tabela::formata_numero_normal(metodo->get_total_iteracoes(), largura_iter_total, padding);
+                metodos_numericos1::outputs::Tabela::formata_numero_normal(metodo->get_media_iteracoes(), largura_iter_total, padding);
+                metodos_numericos1::outputs::Tabela::formata_palavra(metodo->get_quebra(), largura_quebra, padding);
+                std::cout << std::endl;
+                k++;
+
+
+            }
+
 
         }
 }
