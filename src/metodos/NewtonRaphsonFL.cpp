@@ -13,7 +13,7 @@ NewtonRaphsonFL::NewtonRaphsonFL(int max_passos, double erro, Polinomio& funcao,
     this->lambda = lambda;
 }
 
-double NewtonRaphsonFL::get_lambda() const {
+double NewtonRaphsonFL::get_lambda() {
     return this->lambda;
 }
 void NewtonRaphsonFL::set_lambda(double l) {

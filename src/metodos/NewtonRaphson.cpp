@@ -88,6 +88,10 @@ std::string NewtonRaphson::get_classe(int precisao) {
     return ss.str();
 }
 
+double NewtonRaphson::get_lambda() {
+    return 0;
+}
+
 
 void NewtonRaphson::calcula_raiz(double x0) {
     int k = 1;

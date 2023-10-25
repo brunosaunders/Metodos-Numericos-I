@@ -6,6 +6,6 @@ target_sources(${PROJECT_NAME} PRIVATE
     Pendulo.hpp
     Derivacao.hpp
     Utils.hpp
-    Vizualizador.hpp
     Tabela.hpp
+    QuadroComparativo.hpp
 )

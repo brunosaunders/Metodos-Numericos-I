@@ -47,6 +47,8 @@ public:
     virtual std::string get_nome_abreviado();
     virtual std::string get_classe(int precisao);
 
+    virtual double get_lambda();
+
     /* roda o método numérico salvando informações no vetor iteracoes_de_x */
     virtual void calcula_raiz(double x0);
 }; 

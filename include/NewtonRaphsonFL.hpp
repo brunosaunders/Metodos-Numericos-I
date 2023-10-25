@@ -13,7 +13,7 @@ class NewtonRaphsonFL: public NewtonRaphson{
 
         void set_lambda(double l);
 
-        double get_lambda() const;
+        double get_lambda();
 
         void calcula_raiz(double x0);
 
