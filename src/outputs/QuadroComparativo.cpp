@@ -17,7 +17,7 @@ namespace metodos_numericos1::outputs {
             int iter_max = -1000;
 
             for (auto& metodo : metodos) {
-                metodo->calcula_raiz(5.0); // Ajeitar com o isolamento pra cada um.
+                metodo->calcula_raizes(); 
                 int precisao = std::log10(metodo->get_erro()) * (-1);
                 int iteracoes =  metodo->get_max_iteracoes();
                 if (precisao > precisao_max) {
@@ -51,9 +51,6 @@ namespace metodos_numericos1::outputs {
             larguras.push_back(largura_a2);
             larguras.push_back(largura_lambda);
 
-
-
-
             // iter_total min: 10
             int largura_iter_min = 11 + 2 * padding;
             int largura_iter_total = (std::to_string(iter_max*3)).size() + 2 * padding;
@@ -69,7 +66,6 @@ namespace metodos_numericos1::outputs {
             // quebra?
             int largura_quebra = 7 + 2 * padding;
             larguras.push_back(largura_quebra);
-
 
             // r1, r2 e r3
             int largura_raizes = precisao_max + 5 + 2 * padding;
@@ -100,5 +96,7 @@ namespace metodos_numericos1::outputs {
             metodos_numericos1::outputs::Tabela::formata_cabecalho("iter-média", largura_iter);
             metodos_numericos1::outputs::Tabela::formata_cabecalho("quebra?", largura_quebra);
             std::cout << std::endl;
+
+
         }
 }

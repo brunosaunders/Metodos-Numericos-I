@@ -20,8 +20,10 @@ void testa_passos() {
     Pendulo p(1, 1);
     NewtonRaphson* nr = new NewtonRaphson(100, 0.001, p);
     NewtonRaphson* nr_d = new NewtonRaphsonComDerivadaNumerica(100, 0.00001, p);
-    metodos_numericos1::outputs::Passos::exibir_passos(nr);
-    metodos_numericos1::outputs::Passos::exibir_passos(nr_d);    
+    std::vector<double> x0s({5, 0, 2});
+
+    metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr);
+    metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr_d);    
 }
 
 
@@ -53,21 +55,10 @@ void test_quadro_comparativo() {
 }
 
 int main() {
-    // int precisao = 6;
-    // std::vector<double> coef = {-2, 1, 1}; 
-    // Polinomio p(coef); 
-    // NewtonRaphson nr(100, 0.001, p); 
-    // NewtonRaphsonFL nr_fl(100, 0.001, p, 0.5);
-    // NewtonRaphsonComDerivadaNumerica nr_d(100, 0.001, p);
-
-    // nr.calcula_raiz(1.5); 
-    // nr_fl.calcula_raiz(1.5);
-    // nr_d.calcula_raiz(1.5);
-
-    test_quadro_comparativo();
+    // test_quadro_comparativo();
 
     //Testa passos
-    // testa_passos();
+    testa_passos();
     return 0;
 }
 
