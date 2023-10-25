@@ -2,8 +2,11 @@
 #define NewtonRaphson_HPP 
 
 #include <vector>
+
 #include "Polinomio.hpp"
 #include "Metodo.hpp"
+
+using namespace metodos_numericos1::include;
 
 class NewtonRaphson { 
 private:
