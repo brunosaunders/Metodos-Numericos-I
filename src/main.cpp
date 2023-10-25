@@ -27,18 +27,21 @@ void testa_passos() {
 void teste_vizualizador() {
     std::vector<vizualizador::EntradasLinhaQuadroComparativo> entradas;
 
-    for (int i=1; i < 10; i++) {
-        for (int j=1; j < 10; j++) {
-            double a3 = j;
-            double a2 = i;
-            double epsilon = 0.0001;
+    // for (int i=1; i < 10; i++) {
+    //     for (int j=1; j < 10; j++) {
+    //         double a3 = j;
+    //         double a2 = i;
+    //         double epsilon = 0.0001;
 
-            entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{1, a3, a2, 0.5, epsilon});
-        }
-    }
+    //         entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{1, a3, a2, 0.5, epsilon});
+    //     }
+    // }
 
-    double intervalo[2] {1.23,34.9};
-    vizualizador::print_quadro_comparativo(entradas, 6,10,intervalo);
+    entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{0, 1, 1, 0, 0.0001});
+    entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{0, 1, -1, 0, 0.0001});
+
+    double intervalo[2] {0, 10};
+    vizualizador::print_quadro_comparativo(entradas, 4, 100, intervalo);
 }
 
 int main() {
@@ -53,10 +56,10 @@ int main() {
     // nr_fl.calcula_raiz(1.5);
     // nr_d.calcula_raiz(1.5);
 
-    // teste_vizualizador();
+    teste_vizualizador();
 
     //Testa passos
-    testa_passos();
+    // testa_passos();
     return 0;
 }
 

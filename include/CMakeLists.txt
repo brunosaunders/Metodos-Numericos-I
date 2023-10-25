@@ -7,4 +7,5 @@ target_sources(${PROJECT_NAME} PRIVATE
     Derivacao.hpp
     Utils.hpp
     Vizualizador.hpp
+    Tabela.hpp
 )
