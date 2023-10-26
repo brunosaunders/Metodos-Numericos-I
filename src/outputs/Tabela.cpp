@@ -9,7 +9,7 @@ namespace metodos_numericos1::outputs {
             int size = palavra.size();
             int padding = (tamanho_coluna - size) / 2;
             int correcao = (tamanho_coluna - size) % 2;
-            int tamanho_palavra = tamanho_coluna - 2*padding - correcao;
+            int tamanho_palavra = tamanho_coluna - 2*padding;
             std::cout << std::setw(padding + correcao + tamanho_palavra) << palavra << std::setw(padding) << "|";
         }
 
@@ -25,17 +25,59 @@ namespace metodos_numericos1::outputs {
             std::cout << std::defaultfloat << std::setw(largura_numeros + padding) << numero << std::setw(padding) << "|";
         }
 
-        void Tabela::formata_numero(double numero, int largura_total, int padding) {
-            std::string n = std::to_string(numero);
-            int size = n.size();
+        int conta_digitos(double numero) {
+            int count = 0;
+            int num = numero;
 
-            int novo_padding = (largura_total + 2 * padding - size) / 2;
-            std::cout << std::setprecision(1) << std::setw(size + novo_padding) << numero << std::setw(novo_padding) << "|";
+            // Handle the case of a zero as a special case
+            if (num == 0) {
+                return 1;
+            }
+
+            // Handle negative numbers by making them positive
+            if (num < 0) {
+                num = -num;
+            }
+
+            while (num != 0) {
+                num = num / 10;
+                count++;
+            }
+
+            return count;
+        }
+
+        void Tabela::formata_numero(int numero, int largura_total, int padding) {
+            int tamanho_numero = std::to_string(numero).size() - 1;
+            int novo_padding = (largura_total - tamanho_numero) / 2;
+
+            int resto = (largura_total - tamanho_numero) % 2;
+
+            int corrige_negativos = 0;
+            if (numero < 0) corrige_negativos = 1;
+
+            std::cout << std::fixed << std::setprecision(1) << std::setw(novo_padding + 2*tamanho_numero/3 - corrige_negativos) << numero << std::setw(novo_padding + resto + tamanho_numero/3 + corrige_negativos) << "|";
+        }
+        
+        void Tabela::formata_numero(double numero, int largura_total, int padding) {
+            int tamanho_numero = std::to_string(numero).size() - 1;
+            int novo_padding = (largura_total - tamanho_numero) / 2;
+
+            int resto = (largura_total - tamanho_numero) % 2;
+
+            int corrige_negativos = 0;
+            if (numero < 0) corrige_negativos = 1;
+
+            std::cout << std::fixed << std::setprecision(1) << std::setw(novo_padding + 2*tamanho_numero/3 - corrige_negativos) << numero << std::setw(novo_padding + resto + tamanho_numero/3 + corrige_negativos) << "|";
         }
 
         void Tabela::formata_palavra(std::string palavra, int largura_total, int padding) {
-            int largura_numeros = largura_total - 2*padding;
-            std::cout << std::defaultfloat << std::setw(largura_numeros + padding) << palavra << std::setw(padding) << "|";
+            int tamanho_palavra = palavra.size() - 1;
+            if (palavra == "Não") tamanho_palavra = 3;
+            int novo_padding = (largura_total - tamanho_palavra) / 2;
+            int resto = (largura_total - tamanho_palavra) % 2;
+
+            std::cout << std::defaultfloat << std::setw(tamanho_palavra + novo_padding) << palavra << std::setw(novo_padding + resto) << "|";
         }
 
         void Tabela::exibir_tampa_tabela(int tamanho) {
