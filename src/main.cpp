@@ -22,7 +22,7 @@ void print_vector(std::vector<double> v, int precisao) {
 }
 
 void testa_polinomios() {
-    Polinomio p = Polinomio({ 1.0, 0.0, -3.0, 2.0, 0.0 });
+    Polinomio p = Polinomio({ 4.0, 3.0, 0.0, 0.0, 3.0 });
 
     std::pair<double, double> intervalo = p.intervalo_max();
     int qtd_raizes = p.numero_raizes_reais(intervalo.first, intervalo.second);

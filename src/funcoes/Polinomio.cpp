@@ -245,30 +245,21 @@ int Polinomio::numero_raizes_reais(double a, double b) {
     }
 
     int mudancas_a = 0;
-    int mudancas_b = 0;
-
-    for (int i = 1; i < valores_a.size(); i++) {
-        if (valores_a[i] == 0) {
-            mudancas_a++;
-        } else if (valores_a[i] * valores_a[i - 1] < 0) {
-            double discriminante = p_anterior.coeficientes[1] * p_anterior.coeficientes[1] - 4 * p_anterior.coeficientes[2] * p_anterior.coeficientes[0];
-            if (discriminante >= 0) {
-                mudancas_a++;
-            }
-        }
-        p_anterior = sequencia[i];
+  for (int i = 1; i < valores_a.size(); i++) {
+    if (valores_a[i] >= 0 && valores_a[i - 1] < 0) {
+      mudancas_a++;
+    } else if (valores_a[i - 1] >= 0 && valores_a[i] < 0) {
+      mudancas_a++;
     }
+  }
 
-    for (int i = 1; i < valores_b.size(); i++) {
-        if (valores_b[i] == 0) {
-            mudancas_b++;
-        } else if (valores_b[i] * valores_b[i - 1] < 0) {
-            double discriminante = p_anterior.coeficientes[1] * p_anterior.coeficientes[1] - 4 * p_anterior.coeficientes[2] * p_anterior.coeficientes[0];
-            if (discriminante >= 0) {
-                mudancas_b++;
-            }
-        }
-        p_anterior = sequencia[i];
+  int mudancas_b = 0;
+  for (int i = 1; i < valores_b.size(); i++) {
+    if (valores_b[i] >= 0 && valores_b[i - 1] < 0) {
+      mudancas_b++;
+    } else if (valores_b[i - 1] >= 0 && valores_b[i] < 0) {
+      mudancas_b++;
     }
+  }
     return mudancas_a - mudancas_b;
 }
