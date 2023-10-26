@@ -1,24 +1,29 @@
 #include <iostream>
 #include <iomanip>
+#include <cmath>
+#include <random>
+#include <vector> 
+#include <iterator> 
+
 #include "Polinomio.hpp"
 #include "NewtonRaphsonComDerivadaNumerica.hpp"
 #include "NewtonRaphsonFL.hpp"
+#include "Passos.hpp"
 #include "NewtonRaphson.hpp"
-#include "Vizualizador.hpp"
-#include <vector> 
-#include <iterator> 
 #include "Pendulo.hpp"
-#include <iomanip>
-#include <cmath>
-#include <random>
+#include "Utils.hpp"
+// #include "Vizualizador.hpp"
+#include "QuadroComparativo.hpp"
 
-void print_vector(std::vector<double> v, int precisao) {
-    std::cout << std::fixed << std::setprecision(precisao);
-    std::cout << "[";
-    for (auto& item : v) {
-        std::cout << item << " ";
-    }
-    std::cout << "]\n";
+
+void testa_passos() {
+    Pendulo p(1, 1);
+    NewtonRaphson* nr = new NewtonRaphson(100, 0.001, p);
+    NewtonRaphson* nr_d = new NewtonRaphsonComDerivadaNumerica(100, 0.00001, p);
+    std::vector<double> x0s({5, 0, 2});
+
+    metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr);
+    metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr_d);    
 }
 
 void testa_polinomios() {

@@ -1,13 +1,19 @@
 #include <iostream>
+#include <string>
+#include <iomanip>
+#include <sstream>
+
 #include "NewtonRaphsonFL.hpp"
 #include "NewtonRaphson.hpp"
 #include <cmath>
+
+
 
 NewtonRaphsonFL::NewtonRaphsonFL(int max_passos, double erro, Polinomio& funcao, double lambda) : NewtonRaphson(max_passos, erro, funcao) {
     this->lambda = lambda;
 }
 
-double NewtonRaphsonFL::get_lambda() const {
+double NewtonRaphsonFL::get_lambda() {
     return this->lambda;
 }
 void NewtonRaphsonFL::set_lambda(double l) {
@@ -19,8 +25,10 @@ void NewtonRaphsonFL::calcula_raiz(double x0) {
     double xk = x0;
     bool continuar = true;
 
+    std::vector<double> iteracoes_de_x;
+
     //Primeiro, adicionamos xk no vector de iterações
-    this->get_iteracoes_de_x().push_back(xk);
+    iteracoes_de_x.push_back(xk);
 
     //Calculando a derivada da função
     Polinomio derivada = this->get_funcao().get_funcao_derivada();
@@ -34,7 +42,6 @@ void NewtonRaphsonFL::calcula_raiz(double x0) {
             //Não temos raiz válida
             continuar = false;
             this->set_raiz_valida(false);
-            this->set_num_passos(this->get_max_iteracoes());
             return;
         }
 
@@ -53,16 +60,34 @@ void NewtonRaphsonFL::calcula_raiz(double x0) {
         }
 
         //Verificar se atendemos a condição de parada
-        if ((std::abs(this->get_funcao().get_valor_funcao(xk)) < this->get_erro()) && (std::abs(xk - (this->get_iteracoes_de_x().back())) < this->get_erro())) {
+        if ((std::abs(this->get_funcao().get_valor_funcao(xk)) < this->get_erro()) && (std::abs(xk - (iteracoes_de_x.back())) < this->get_erro())) {
             continuar = false;
             this->set_raiz_valida(true);
-            this->set_num_passos(k);
         }
 
         //Acrescentamos a nova aproximação no vector de iterações
-        this->get_iteracoes_de_x().push_back(xk);
+        iteracoes_de_x.push_back(xk);
 
         //Incrementar o k
         k++;
     }
+
+    this->iteracoes_de_x.push_back(iteracoes_de_x);
+}
+
+std::string NewtonRaphsonFL::get_nome() {
+    return "Newton Raphson FL";
+}
+
+std::string NewtonRaphsonFL::get_nome_abreviado() {
+    return "NR-FL";
+}
+
+std::string NewtonRaphsonFL::get_classe(int precision) {
+    Polinomio p = this->get_funcao();
+
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(precision) << this->get_nome_abreviado() << "(a3: " << p[0] << ", a2: " << p[2]/9 << ", lambda: " << this->lambda << ", erro: " << this->get_erro() << ")";
+
+    return ss.str();
 }
