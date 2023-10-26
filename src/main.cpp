@@ -25,8 +25,8 @@ void testa_polinomios() {
     Polinomio p = Polinomio({ 1.0, 0.0, -3.0, 2.0, 0.0 });
 
     std::pair<double, double> intervalo = p.intervalo_max();
-    //int qtd_raizes = p.numero_raizes_reais(intervalo.first, intervalo.second);
-    //p.encontra_intervalos(intervalo.first, intervalo.second, qtd_raizes);
+    int qtd_raizes = p.numero_raizes_reais(intervalo.first, intervalo.second);
+    p.encontra_intervalos(intervalo.first, intervalo.second, qtd_raizes);
 
     for (const auto& root : p.intervalos) {
         std::cout << "Raiz no intervalo [" << root.first << ", " << root.second << "]\n";

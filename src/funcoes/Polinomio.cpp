@@ -89,9 +89,17 @@ void Polinomio::encontra_intervalos(double inicio, double fim, int n_raizes) {
 std::pair<double, double> Polinomio::intervalo_max() {
     std::vector<double> values;
     int n = this->coeficientes.size() - 1;
+    double a_n;
+
+    for (size_t i =0; i < n; i++) {
+        if (this->coeficientes[i] != 0) {
+            a_n = this->coeficientes[i];
+        }
+    }
     
+
     for (auto coeficiente : this->coeficientes) {
-        values.push_back(fabs(coeficiente) / fabs(this->coeficientes[n]));
+        values.push_back(fabs(coeficiente) / fabs(a_n));
     }
 
     double raio_max = *max_element(values.begin(), values.end()) + 1;
