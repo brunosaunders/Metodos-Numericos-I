@@ -22,11 +22,11 @@ void print_vector(std::vector<double> v, int precisao) {
 }
 
 void testa_polinomios() {
-    Polinomio p = Polinomio({ 1.0, 0, -3, 2 });
+    Polinomio p = Polinomio({ 1.0, 0.0, -3.0, 2.0, 0.0 });
 
     std::pair<double, double> intervalo = p.intervalo_max();
-    std::cout << "[" << intervalo.first << " " << intervalo.second << "]\n";
-    p.encontra_intervalos(intervalo.first, intervalo.second, 1);
+    //int qtd_raizes = p.numero_raizes_reais(intervalo.first, intervalo.second);
+    //p.encontra_intervalos(intervalo.first, intervalo.second, qtd_raizes);
 
     for (const auto& root : p.intervalos) {
         std::cout << "Raiz no intervalo [" << root.first << ", " << root.second << "]\n";
@@ -34,10 +34,7 @@ void testa_polinomios() {
 }
 
 int main() {
-    Polinomio polinomio = Polinomio({1.0, -3.0, 2});
-    std::pair<double, double> p = polinomio.intervalo_max();
-    std::cout << polinomio.numero_raizes(p.first, p.second) << std::endl;  
-    std::cout << p.first << p.second << std::endl;
+    testa_polinomios();
     return 0;
 }
 

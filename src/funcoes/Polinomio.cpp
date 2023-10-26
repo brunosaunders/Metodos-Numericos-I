@@ -53,8 +53,6 @@ Polinomio Polinomio::get_funcao_derivada() const {
     novos_coeficientes.push_back(this->coeficientes[i] * grau--);
   }
 
-  novos_coeficientes.pop_back();
-
   return Polinomio(novos_coeficientes);
 }
 
@@ -69,10 +67,6 @@ double Polinomio::operator[](int i) const {
 
 double Polinomio::p(double x) const { return 0.0000999999; }
 
-bool Polinomio::tem_mais_raiz(double a, double b) {
-  return (get_valor_funcao(a) * get_valor_funcao(b) <= 0);
-}
-
 void Polinomio::encontra_intervalos(double inicio, double fim, int n_raizes) {
   double epsilon = 1;
   if (fabs(fim - inicio) <= epsilon && n_raizes < 2) {
@@ -81,8 +75,8 @@ void Polinomio::encontra_intervalos(double inicio, double fim, int n_raizes) {
   }
 
   double meio = (inicio + fim) / 2;
-  int raizes_a_meio = this->numero_raizes(inicio, meio);
-  int raizes_meio_fim = this->numero_raizes(meio, fim);
+  int raizes_a_meio = this->numero_raizes_reais(inicio, meio);
+  int raizes_meio_fim = this->numero_raizes_reais(meio, fim);
 
   if (raizes_a_meio > 0) {
     this->encontra_intervalos(inicio, meio, raizes_a_meio);
@@ -93,15 +87,15 @@ void Polinomio::encontra_intervalos(double inicio, double fim, int n_raizes) {
 }
 
 std::pair<double, double> Polinomio::intervalo_max() {
-  std::vector<double> values;
-  std::reverse(this->coeficientes.begin(), this->coeficientes.end());
-  int n = this->coeficientes.size() - 1;
-  for (size_t i = 0; i < n; i++) {
-    values.push_back(
-        (fabs(this->coeficientes[i]) / fabs(this->coeficientes[n])));
-  }
-  double raio_max = *max_element(values.begin(), values.end()) + 1;
-  return std::make_pair(-raio_max, raio_max);
+    std::vector<double> values;
+    int n = this->coeficientes.size() - 1;
+    
+    for (auto coeficiente : this->coeficientes) {
+        values.push_back(fabs(coeficiente) / fabs(this->coeficientes[n]));
+    }
+
+    double raio_max = *max_element(values.begin(), values.end()) + 1;
+    return std::make_pair(-raio_max, raio_max);
 }
 
 Polinomio Polinomio::multiplica(double valor) {
@@ -212,48 +206,61 @@ Polinomio Polinomio::divide(Polinomio p) {
   return resto;
 }
 
-int Polinomio::numero_raizes(double a, double b) {
-  if (a > b) {
-    throw std::invalid_argument("a maior que b");
-  }
-  std::vector<Polinomio> sequencia;
-  sequencia.push_back(*this);
-  sequencia.push_back(this->get_funcao_derivada());
-
-  Polinomio p_anterior = sequencia[0];
-  Polinomio p_atual = sequencia[1];
-
-  while (p_atual.get_grau() > 0) {
-    Polinomio p_temp = p_anterior;
-    p_anterior = p_atual;
-    p_atual = (p_temp.divide(p_atual)).multiplica(-1);
-    sequencia.push_back(p_atual);
-  }
-  std::vector<double> valores_a;
-  std::vector<double> valores_b;
-
-  for (auto &polinomio : sequencia) {
-    valores_a.push_back(polinomio.get_valor_funcao(a));
-    valores_b.push_back(polinomio.get_valor_funcao(b));
-  }
-
-  int mudancas_a = 0;
-  for (int i = 1; i < valores_a.size(); i++) {
-    if (valores_a[i] >= 0 && valores_a[i - 1] < 0) {
-      mudancas_a++;
-    } else if (valores_a[i - 1] >= 0 && valores_a[i] < 0) {
-      mudancas_a++;
+int Polinomio::numero_raizes_reais(double a, double b) {
+    if (a > b) {
+        throw std::invalid_argument("a maior que b");
     }
-  }
 
-  int mudancas_b = 0;
-  for (int i = 1; i < valores_b.size(); i++) {
-    if (valores_b[i] >= 0 && valores_b[i - 1] < 0) {
-      mudancas_b++;
-    } else if (valores_b[i - 1] >= 0 && valores_b[i] < 0) {
-      mudancas_b++;
+    std::vector<Polinomio> sequencia;
+    sequencia.push_back(*this);
+    sequencia.push_back(this->get_funcao_derivada());
+
+    Polinomio p_anterior = sequencia[0];
+    Polinomio p_atual = sequencia[1];
+
+    // Prepara a sequência de polinômios até encontrar uma constante
+    while (p_atual.get_grau() > 0) {
+        Polinomio p_temp = p_anterior;
+        p_anterior = p_atual;
+        p_atual = p_temp
+            .divide(p_atual)
+            .multiplica(-1);
+        sequencia.push_back(p_atual);
     }
-  }
 
-  return mudancas_a - mudancas_b;
+    std::vector<double> valores_a;
+    std::vector<double> valores_b;
+
+    for (auto &polinomio : sequencia) {
+        valores_a.push_back(polinomio.get_valor_funcao(a));
+        valores_b.push_back(polinomio.get_valor_funcao(b));
+    }
+
+    int mudancas_a = 0;
+    int mudancas_b = 0;
+
+    for (int i = 1; i < valores_a.size(); i++) {
+        if (valores_a[i] == 0) {
+            mudancas_a++;
+        } else if (valores_a[i] * valores_a[i - 1] < 0) {
+            double discriminante = p_anterior.coeficientes[1] * p_anterior.coeficientes[1] - 4 * p_anterior.coeficientes[2] * p_anterior.coeficientes[0];
+            if (discriminante >= 0) {
+                mudancas_a++;
+            }
+        }
+        p_anterior = sequencia[i];
+    }
+
+    for (int i = 1; i < valores_b.size(); i++) {
+        if (valores_b[i] == 0) {
+            mudancas_b++;
+        } else if (valores_b[i] * valores_b[i - 1] < 0) {
+            double discriminante = p_anterior.coeficientes[1] * p_anterior.coeficientes[1] - 4 * p_anterior.coeficientes[2] * p_anterior.coeficientes[0];
+            if (discriminante >= 0) {
+                mudancas_b++;
+            }
+        }
+        p_anterior = sequencia[i];
+    }
+    return mudancas_a - mudancas_b;
 }

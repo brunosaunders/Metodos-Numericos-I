@@ -21,11 +21,6 @@ namespace metodos_numericos1::include {
             double p(double x) const;
 
             /*
-             * Dado um intervalo [a, b] é feito o teste para saber se existem mais de uma raiz nesse intervalo
-             */
-            bool tem_mais_raiz(double a, double b);
-
-            /*
              * Dado um polinômio retorna intervalos contendo raizes desse polinômi desse polinômioo 
              */
             void encontra_intervalos(double a, double b, int n_raizes);
@@ -46,12 +41,13 @@ namespace metodos_numericos1::include {
 
             /*
              * Dado um intervalo é retornado a quantidade de raízes dentro daquele intervalo 
+             * Esse método faz uso do teorema de Sturm para fazer o cálculo da quantidade de raizes existentes no intervalo dado
              */
-            int numero_raizes(double a, double b);
+            int numero_raizes_reais(double a, double b);
 
             /*
              * Retorna um intervalo onde as raízes do polinômio se encontram.
-             * Essa função faz o uso do Cauchy's bounds.
+             * Esse método faz o uso do Cauchy's bounds.
              */
             std::pair<double, double> intervalo_max();
 
