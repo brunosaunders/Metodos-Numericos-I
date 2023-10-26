@@ -51,7 +51,7 @@ Polinomio Polinomio::get_funcao_derivada() const {
 
   for (int i = 0; i < this->coeficientes.size() - 1; i++) {
     novos_coeficientes.push_back(this->coeficientes[i] * grau--);
-    
+  }  
     return Polinomio(novos_coeficientes);
 }
 
