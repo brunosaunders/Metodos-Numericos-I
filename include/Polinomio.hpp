@@ -13,8 +13,7 @@ public:
 
     Polinomio get_funcao_derivada() const;
 
-    /*acessa o coeficiente a_i*/
+    // acessa o coeficiente a_i
     double operator[] (int i) const;
-    double p(double x) const;
 }; 
 #endif

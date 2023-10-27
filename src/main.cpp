@@ -12,9 +12,9 @@
 #include "NewtonRaphson.hpp"
 #include "Pendulo.hpp"
 #include "Utils.hpp"
-// #include "Vizualizador.hpp"
 #include "QuadroComparativo.hpp"
 
+using namespace std;
 
 void testa_passos() {
     Pendulo p(1, 1);
@@ -23,29 +23,14 @@ void testa_passos() {
     std::vector<double> x0s({5, 0, 2});
 
     metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr);
-    metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr_d);    
 }
 
 
 void testa_quadro_comparativo() {
-    // std::vector<vizualizador::EntradasLinhaQuadroComparativo> entradas;
     std::vector<NewtonRaphson*> metodos;
 
-    // for (int i=1; i < 10; i++) {
-    //     for (int j=1; j < 10; j++) {
-    //         double a3 = j;
-    //         double a2 = i;
-    //         double epsilon = 0.0001;
-
-    //         entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{1, a3, a2, 0.5, epsilon});
-    //     }
-    // }
-
-    // entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{0, 1, 1, 0, 0.0001});
-    // entradas.push_back(vizualizador::EntradasLinhaQuadroComparativo{0, 1, -1, 0, 0.0001});
-
     Polinomio p = Pendulo(1.3332, 1);
-    Polinomio p2 = Pendulo(-9, 2);
+    Polinomio p2 = Pendulo(-52, 2);
     Polinomio p3 = Pendulo(5, 2);
     metodos.push_back(new NewtonRaphson(100, 0.001, p));
     metodos.push_back(new NewtonRaphsonFL(100, 0.001, p, 0.5));
@@ -60,16 +45,14 @@ void testa_quadro_comparativo() {
     metodos.push_back(new NewtonRaphsonComDerivadaNumerica(100, 0.001, p3));
 
     double intervalo[2] {0, 10};
-    // vizualizador::print_quadro_comparativo(entradas, 4, 100, intervalo);
     metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(metodos);
 
 }
 
 int main() {
-    // testa_quadro_comparativo();
-
-    //Testa passos
+    testa_quadro_comparativo();
     testa_passos();
+
     return 0;
 }
 

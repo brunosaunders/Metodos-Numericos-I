@@ -45,5 +45,3 @@ double Polinomio::operator[](int i) const {
         throw std::out_of_range("Index out of bounds");
     }
 }
-
-double Polinomio::p(double x) const {return 0.0000999999;}
