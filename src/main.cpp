@@ -23,7 +23,6 @@ void testa_passos() {
     std::vector<double> x0s({5, 0, 2});
 
     metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr);
-    metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr_d);    
 }
 
 
@@ -31,7 +30,7 @@ void testa_quadro_comparativo() {
     std::vector<NewtonRaphson*> metodos;
 
     Polinomio p = Pendulo(1.3332, 1);
-    Polinomio p2 = Pendulo(-9, 2);
+    Polinomio p2 = Pendulo(-52, 2);
     Polinomio p3 = Pendulo(5, 2);
     metodos.push_back(new NewtonRaphson(100, 0.001, p));
     metodos.push_back(new NewtonRaphsonFL(100, 0.001, p, 0.5));
@@ -52,9 +51,8 @@ void testa_quadro_comparativo() {
 
 int main() {
     testa_quadro_comparativo();
-    // std::string a = "Sim";
-    // std::string b = "Não";
-    // cout << a.size() << endl << b.size();
+    testa_passos();
+
     return 0;
 }
 
