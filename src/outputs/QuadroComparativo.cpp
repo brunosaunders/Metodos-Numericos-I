@@ -16,7 +16,13 @@ namespace metodos_numericos1::outputs {
             int k_max = metodos.size();
             int iter_max = -1000;
 
+            int largura_padrao = 12;
+
+            bool negativos[5] = {false, false, false, false, false};
+
             for (auto& metodo : metodos) {
+                Polinomio funcao = metodo->get_funcao();
+
                 metodo->calcula_raizes(); 
                 int precisao = std::log10(metodo->get_erro()) * (-1);
                 int iteracoes =  metodo->get_max_iteracoes();
@@ -25,99 +31,108 @@ namespace metodos_numericos1::outputs {
                 }
 
                 if (iteracoes > iter_max) iter_max = iteracoes;
-            }
-            if (precisao_max > 5) precisao_max = 5;
 
-            std::cout << precisao_max << std::endl;
+                if (funcao[0] < 0) negativos[0] = true;
+                if (funcao[2] < 0) negativos[1] = true;
+                if (metodo->get_raiz(0) < 0) negativos[2] = true;
+                if (metodo->get_raiz(1) < 0) negativos[3] = true;
+                if (metodo->get_raiz(2) < 0) negativos[4] = true;
+            }
+
+            if (precisao_max > 5) precisao_max = 5;
 
             std::vector<int> larguras;
 
-            int padding = 3;
-
             // Cálculo do tamanho da coluna de k 
             std::string maior_k = std::to_string(k_max);
-            int largura_k = maior_k.size() + 2*padding;
+            int largura_k = maior_k.size() + 5;
             larguras.push_back(largura_k);
 
             // Método
-            int largura_metodo = 5 + 2 * padding;
-            larguras.push_back(largura_metodo);
+            int largura_metodo = 6;
+            
 
-            // a3, a2 e lambda
-            int largura_a3 = 4 + 2 * padding;
-            int largura_a2 = largura_a3;
-            int largura_lambda = largura_a3;
-            larguras.push_back(largura_a3);
-            larguras.push_back(largura_a2);
-            larguras.push_back(largura_lambda);
+            // a3
+            int largura_a3 = 6;
+            if (negativos[0]) largura_a3++;
+            
+
+            // a2
+            int largura_a2 = 6;
+            if (negativos[1]) largura_a2++;
+            
+
+            // lambda
+            int largura_lambda = 6;
+            
 
             // iter_total min: 10
-            int largura_iter_min = 11 + 2 * padding;
-            int largura_iter_total = (std::to_string(iter_max*3)).size() + 2 * padding;
-            if (largura_iter_total < largura_iter_min) largura_iter_total = largura_iter_min;
-            larguras.push_back(largura_iter_total);
-
-
-            // iter_media min: 10
-            int largura_iter = (std::to_string(iter_max)).size() + 2 * padding;
-            if (largura_iter < largura_iter_min) largura_iter = largura_iter_min;
-            larguras.push_back(largura_iter);
+            int largura_iter_media = 13;
+            int largura_iter_total = largura_iter_media;
+            
+            
 
             // quebra?
-            int largura_quebra = 7 + 2 * padding;
-            larguras.push_back(largura_quebra);
+            int largura_quebra = 8;
+            
 
-            // r1, r2 e r3
-            int largura_raizes = precisao_max + 5 + 2 * padding;
-            larguras.push_back(largura_raizes * 3);
+            // r1
+            int largura_r1 = precisao_max + 8;
+            if (negativos[2]) largura_r1++;
+            
 
-            int largura_total_tabela = 0;
-            for (auto& item : larguras) {
-                largura_total_tabela += item;
-            }
+            // r2
+            int largura_r2 = precisao_max + 8;
+            if (negativos[3]) largura_r2++;
+            
+
+            // r3
+            int largura_r3 = precisao_max + 8;
+            if (negativos[4]) largura_r3++;
+            
+
+
+            int largura_total_tabela = 11 * largura_padrao + largura_k;
 
             std::string quadro = "Quadro Comparativo";
-            int padding_quadro = (largura_total_tabela ) / 2;
 
-            metodos_numericos1::outputs::Tabela::exibir_tampa_tabela(largura_total_tabela -1);
-            std::cout << std::setw(padding_quadro) << quadro << std::endl;
-            metodos_numericos1::outputs::Tabela::exibir_tampa_tabela(largura_total_tabela -1);
+            std::cout << std::left << quadro << std::endl;
+            metodos_numericos1::outputs::Tabela::exibir_tampa_tabela(largura_total_tabela);
 
             std::cout << "|";
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("k", largura_k);
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("Método", largura_metodo);
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("a3", largura_a3);
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("a2", largura_a2);
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("lambda", largura_lambda);
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("r1", largura_raizes);
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("r2", largura_raizes);
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("r3", largura_raizes);
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("iter-total", largura_iter_total);
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("iter-média", largura_iter);
-            metodos_numericos1::outputs::Tabela::formata_cabecalho("quebra?", largura_quebra);
+            metodos_numericos1::outputs::Tabela::formata_palavra("k", largura_k);
+            metodos_numericos1::outputs::Tabela::formata_palavra("Método", largura_padrao);
+            metodos_numericos1::outputs::Tabela::formata_palavra("a3", largura_padrao);
+            metodos_numericos1::outputs::Tabela::formata_palavra("a2", largura_padrao);
+            metodos_numericos1::outputs::Tabela::formata_palavra("lambda", largura_padrao);
+            metodos_numericos1::outputs::Tabela::formata_palavra("r1", largura_padrao);
+            metodos_numericos1::outputs::Tabela::formata_palavra("r2", largura_padrao);
+            metodos_numericos1::outputs::Tabela::formata_palavra("r3", largura_padrao);
+            metodos_numericos1::outputs::Tabela::formata_palavra("iter-total", largura_padrao);
+            metodos_numericos1::outputs::Tabela::formata_palavra("iter-média", largura_padrao);
+            metodos_numericos1::outputs::Tabela::formata_palavra("quebra?", largura_padrao);
             std::cout << std::endl;
+            metodos_numericos1::outputs::Tabela::exibir_tampa_tabela(largura_total_tabela);
 
             int k = 1;
             for (auto& metodo : metodos) {
                 Polinomio p = metodo->get_funcao();
                 std::cout << "|";
-                metodos_numericos1::outputs::Tabela::formata_numero_normal(k, largura_k, padding);
-                metodos_numericos1::outputs::Tabela::formata_palavra(metodo->get_nome_abreviado(), largura_metodo,  padding);
-                metodos_numericos1::outputs::Tabela::formata_numero_normal(p[0], largura_a3, padding);
-                metodos_numericos1::outputs::Tabela::formata_numero_normal(p[2]/9, largura_a2, padding);
-                metodos_numericos1::outputs::Tabela::formata_numero_normal(metodo->get_lambda(), largura_a2, padding);
-                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(0), precisao_max, largura_raizes , padding);
-                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(1), precisao_max, largura_raizes , padding);
-                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(2), precisao_max, largura_raizes , padding);
-                metodos_numericos1::outputs::Tabela::formata_numero_normal(metodo->get_total_iteracoes(), largura_iter_total, padding);
-                metodos_numericos1::outputs::Tabela::formata_numero_normal(metodo->get_media_iteracoes(), largura_iter_total, padding);
-                metodos_numericos1::outputs::Tabela::formata_palavra(metodo->get_quebra(), largura_quebra, padding);
+                metodos_numericos1::outputs::Tabela::formata_numero(k, largura_k);
+                metodos_numericos1::outputs::Tabela::formata_palavra(metodo->get_nome_abreviado(), largura_padrao);
+                metodos_numericos1::outputs::Tabela::formata_numero(p[0], largura_padrao);
+                metodos_numericos1::outputs::Tabela::formata_numero(p[2]/9, largura_padrao);
+                metodos_numericos1::outputs::Tabela::formata_numero(metodo->get_lambda(), largura_padrao);
+                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(0), precisao_max, largura_padrao);
+                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(1), precisao_max, largura_padrao);
+                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(2), precisao_max, largura_padrao);
+                metodos_numericos1::outputs::Tabela::formata_numero(metodo->get_total_iteracoes(), largura_padrao);
+                metodos_numericos1::outputs::Tabela::formata_numero(metodo->get_media_iteracoes(), largura_padrao);
+                metodos_numericos1::outputs::Tabela::formata_palavra(metodo->get_quebra(), largura_padrao);
                 std::cout << std::endl;
                 k++;
-
-
             }
-
+            metodos_numericos1::outputs::Tabela::exibir_tampa_tabela(largura_total_tabela);
 
         }
 }
