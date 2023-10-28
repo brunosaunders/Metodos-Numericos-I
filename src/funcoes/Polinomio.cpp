@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "Polinomio.hpp"
+#include "Utils.hpp"
 
 using namespace metodos_numericos1::include;
 
@@ -66,6 +67,8 @@ double Polinomio::operator[](int i) const {
 
 double Polinomio::p(double x) const { return 0.0000999999; }
 
+int n = 1;
+
 void Polinomio::encontra_intervalos(double inicio, double fim, int n_raizes) {
   double epsilon = 1;
   if (fabs(fim - inicio) <= epsilon && n_raizes < 2) {
@@ -89,16 +92,19 @@ std::pair<double, double> Polinomio::intervalo_max() {
     std::vector<double> values;
     int n = this->coeficientes.size() - 1;
     double a_n;
+    int a_n_index = 0;
 
     for (size_t i =0; i < n; i++) {
         if (this->coeficientes[i] != 0) {
             a_n = this->coeficientes[i];
+            a_n_index = i;
+            break; 
         }
     }
-    
 
-    for (auto coeficiente : this->coeficientes) {
-        values.push_back(fabs(coeficiente) / fabs(a_n));
+    // Não se inclui o a_n no numerador.
+    for (int i = a_n_index + 1; i < this->coeficientes.size(); i++) {
+        values.push_back(fabs(this->coeficientes[i]) / fabs(a_n));
     }
 
     double raio_max = *max_element(values.begin(), values.end()) + 1;
@@ -244,21 +250,21 @@ int Polinomio::numero_raizes_reais(double a, double b) {
     }
 
     int mudancas_a = 0;
-  for (int i = 1; i < valores_a.size(); i++) {
-    if (valores_a[i] >= 0 && valores_a[i - 1] < 0) {
-      mudancas_a++;
-    } else if (valores_a[i - 1] >= 0 && valores_a[i] < 0) {
-      mudancas_a++;
+    for (int i = 1; i < valores_a.size(); i++) {
+        if (valores_a[i] >= 0 && valores_a[i - 1] < 0) {
+        mudancas_a++;
+        } else if (valores_a[i - 1] >= 0 && valores_a[i] < 0) {
+        mudancas_a++;
+        }
     }
-  }
 
-  int mudancas_b = 0;
-  for (int i = 1; i < valores_b.size(); i++) {
-    if (valores_b[i] >= 0 && valores_b[i - 1] < 0) {
-      mudancas_b++;
-    } else if (valores_b[i - 1] >= 0 && valores_b[i] < 0) {
-      mudancas_b++;
+    int mudancas_b = 0;
+    for (int i = 1; i < valores_b.size(); i++) {
+        if (valores_b[i] >= 0 && valores_b[i - 1] < 0) {
+        mudancas_b++;
+        } else if (valores_b[i - 1] >= 0 && valores_b[i] < 0) {
+        mudancas_b++;
+        }
     }
-  }
     return mudancas_a - mudancas_b;
 }
