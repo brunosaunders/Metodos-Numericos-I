@@ -9,35 +9,27 @@ namespace metodos_numericos1::include {
             Polinomio(); 
             Polinomio(std::vector<double> coeficientes); 
 
-            int get_grau() const;
-            double get_valor_funcao(double x) const; // Método que retorna P(x) 
             std::vector<double> coeficientes; 
+            std::vector<std::pair<double, double>> intervalos;
 
+            int get_grau() const;
             Polinomio get_funcao_derivada() const;
+            double get_valor_funcao(double x) const; // Método que retorna P(x) 
 
-            /*acessa o coeficiente a_i*/
-            double operator[] (int i) const;
+            double operator[] (int i) const; // acessa o coeficiente a_i
+            void print();
 
-            double p(double x) const;
+            Polinomio soma(Polinomio p);
+            Polinomio divide(Polinomio p);
+            Polinomio divide(double valor);
+            Polinomio subtrai(Polinomio p);
+            Polinomio multiplica(Polinomio p);
+            Polinomio multiplica(double valor);
 
             /*
              * Dado um polinômio retorna intervalos contendo raizes desse polinômi desse polinômioo 
              */
             void encontra_intervalos(double a, double b, int n_raizes);
-
-            Polinomio divide(Polinomio p);
-
-            Polinomio divide(double valor);
-
-            Polinomio multiplica(double valor);
-
-            Polinomio multiplica(Polinomio p);
-
-            Polinomio soma(Polinomio p);
-
-            Polinomio subtrai(Polinomio p);
-
-            void print();
 
             /*
              * Dado um intervalo é retornado a quantidade de raízes dentro daquele intervalo 
@@ -51,7 +43,6 @@ namespace metodos_numericos1::include {
              */
             std::pair<double, double> intervalo_max();
 
-            std::vector<std::pair<double, double>> intervalos;
     }; 
 } // namespace metodos_numericos1::include
 

@@ -17,10 +17,9 @@
 using namespace std;
 
 void testa_passos() {
-    Pendulo p(1, 1);
+    Polinomio p = Pendulo(1, -1);
     NewtonRaphson* nr = new NewtonRaphson(100, 0.001, p);
     NewtonRaphson* nr_d = new NewtonRaphsonComDerivadaNumerica(100, 0.00001, p);
-    std::vector<double> x0s({5, 0, 2});
 
     metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr);
 }
@@ -28,9 +27,9 @@ void testa_passos() {
 void testa_polinomios() {
     Polinomio p = Pendulo(1,-1);
 
-    std::pair<double, double> intervalo = p.intervalo_max();
-    int qtd_raizes = p.numero_raizes_reais(intervalo.first, intervalo.second);
-    p.encontra_intervalos(intervalo.first, intervalo.second, qtd_raizes);
+    // std::pair<double, double> intervalo = p.intervalo_max();
+    // int qtd_raizes = p.numero_raizes_reais(intervalo.first, intervalo.second);
+    // p.encontra_intervalos(intervalo.first, intervalo.second, qtd_raizes);
 
     for (const auto& root : p.intervalos) {
         std::cout << "Raiz no intervalo [" << root.first << ", " << root.second << "]\n";
@@ -78,12 +77,12 @@ void testa_isolamento() {
 }
 
 int main() {
-    testa_polinomios();
+    // testa_polinomios();
     
     // testa_isolamento();
     // testa_divisao();
     // testa_quadro_comparativo();
-    // testa_passos();
+    testa_passos();
 
     return 0;
 }

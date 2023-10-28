@@ -6,15 +6,13 @@
 
 #include "NewtonRaphson.hpp"
 
-namespace metodos_numericos1 {
-    namespace outputs {
-        class Passos {
-            public:
-                static void exibir_passos_todas_raizes(NewtonRaphson* metodo);
-            private:
-                static void exibir_passos_raiz(NewtonRaphson* metodo, int index);
-        };
-    }
+namespace metodos_numericos1::outputs {
+    class Passos {
+        public:
+            static void exibir_passos_todas_raizes(NewtonRaphson* metodo);
+        private:
+            static void exibir_passos_raiz(NewtonRaphson* metodo, int index);
+    };
 }
 
 #endif
