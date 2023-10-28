@@ -6,6 +6,8 @@
 
 #include "Polinomio.hpp"
 
+using namespace metodos_numericos1::include;
+
 class NewtonRaphson { 
 private:
     int max_iteracoes;

@@ -25,7 +25,31 @@ void testa_passos() {
     metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(nr);
 }
 
+void testa_polinomios() {
+    Polinomio p = Pendulo(1,-1);
 
+    std::pair<double, double> intervalo = p.intervalo_max();
+    int qtd_raizes = p.numero_raizes_reais(intervalo.first, intervalo.second);
+    p.encontra_intervalos(intervalo.first, intervalo.second, qtd_raizes);
+
+    for (const auto& root : p.intervalos) {
+        std::cout << "Raiz no intervalo [" << root.first << ", " << root.second << "]\n";
+    }    
+    std::cout << "eae\n";
+}
+
+void testa_divisao() {
+    Polinomio p = Pendulo(1, -1);
+    Polinomio p_deriv = p.get_funcao_derivada();
+    p.print();
+    p_deriv.print();
+
+    Polinomio p_div = p.divide(p_deriv);
+    p_div.print();
+
+    Polinomio p_div2 = p_deriv.divide(p_div);
+    p_div2.print();
+}
 void testa_quadro_comparativo() {
     std::vector<NewtonRaphson*> metodos;
 
@@ -46,12 +70,20 @@ void testa_quadro_comparativo() {
 
     double intervalo[2] {0, 10};
     metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(metodos);
+}
 
+void testa_isolamento() {
+    Polinomio p = Pendulo(1,-1);
+    std::cout << p.numero_raizes_reais(-3.16, 2.82);
 }
 
 int main() {
-    testa_quadro_comparativo();
-    testa_passos();
+    testa_polinomios();
+    
+    // testa_isolamento();
+    // testa_divisao();
+    // testa_quadro_comparativo();
+    // testa_passos();
 
     return 0;
 }
