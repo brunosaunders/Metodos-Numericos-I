@@ -70,6 +70,7 @@ void testa_quadro_comparativo() {
 
     double intervalo[2] {0, 10};
     metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(metodos);
+}
 
 void testa_isolamento() {
     Polinomio p = Pendulo(1,-1);
