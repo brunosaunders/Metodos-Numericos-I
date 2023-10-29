@@ -8,6 +8,8 @@
 #define DERIVACAO_CENTRADA 1
 #define DERIVACAO_PROGRESSIVA 2
 
+using namespace metodos_numericos1::include;
+
 class Derivacao {
 
     public:
