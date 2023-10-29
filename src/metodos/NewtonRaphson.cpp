@@ -156,7 +156,7 @@ void NewtonRaphson::calcula_raiz(double x0) {
 
 void NewtonRaphson::calcula_raizes() {
     double fator_de_risco = 0.3;
-    int raizes_disponiveis_para_calculo = this->isolamento_raizes.size(); //mudar int para size_t
+    int raizes_disponiveis_para_calculo = this->isolamento_raizes.size(); 
 
     for (int i=0; i < raizes_disponiveis_para_calculo; i++) {
         this->calcula_raiz(this->isolamento_raizes[i]);
