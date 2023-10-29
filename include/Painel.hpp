@@ -1,6 +1,12 @@
 #ifndef METODOS_NUMERICOS1_INCLUDE_PAINEL_HPP_
 #define METODOS_NUMERICOS1_INCLUDE_PAINEL_HPP_
 
+#include "Polinomio.hpp"
+#include "NewtonRaphson.hpp"
+#include <vector>
+#include <utility>
+#include <string>
+
 namespace metodos_numericos1::include {
     // Implementação de um painel iterativo (terminal) em modo texto para iteração
     // com usuário.
@@ -11,45 +17,66 @@ namespace metodos_numericos1::include {
                 "Escolha uma opção: \n"
                 "1 -> Cadastrar uma função e método para análise \n"
                 "2 -> Remover uma função já cadastrada \n"
-                "3 -> Resetar funções cadastradas.\n"
-                "4 -> Mostrar analise passo a passo de um funcao.\n"
-                "5 -> Gerar quadro comparativo das funcoes cadastradas.\n"
-                "6 -> Mostrar isolamento de uma funcao.\n"
+                "3 -> Resetar funçôes cadastradas.\n"
+                "4 -> Mostrar análise passo a passo de um função.\n"
+                "5 -> Gerar quadro comparativo das funções cadastradas.\n"
+                "6 -> Mostrar isolamento de uma função.\n"
                 "0 -> Sair.\n";
             const char *texto_cadastrar_funcao_metodo_analise =
-                "Voce escolheu 1 -> Cadastrar uma funcao e metodo para analise.\n\n"
+                "Você escolheu 1 -> Cadastrar uma função e método para análise.\n\n"
                 "Insira os seguintes dados: a3, a2 e precisao\n";
             const char *texto_escolher_newton_raphson =
-                "Agora, escolha o metodo desejado:\n"
+                "Agora, escolha o método desejado:\n"
                 "1 -> Newton Raphson (NR).\n"
                 "2 -> Newton Raphson com FL (NR-FL).\n"
                 "3 -> Newton Raphson com Derivada Numerica (NR-D).\n";
             const char *texto_newton_raphson_normal =
-                "Voce escolheu 1 -> Newton Raphson (NR).\n";
+                "Você escolheu 1 -> Newton Raphson (NR).\n";
             const char *texto_newton_raphson_fl =
-                "Voce escolheu 2 -> Newton Raphson com FL (NR-FL).\n";
+                "Você escolheu 2 -> Newton Raphson com FL (NR-FL).\n";
+            const char *texto_cadastrar_lambda = 
+                "Informe o lambda:\n";
             const char *texto_newton_raphson_derivada_numerica =
-                "Voce escolheu 3 -> Newton Raphson com Derivada Numerica (NR-D).\n";
+                "Você escolheu 3 -> Newton Raphson com Derivada Numerica (NR-D).\n";
             const char *texto_metodo_cadastrado =
                 "Método cadastrado: ";
             const char *texto_remover_funcao_cadastrada =
-                "Voce escolheu 2 -> Remover uma funcao ja cadastrada.\n";
+                "Você escolheu 2 -> Remover uma função já cadastrada.\n";
+            const char *texto_nenhuma_funcao_remover =
+                "Ainda não foram cadastradas funções. Portanto, não é possível remover nenhuma. Tente inserir uma função primeiramente.\n\n";
+            const char *texto_inserir_indice_remover = 
+                "\nInsira o índice de qual função deseja remover:\n";
+            const char *texto_funcao_removida = 
+                "Funcao removida com sucesso.\n\n";
             const char *texto_resetar_funcoes_cadastradas =
-                "Voce escolheu 3 -> Resetar funcoes cadastradas.\n";
+                "Você escolheu 3 -> Resetar funções cadastradas.\n";
+            const char *texto_sem_funcoes_resetar =
+                "Não existem funções cadastradas. Portanto, não há o que remover.\n\n";
+            const char *texto_funcoes_resetadas = 
+                "Pronto, todas as funções foram removidas.\n\n";
             const char *texto_analise_passo_passo_funcao =
-                "Voce escolheu 4 -> Mostrar analise passo a passo de um funcao.\n";
+                "Você escolheu 4 -> Mostrar análise passo a passo de um função.\n";
+            const char *texto_sem_funcoes_analisar = 
+                "Ainda não foram cadastradas funções. Portanto, não é possível analisar nenhuma. Tente inserir uma função primeiramente.\n\n";
+            const char *texto_mostrar_funcoes_cadastradas =
+                "Estas são as funções cadastradas:\n\n";
+            const char *texto_inserir_indice_analisar =
+                "\nInsira o índice de qual função deseja analisar:\n";
             const char *texto_mostrar_quadro_comparativo_func_cadastradas =
-                "Voce escolheu 5 -> Gerar quadro comparativo das funcoes cadastradas.\n";
+                "Você escolheu 5 -> Gerar quadro comparativo das funções cadastradas.\n";
             const char *texto_mostrar_isolamento_funcao =
-                "Voce escolheu 6 -> Mostrar isolamento de uma funcao.\n";
-            const char *texto_entrada_invalida = "Entrada inválida. Teste novamente. \n";
+                "Você escolheu 6 -> Mostrar isolamento de uma função.\n";
+            const char *texto_entrada_invalida = 
+                "Entrada inválida. Teste novamente. \n";
+
+            void init(std::vector<NewtonRaphson*>& funcoes);
 
             // Inicialização do painel, a partir dela será feita a iteração com o usuário.
-            void init();
+            //void init();
             void output() const;
-            // Output de textos da aplicação. Esses textos estão alocados em atributos da classe Painel.
+
             void output(const char *texto_principal) const;
     };
-} // namespace metodos_numericos1::include
+};
 
-#endif /* METODOS_NUMERICOS1_INCLUDE_PAINEL_HPP_ */
+#endif 
