@@ -85,9 +85,9 @@ double NewtonRaphson::get_raiz(int index) {
         ss << "Erro: essa função tem apenas " << this->iteracoes_de_x.size() << " raízes, você tentou acessar a raiz: " << index + 1 << ".\n";
         throw std::domain_error(ss.str());
     }
-    if (!(this->raiz_valida)) {
-        throw std::logic_error("Erro: raiz inválida, pois o método estorou o número máximo de iterações.");
-    }
+    // if (!(this->raiz_valida)) {
+    //     throw std::logic_error("Erro: raiz inválida, pois o método estorou o número máximo de iterações.");
+    // }
 
     if (this->iteracoes_de_x[index].size() < 1) {
         throw std::domain_error("Erro: raiz não calculada, chame calcula_raiz antes de acessar a raiz");
@@ -102,6 +102,16 @@ std::string NewtonRaphson::get_nome_abreviado() {
 
 std::string NewtonRaphson::get_nome() {
     return "Newton Raphson";
+}
+
+void NewtonRaphson::print_isolamento() {
+    std::vector<std::pair<double, double>> isolamento = this->get_isolamento();
+
+    std::cout << "[ ";
+    for (auto& item : isolamento) {
+        std::cout << "[" << item.first << ", " << item.second << "] ";
+    }
+    std::cout << "]\n";
 }
 
 std::string NewtonRaphson::get_classe(int precisao) {
@@ -135,13 +145,14 @@ void NewtonRaphson::calcula_raiz(double x0) {
         double f_derivada_x = f_derivada.get_valor_funcao(x0);
 
         x_k = x0 - (f_x / f_derivada_x);
-        iteracoes_de_x.push_back(x_k);
 
         /* Resultado do método é invalidado por estouro do número máximo de iterações */
         if (k > this->max_iteracoes) {
-            this->raiz_valida = false;
-            return;
+            break;
         }
+
+        iteracoes_de_x.push_back(x_k);
+
 
         if ((std::abs(f_x) < this->erro) && (std::abs(x_k - x0) < this->erro)) {
             continuar_iteracao = false;
@@ -166,12 +177,17 @@ void NewtonRaphson::calcula_raizes() {
     double fator_de_risco = 0.3;
     std::vector<double> x0s;
 
+    if (this->iteracoes_de_x.size() != 0) {
+        return;
+    }
+
     for (auto& item : this->get_isolamento()) {
         x0s.push_back((item.first + item.second) / 2);
     }
 
     for (int i=0; i < x0s.size(); i++) {
         this->calcula_raiz(x0s[i]);
+
 
         if (this->get_raiz(i) >= fator_de_risco) this->quebra = true;
     }

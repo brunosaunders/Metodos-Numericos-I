@@ -37,10 +37,7 @@ void NewtonRaphsonFL::calcula_raiz(double x0) {
     while (continuar) {
         //Verificar se já passamos do limite de passos(numero máximo)
         if (k > this->get_max_iteracoes()) {
-            //Não temos raiz válida
-            continuar = false;
-            this->set_raiz_valida(false);
-            return;
+            break;
         }
 
         //Caso contrário, iremos nos preocupar com a próxima aproximação
@@ -60,7 +57,6 @@ void NewtonRaphsonFL::calcula_raiz(double x0) {
         //Verificar se atendemos a condição de parada
         if ((std::abs(this->get_funcao().get_valor_funcao(xk)) < this->get_erro()) && (std::abs(xk - (iteracoes_de_x.back())) < this->get_erro())) {
             continuar = false;
-            this->set_raiz_valida(true);
         }
 
         //Acrescentamos a nova aproximação no vector de iterações

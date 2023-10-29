@@ -81,7 +81,9 @@ namespace metodos_numericos1::outputs {
             const char *texto_entrada_invalida = 
                 "Entrada inválida. Teste novamente\n";
 
-            void init(std::vector<NewtonRaphson*>& funcoes);
+            void init(std::vector<NewtonRaphson*> funcoes);
+
+            void print_funcoes_cadastradas(std::vector<NewtonRaphson*> metodos);
 
             // Inicialização do painel, a partir dela será feita a iteração com o usuário.
             //void init();

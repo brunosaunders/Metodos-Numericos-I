@@ -14,7 +14,6 @@ namespace metodos_numericos1::metodos {
     private:
         bool quebra;
         double erro;
-        bool raiz_valida;
         Polinomio funcao; 
         int max_iteracoes;
         std::vector<std::pair<double, double>> isolamento;
@@ -46,12 +45,12 @@ namespace metodos_numericos1::metodos {
         std::vector<double>& get_iteracoes_de_x(int index);
         std::vector<std::vector<double>>& get_iteracoes_de_x_todas_raizes();
         std::vector<std::pair<double, double>> get_isolamento();
-        void set_raiz_valida(bool r);
 
         /* Executa o método numérico para cada intervalo do isolamento, guardando
         * as iterações em iteracoes_de_x
         */
         void calcula_raizes();
+        void print_isolamento();
     }; 
 }
 #endif
