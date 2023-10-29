@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <iostream>
 #include <vector> 
 #include <iomanip>
@@ -78,6 +79,40 @@ void testa_isolamento()
     std::cout << p.numero_raizes_reais(-3.16, 2.82);
 }
 
+void gera_quadro_nr_a3_fixo_a2_variando()
+{
+    std::vector<NewtonRaphson *> metodos;
+
+    for (int i = -5; i <= 5; i++) {
+        Polinomio p = Pendulo(1, i);
+        metodos.push_back(new NewtonRaphson(100, 0.001, p));
+    }
+    metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(metodos);
+}
+
+void gera_quadro_nr_fl_a3_fixo_lambda_fixo_a2_variando()
+{
+    std::vector<NewtonRaphson *> metodos;
+
+    for (int i = -5; i <= 5; i++) {
+        Polinomio p = Pendulo(2, i);
+        metodos.push_back(new NewtonRaphsonFL(100, 0.001, p, 0.5));
+    }
+    metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(metodos);
+}
+
+// TODO: necessário rever dado que um resultado -nan aparece
+void gera_quadro_nr_d_a3_fixo_a2_variando()
+{
+    std::vector<NewtonRaphson *> metodos;
+
+    for (int i = -5; i <= 5; i++) {
+        Polinomio p = Pendulo(3, i);
+        metodos.push_back(new NewtonRaphsonComDerivadaNumerica(100, 0.001, p));
+    }
+    metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(metodos);
+}
+
 int main()
 {
     // testa_polinomios();
@@ -89,10 +124,13 @@ int main()
     // testa_passos();
 
     // Inicializa painel da aplicação;
-    Painel painel;
-    std::vector<NewtonRaphson*> funcoes;
-    painel.init(funcoes);
-
+    //Painel painel;
+    //std::vector<NewtonRaphson*> funcoes;
+    //painel.init(funcoes);
+    //gera_quadro_nr_a3_fixo_a2_variando();
+    gera_quadro_nr_fl_a3_fixo_lambda_fixo_a2_variando();
+    gera_quadro_nr_d_a3_fixo_a2_variando();
+    gera_quadro_nr_d_a3_fixo_a2_variando();
     return 0;
 }
 
