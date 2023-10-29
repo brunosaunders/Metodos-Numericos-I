@@ -11,6 +11,11 @@ NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio& funcao) 
     this->funcao = funcao;
     this->raiz_valida = true;
 
+    if (funcao.intervalos.size() > 0){
+        this->isolamento = funcao.intervalos;
+        return;
+    } 
+
     /* Isolamento do polinomio */
     std::pair<double, double> intervalo = funcao.intervalo_max();
     int qtd_raizes = funcao.numero_raizes_reais(intervalo.first, intervalo.second);
