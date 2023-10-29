@@ -1,6 +1,8 @@
 #ifndef NEWTONRAPHSONCOMDERIVADANUMERICA_HPP
 #define NEWTONRAPHSONCOMDERIVADANUMERICA_HPP
 
+#include <string>
+
 #include "Polinomio.hpp"
 #include "NewtonRaphson.hpp"
 #include "Derivacao.hpp"
@@ -11,5 +13,9 @@ class NewtonRaphsonComDerivadaNumerica:public NewtonRaphson{
         Derivacao derivador;
 
         void calcula_raiz(double x0);
+        std::string get_nome();
+        std::string get_nome_abreviado();
+
+        //virtual std::string get_classe(int precisao);
 };
 #endif
