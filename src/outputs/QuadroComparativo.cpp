@@ -97,7 +97,7 @@ namespace metodos_numericos1::outputs {
 
             int largura_total_tabela = 11 * largura_padrao + largura_k;
 
-            std::string quadro = "Quadro Comparativo";
+            std::string quadro = "\nQuadro Comparativo";
 
             std::cout << std::left << quadro << std::endl;
             metodos_numericos1::outputs::Tabela::exibir_tampa_tabela(largura_total_tabela);

@@ -1,15 +1,18 @@
-#include "Painel.hpp"
-#include "NewtonRaphson.hpp"
-#include "NewtonRaphsonFL.hpp"
-#include "NewtonRaphsonComDerivadaNumerica.hpp"
-#include "Polinomio.hpp"
-#include "Pendulo.hpp"
-#include "fmt/core.h"
-#include "fmt/format.h"
 #include <iostream>
 #include <memory>
 #include <string>
 #include <vector>
+
+#include "Painel.hpp"
+#include "fmt/core.h"
+#include "Passos.hpp"
+#include "Pendulo.hpp"
+#include "fmt/format.h"
+#include "Polinomio.hpp"
+#include "NewtonRaphson.hpp"
+#include "NewtonRaphsonFL.hpp"
+#include "QuadroComparativo.hpp"
+#include "NewtonRaphsonComDerivadaNumerica.hpp"
 
 using namespace metodos_numericos1::include;
 
@@ -27,18 +30,21 @@ void Painel::init(std::vector<NewtonRaphson*>& funcoes){
             }
         case 1: 
             {
-                double a3, a2, precisao, lambda;
+                double a3, a2, precisao, max_iteracoes, lambda;
                 this->output(this->texto_cadastrar_funcao_metodo_analise);
-                std::cin >> a3 >> a2 >> precisao;
+                std::cin >> a3 >> a2 >> precisao >> max_iteracoes;
+
+                if (max_iteracoes < 10) max_iteracoes = 10;
+
                 Pendulo pendulo(a3, a2);
-                this->output(this->texto_escolher_newton_raphson);
+                this->output(this->texto_escolher_metodo);
                 std::cout << "R: ";
                 std::cin >> escolha_usuario;
                 switch (escolha_usuario) {
                     case 1:
                         {
                             this->output(this->texto_newton_raphson_normal);
-                            NewtonRaphson* nr = new NewtonRaphson(100, precisao, pendulo);
+                            NewtonRaphson* nr = new NewtonRaphson(max_iteracoes, precisao, pendulo);
                             funcoes.push_back(nr);
                             fmt::print("\n!!! {0} {1} !!!\n\n", this->texto_metodo_cadastrado, nr->get_classe(precisao));
                             this->init(funcoes);
@@ -49,7 +55,7 @@ void Painel::init(std::vector<NewtonRaphson*>& funcoes){
                             this->output(this->texto_newton_raphson_fl);
                             this->output(this->texto_cadastrar_lambda);
                             std::cin >> lambda;
-                            NewtonRaphson* nr_fl = new NewtonRaphsonFL(100, precisao, pendulo, lambda);
+                            NewtonRaphson* nr_fl = new NewtonRaphsonFL(max_iteracoes, precisao, pendulo, lambda);
                             funcoes.push_back(nr_fl);
                             fmt::print("\n!!! {0} {1} !!!\n\n", this->texto_metodo_cadastrado, nr_fl->get_classe(precisao));
                             this->init(funcoes);
@@ -58,7 +64,7 @@ void Painel::init(std::vector<NewtonRaphson*>& funcoes){
                     case 3: 
                         {
                             this->output(this->texto_newton_raphson_derivada_numerica);
-                            NewtonRaphson* nr_d = new NewtonRaphsonComDerivadaNumerica(100, precisao, pendulo);
+                            NewtonRaphson* nr_d = new NewtonRaphsonComDerivadaNumerica(max_iteracoes, precisao, pendulo);
                             funcoes.push_back(nr_d);
                             fmt::print("\n!!! {0} {1} !!!\n\n", this->texto_metodo_cadastrado, nr_d->get_classe(precisao));
                             this->init(funcoes);
@@ -145,18 +151,7 @@ void Painel::init(std::vector<NewtonRaphson*>& funcoes){
                         break;
                     }
 
-                    if (funcoes[j - 1]->get_nome_abreviado() == "NR")
-                    {
-                        std::cout << "NR\n"; //inserir aqui o metodo de analise
-                    }
-                    else if (funcoes[j - 1]->get_nome_abreviado() == "NR-FL")
-                    {
-                        std::cout << "NR-FL\n"; //inserir aqui o metodo de analise
-                    }
-                    else if (funcoes[j - 1]->get_nome_abreviado() == "NR-D")
-                    {
-                        std::cout << "NR-D\n"; //inserir aqui o metodo de analise
-                    }
+                    metodos_numericos1::outputs::Passos::exibir_passos_todas_raizes(funcoes[j-1]);
                 }
                 this->init(funcoes);
                 break;
@@ -164,7 +159,7 @@ void Painel::init(std::vector<NewtonRaphson*>& funcoes){
         case 5: 
             {
                 this->output(this->texto_mostrar_quadro_comparativo_func_cadastradas);
-                // Chamar método que mostra quadro comparativo
+                metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(funcoes);
                 this->init(funcoes);
                 break;
             }

@@ -20,6 +20,8 @@ namespace metodos_numericos1::outputs {
         int precisao_fx_xk = std::log10(metodo->get_erro()) * (-1);
 
         metodo->calcula_raizes();
+        int largura_total_tabela = 7 * 12 + 8;
+        metodos_numericos1::outputs::Tabela::exibir_tampa_tabela(largura_total_tabela);
         std::cout << "Método: " << metodo->get_classe(precisao_fx_xk) << std::endl;
         
         for (int i=0; i < metodo->get_iteracoes_de_x_todas_raizes().size(); i++) {

@@ -28,8 +28,8 @@ namespace metodos_numericos1::include {
                 "---------------------------------------------------------\n";
             const char *texto_cadastrar_funcao_metodo_analise =
                 "\nVocê escolheu 1 -> Cadastrar uma função e método para análise.\n\n"
-                "Insira, separados por espaços, a3 a2 precisão: ";
-            const char *texto_escolher_newton_raphson =
+                "Insira, separados por espaços, a3 a2 precisão max_iterações: ";
+            const char *texto_escolher_metodo =
                 "\n"
                 "---------------------------------------------------\n"
                 "|Agora, escolha o método desejado:                |\n"
