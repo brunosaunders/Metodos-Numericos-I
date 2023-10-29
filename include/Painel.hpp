@@ -7,7 +7,9 @@
 #include <utility>
 #include <string>
 
-namespace metodos_numericos1::include {
+using namespace metodos_numericos1::metodos;
+
+namespace metodos_numericos1::outputs {
     // Implementação de um painel iterativo (terminal) em modo texto para iteração
     // com usuário.
     class Painel {
@@ -67,7 +69,7 @@ namespace metodos_numericos1::include {
             const char *texto_analise_passo_passo_funcao =
                 "Você escolheu 4 -> Mostrar análise passo a passo de um função.\n";
             const char *texto_sem_funcoes_analisar = 
-                "!!! Ainda não foram cadastradas funções. Portanto, não é possível analisar nenhuma. Tente inserir uma função primeiramente !!!\n";
+                "Ainda não foi cadastrada nenhuma função. Cadastre uma função para prosseguir";
             const char *texto_mostrar_funcoes_cadastradas =
                 "Estas são as funções cadastradas:\n";
             const char *texto_inserir_indice_analisar =

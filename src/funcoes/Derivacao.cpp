@@ -1,6 +1,9 @@
 #include "Derivacao.hpp"
 #include <stdexcept>
 
+using namespace metodos_numericos1::funcoes;
+
+
 Derivacao::Derivacao() {}
 
 double Derivacao::derivar(double (*fn)(double), double x, double h, int metodo) {

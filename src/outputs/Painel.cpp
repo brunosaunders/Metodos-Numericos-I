@@ -14,7 +14,11 @@
 #include "QuadroComparativo.hpp"
 #include "NewtonRaphsonComDerivadaNumerica.hpp"
 
-using namespace metodos_numericos1::include;
+using namespace metodos_numericos1::metodos;
+
+using namespace metodos_numericos1::funcoes;
+using namespace metodos_numericos1::outputs;
+
 
 Painel::Painel() {}
 
@@ -132,7 +136,7 @@ void Painel::init(std::vector<NewtonRaphson*>& funcoes){
                 this->output(this->texto_analise_passo_passo_funcao);
                 if (funcoes.size() < 1)
                 {
-                    fmt::print("\n!!! {0} !!!\n\n", this->texto_funcoes_resetadas);
+                    fmt::print("\n!!! {0} !!!\n\n", this->texto_sem_funcoes_analisar);
                 }
                 else
                 {
@@ -140,7 +144,7 @@ void Painel::init(std::vector<NewtonRaphson*>& funcoes){
                     this->output(this->texto_mostrar_funcoes_cadastradas);
                     for (int i = 0; i < funcoes.size(); i++)
                     {
-                       std::cout << i+1 << " -> " << funcoes[i]->get_classe(2) << "\n";
+                    std::cout << i+1 << " -> " << funcoes[i]->get_classe(2) << "\n";
                     }
                     this->output(this->texto_inserir_indice_analisar);
                     std::cin >> j;
@@ -159,6 +163,11 @@ void Painel::init(std::vector<NewtonRaphson*>& funcoes){
         case 5: 
             {
                 this->output(this->texto_mostrar_quadro_comparativo_func_cadastradas);
+                if (funcoes.size() == 0) {
+                    fmt::print("\n!!! {0} !!!\n\n", this->texto_sem_funcoes_analisar);
+                    this->init(funcoes);
+                    break;
+                }
                 metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(funcoes);
                 this->init(funcoes);
                 break;

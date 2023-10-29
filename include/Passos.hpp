@@ -1,10 +1,12 @@
-#ifndef METODOS_NUMERICOS1_OUTPUTS_PASSOS
-#define METODOS_NUMERICOS1_OUTPUTS_PASSOS
+#ifndef METODOS_NUMERICOS1_INCLUDE_PASSOS
+#define METODOS_NUMERICOS1_INCLUDE_PASSOS
 
 #include <vector>
 #include <string>
 
 #include "NewtonRaphson.hpp"
+
+using namespace metodos_numericos1::metodos;
 
 namespace metodos_numericos1::outputs {
     class Passos {

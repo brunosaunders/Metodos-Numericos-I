@@ -6,6 +6,8 @@
 #include "NewtonRaphsonComDerivadaNumerica.hpp"
 #include "Derivacao.hpp"
 
+using namespace metodos_numericos1::metodos;
+
 void NewtonRaphsonComDerivadaNumerica::calcula_raiz(double x0) {
     int k = 1;
     double x_k = 0.0;

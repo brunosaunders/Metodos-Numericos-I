@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iomanip>
 
+using namespace metodos_numericos1::metodos;
 
 NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio& funcao) {
     this->max_iteracoes = max_iteracoes;

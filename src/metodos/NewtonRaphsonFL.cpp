@@ -7,6 +7,7 @@
 #include "NewtonRaphson.hpp"
 #include <cmath>
 
+using namespace metodos_numericos1::metodos;
 
 
 NewtonRaphsonFL::NewtonRaphsonFL(int max_passos, double erro, Polinomio& funcao, double lambda) : NewtonRaphson(max_passos, erro, funcao) {

@@ -1,5 +1,5 @@
-#ifndef DERIVADANUMERICA_HPP
-#define DERIVADANUMERICA_HPP
+#ifndef METODOS_NUMERICOS1_INCLUDE_DERIVADANUMERICA_HPP
+#define METODOS_NUMERICOS1_INCLUDE_DERIVADANUMERICA_HPP
 
 #include "Polinomio.hpp"
 
@@ -8,25 +8,28 @@
 #define DERIVACAO_CENTRADA 1
 #define DERIVACAO_PROGRESSIVA 2
 
-using namespace metodos_numericos1::include;
+using namespace metodos_numericos1::funcoes;
 
-class Derivacao {
+namespace metodos_numericos1::funcoes {
 
-    public:
-        Derivacao();
+    class Derivacao {
 
-        /*
-            Retorna a derivada numérica de uma função qualquer num ponto x, com passo h, utilizando o método especificado.
-            O método padrão utilizado é o DERIVACAO_CENTRADA, pois esse é o mais preciso em geral.
-        */
-        double derivar(double (*fn)(double), double x, double h = 1.0e-10, int metodo = DERIVACAO_CENTRADA);
+        public:
+            Derivacao();
 
-        /*
-            Retorna a derivada numérica de um Polinômio num ponto x, com passo h, utilizando o método especificado.
-            O método padrão utilizado é o DERIVACAO_CENTRADA, pois esse é o mais preciso em geral. O valor padrão para 
-        */
-        double derivar(Polinomio polinomio, double x, double h = 1.0e-10, int metodo = DERIVACAO_CENTRADA);
+            /*
+                Retorna a derivada numérica de uma função qualquer num ponto x, com passo h, utilizando o método especificado.
+                O método padrão utilizado é o DERIVACAO_CENTRADA, pois esse é o mais preciso em geral.
+            */
+            double derivar(double (*fn)(double), double x, double h = 1.0e-10, int metodo = DERIVACAO_CENTRADA);
 
-};
+            /*
+                Retorna a derivada numérica de um Polinômio num ponto x, com passo h, utilizando o método especificado.
+                O método padrão utilizado é o DERIVACAO_CENTRADA, pois esse é o mais preciso em geral. O valor padrão para 
+            */
+            double derivar(Polinomio polinomio, double x, double h = 1.0e-10, int metodo = DERIVACAO_CENTRADA);
+
+    };
+}
 
 #endif

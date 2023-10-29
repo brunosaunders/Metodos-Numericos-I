@@ -13,6 +13,7 @@
 #include "QuadroComparativo.hpp"
 
 using namespace std;
+using namespace metodos_numericos1::outputs;
 
 
 void testa_passos()
@@ -88,7 +89,7 @@ int main()
     // testa_passos();
 
     // Inicializa painel da aplicação;
-    metodos_numericos1::include::Painel painel;
+    Painel painel;
     std::vector<NewtonRaphson*> funcoes;
     painel.init(funcoes);
 
