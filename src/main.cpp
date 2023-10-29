@@ -1,20 +1,20 @@
 #include <iostream>
+#include <vector> 
 #include <iomanip>
-#include <cmath>
-#include <random>
-#include <vector>
-#include <iterator>
 
+#include "Painel.hpp"
 #include "Polinomio.hpp"
 #include "NewtonRaphsonComDerivadaNumerica.hpp"
 #include "NewtonRaphsonFL.hpp"
-#include "Passos.hpp"
 #include "NewtonRaphson.hpp"
 #include "Pendulo.hpp"
+#include "Passos.hpp"
 #include "Utils.hpp"
 #include "QuadroComparativo.hpp"
 
 using namespace std;
+using namespace metodos_numericos1::outputs;
+
 
 void testa_passos()
 {
@@ -85,8 +85,15 @@ int main()
     // testa_isolamento();
     // testa_divisao();
     
-    testa_quadro_comparativo();
-    testa_passos();
+    // testa_quadro_comparativo();
+    // testa_passos();
+
+    // Inicializa painel da aplicação;
+    Painel painel;
+    std::vector<NewtonRaphson*> funcoes;
+    painel.init(funcoes);
 
     return 0;
 }
+
+   

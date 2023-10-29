@@ -3,7 +3,7 @@
 
 #include <vector> 
 
-namespace metodos_numericos1::include {
+namespace metodos_numericos1::funcoes {
     class Polinomio { 
         public:
             Polinomio(); 

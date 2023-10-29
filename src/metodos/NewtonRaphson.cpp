@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iomanip>
 
+using namespace metodos_numericos1::metodos;
 
 NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio& funcao) {
     this->max_iteracoes = max_iteracoes;
@@ -118,6 +119,7 @@ double NewtonRaphson::get_lambda() {
 
 
 void NewtonRaphson::calcula_raiz(double x0) {
+
     int k = 1;
     double x_k = x0;
     bool continuar_iteracao = true;
@@ -174,4 +176,3 @@ void NewtonRaphson::calcula_raizes() {
         if (this->get_raiz(i) >= fator_de_risco) this->quebra = true;
     }
 }
-

@@ -1,5 +1,5 @@
-#ifndef NEWTONRAPHSONCOMDERIVADANUMERICA_HPP
-#define NEWTONRAPHSONCOMDERIVADANUMERICA_HPP
+#ifndef METODOS_NUMERICOS1_INCLUDE_NEWTONRAPHSONCOMDERIVADANUMERICA_HPP
+#define METODOS_NUMERICOS1_INCLUDE_NEWTONRAPHSONCOMDERIVADANUMERICA_HPP
 
 #include <string>
 
@@ -7,13 +7,22 @@
 #include "NewtonRaphson.hpp"
 #include "Derivacao.hpp"
 
-class NewtonRaphsonComDerivadaNumerica:public NewtonRaphson{ 
+using namespace metodos_numericos1::funcoes;
+
+namespace metodos_numericos1::metodos {
+
+    class NewtonRaphsonComDerivadaNumerica : public NewtonRaphson
+    {
     public:
-        NewtonRaphsonComDerivadaNumerica(int max_passos, double erro, Polinomio& funcao): NewtonRaphson(max_passos,erro, funcao) {}
+        NewtonRaphsonComDerivadaNumerica(int max_passos, double erro,
+                                        Polinomio &funcao) : NewtonRaphson(max_passos, erro, funcao) {}
+        
         Derivacao derivador;
 
-        void calcula_raiz(double x0);
         std::string get_nome();
         std::string get_nome_abreviado();
-};
+
+        void calcula_raiz(double x0);
+    };
+}
 #endif

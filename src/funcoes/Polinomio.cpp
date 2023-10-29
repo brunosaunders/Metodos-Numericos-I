@@ -12,7 +12,7 @@
 #include "Polinomio.hpp"
 #include "Utils.hpp"
 
-using namespace metodos_numericos1::include;
+using namespace metodos_numericos1::funcoes;
 
 Polinomio::Polinomio() {}
 

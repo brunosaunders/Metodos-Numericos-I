@@ -3,9 +3,10 @@ target_sources(${PROJECT_NAME} PRIVATE
     NewtonRaphsonComDerivadaNumerica.hpp
     NewtonRaphson.hpp
     NewtonRaphsonFL.hpp
+    Painel.hpp
     Pendulo.hpp
     Derivacao.hpp
-    Utils.hpp
-    Tabela.hpp
     QuadroComparativo.hpp
+    Tabela.hpp
+    Utils.hpp
 )

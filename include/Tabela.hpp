@@ -1,5 +1,6 @@
-#ifndef TABELA_HPP
-#define TABELA_HPP
+#ifndef METODOS_NUMERICOS1_INCLUDE_TABELA_HPP
+#define METODOS_NUMERICOS1_INCLUDE_TABELA_HPP
+
 #include <string> 
 
 namespace metodos_numericos1::outputs

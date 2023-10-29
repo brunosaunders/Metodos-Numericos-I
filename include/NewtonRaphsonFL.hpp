@@ -4,18 +4,23 @@
 #include "NewtonRaphson.hpp"
 #include "Derivacao.hpp"
 
-class NewtonRaphsonFL: public NewtonRaphson{ 
-    private:
-        double lambda;
+using namespace metodos_numericos1::funcoes;
 
-    public:
-        NewtonRaphsonFL(int max_passos, double erro, Polinomio& funcao, double lambda);
+namespace metodos_numericos1::metodos {
 
-        double get_lambda();
-        std::string get_nome();
-        std::string get_nome_abreviado();
-        std::string get_classe(int precision);
+    class NewtonRaphsonFL: public NewtonRaphson{ 
+        private:
+            double lambda;
 
-        void calcula_raiz(double x0);
-};
+        public:
+            NewtonRaphsonFL(int max_passos, double erro, Polinomio& funcao, double lambda);
+
+            double get_lambda();
+            std::string get_nome();
+            std::string get_nome_abreviado();
+            std::string get_classe(int precision);
+
+            void calcula_raiz(double x0);
+    };
+}
 #endif
