@@ -24,6 +24,8 @@ namespace metodos_numericos1::outputs {
                 Polinomio funcao = metodo->get_funcao();
 
                 metodo->calcula_raizes(); 
+                std::vector<double> raizes = metodo->get_raizes();
+
                 int precisao = std::log10(metodo->get_erro()) * (-1);
                 int iteracoes =  metodo->get_max_iteracoes();
                 if (precisao > precisao_max) {
@@ -34,9 +36,10 @@ namespace metodos_numericos1::outputs {
 
                 if (funcao[0] < 0) negativos[0] = true;
                 if (funcao[2] < 0) negativos[1] = true;
-                if (metodo->get_raiz(0) < 0) negativos[2] = true;
-                if (metodo->get_raiz(1) < 0) negativos[3] = true;
-                if (metodo->get_raiz(2) < 0) negativos[4] = true;
+
+                for (int i=0; i < raizes.size(); i++) {
+                    if (raizes[i] < 0) negativos[2+i] = true;
+                }
             }
 
             if (precisao_max > 5) precisao_max = 5;
@@ -117,15 +120,23 @@ namespace metodos_numericos1::outputs {
             int k = 1;
             for (auto& metodo : metodos) {
                 Polinomio p = metodo->get_funcao();
+                std::vector<double> raizes = metodo->get_raizes();
+                
                 std::cout << "|";
                 metodos_numericos1::outputs::Tabela::formata_numero(k, largura_k);
                 metodos_numericos1::outputs::Tabela::formata_palavra(metodo->get_nome_abreviado(), largura_padrao);
                 metodos_numericos1::outputs::Tabela::formata_numero(p[0], largura_padrao);
                 metodos_numericos1::outputs::Tabela::formata_numero(p[2]/9, largura_padrao);
                 metodos_numericos1::outputs::Tabela::formata_numero(metodo->get_lambda(), largura_padrao);
-                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(0), precisao_max, largura_padrao);
-                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(1), precisao_max, largura_padrao);
-                metodos_numericos1::outputs::Tabela::formata_numero_cientifico(metodo->get_raiz(2), precisao_max, largura_padrao);
+
+                for (int i=0; i < 3; i++) {
+                    if (i < raizes.size()) {
+                        metodos_numericos1::outputs::Tabela::formata_numero_cientifico(raizes[i], precisao_max, largura_padrao);
+                    } else {
+                        metodos_numericos1::outputs::Tabela::formata_palavra("null", largura_padrao);
+                    }
+                } 
+
                 metodos_numericos1::outputs::Tabela::formata_numero(metodo->get_total_iteracoes(), largura_padrao);
                 metodos_numericos1::outputs::Tabela::formata_numero(metodo->get_media_iteracoes(), largura_padrao);
                 metodos_numericos1::outputs::Tabela::formata_palavra(metodo->get_quebra(), largura_padrao);
