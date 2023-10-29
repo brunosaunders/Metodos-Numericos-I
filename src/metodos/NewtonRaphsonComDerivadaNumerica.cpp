@@ -5,7 +5,6 @@
 
 #include "NewtonRaphsonComDerivadaNumerica.hpp"
 #include "Derivacao.hpp"
-#include <cmath>
 
 void NewtonRaphsonComDerivadaNumerica::calcula_raiz(double x0) {
     int k = 1;
@@ -44,4 +43,3 @@ std::string NewtonRaphsonComDerivadaNumerica::get_nome() {
 std::string NewtonRaphsonComDerivadaNumerica::get_nome_abreviado() {
     return "NR-D";
 }
-

@@ -6,21 +6,29 @@
 
 
 NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio& funcao) {
-    this->set_max_iteracoes(max_iteracoes);
-    this->set_erro(erro);
-    this->set_funcao(funcao);
-    this->set_raiz_valida(true);
+    this->max_iteracoes = max_iteracoes;
+    this->erro = erro;
+    this->funcao = funcao;
+    this->raiz_valida = true;
 
-    std::vector<double> isolamento({5, 100, -4});
-    this->isolamento_raizes = isolamento;
+    if (funcao.intervalos.size() > 0){
+        this->isolamento = funcao.intervalos;
+        return;
+    } 
+
+    /* Isolamento do polinomio */
+    std::pair<double, double> intervalo = funcao.intervalo_max();
+    int qtd_raizes = funcao.numero_raizes_reais(intervalo.first, intervalo.second);
+    funcao.encontra_intervalos(intervalo.first, intervalo.second, qtd_raizes);
+    this->isolamento = funcao.intervalos;
+}
+
+std::vector<std::pair<double, double>> NewtonRaphson::get_isolamento() {
+    return this->isolamento;
 }
 
 int NewtonRaphson::get_max_iteracoes() const {
     return this->max_iteracoes;
-}
-
-void NewtonRaphson::set_max_iteracoes(int m) {
-    this->max_iteracoes = m;
 }
 
 bool NewtonRaphson::get_raiz_valida() const {
@@ -35,16 +43,8 @@ double NewtonRaphson::get_erro() const {
     return this->erro;
 }
 
-void NewtonRaphson::set_erro(double e) {
-    this->erro = e;
-}
-
 Polinomio& NewtonRaphson::get_funcao() {
     return this->funcao;
-}
-
-void NewtonRaphson::set_funcao(Polinomio& f) {
-    this->funcao = f;
 }
 
 int NewtonRaphson::get_total_iteracoes() {
@@ -139,7 +139,6 @@ void NewtonRaphson::calcula_raiz(double x0) {
         /* Resultado do método é invalidado por estouro do número máximo de iterações */
         if (k > this->max_iteracoes) {
             this->raiz_valida = false;
-            this->num_passos = this->max_iteracoes;
             return;
         }
 
@@ -154,12 +153,24 @@ void NewtonRaphson::calcula_raiz(double x0) {
     this->iteracoes_de_x.push_back(iteracoes_de_x);
 }
 
+std::vector<double> NewtonRaphson::get_raizes() {
+    std::vector<double> raizes;
+    for (auto& item : this->iteracoes_de_x) {
+        raizes.push_back(item.back());
+    }
+    return raizes;
+}
+
 void NewtonRaphson::calcula_raizes() {
     double fator_de_risco = 0.3;
-    int raizes_disponiveis_para_calculo = this->isolamento_raizes.size(); 
+    std::vector<double> x0s;
 
-    for (int i=0; i < raizes_disponiveis_para_calculo; i++) {
-        this->calcula_raiz(this->isolamento_raizes[i]);
+    for (auto& item : this->get_isolamento()) {
+        x0s.push_back((item.first + item.second) / 2);
+    }
+
+    for (int i=0; i < x0s.size(); i++) {
+        this->calcula_raiz(x0s[i]);
 
         if (this->get_raiz(i) >= fator_de_risco) this->quebra = true;
     }

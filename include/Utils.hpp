@@ -3,7 +3,7 @@
 
 #include <vector> 
 
-namespace Utils { 
+namespace metodos_numericos1::out { 
     void print_vector(std::vector<double> v);
 }; 
 #endif

@@ -16,9 +16,6 @@ NewtonRaphsonFL::NewtonRaphsonFL(int max_passos, double erro, Polinomio& funcao,
 double NewtonRaphsonFL::get_lambda() {
     return this->lambda;
 }
-void NewtonRaphsonFL::set_lambda(double l) {
-    this->lambda = l;
-}
 
 void NewtonRaphsonFL::calcula_raiz(double x0) {
     int k = 1;

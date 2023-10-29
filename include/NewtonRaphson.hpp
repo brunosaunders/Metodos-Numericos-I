@@ -10,13 +10,15 @@ using namespace metodos_numericos1::include;
 
 class NewtonRaphson { 
 private:
-    int max_iteracoes;
-    bool raiz_valida;
-    int num_passos;
-    double erro;
-    Polinomio funcao; 
-    std::vector<double> isolamento_raizes;
     bool quebra;
+    double erro;
+    bool raiz_valida;
+    Polinomio funcao; 
+    int max_iteracoes;
+    std::vector<std::pair<double, double>> isolamento;
+
+    /* roda o método numérico salvando informações no vetor iteracoes_de_x */
+    virtual void calcula_raiz(double x0);
 
 protected:
     /* [x_0,x_1,...,x_n], onde x_n é a raiz encontrada*/
@@ -24,40 +26,29 @@ protected:
 
 public: 
     NewtonRaphson (int max_iteracoes,double erro, Polinomio& funcao); 
-
     virtual ~NewtonRaphson() {}
 
-    int get_max_iteracoes() const;
-    void set_max_iteracoes(int m);
-
-    bool get_raiz_valida() const;
-    void set_raiz_valida(bool r);
-
     double get_erro() const;
-    void set_erro(double e);
-
     Polinomio& get_funcao();
-    void set_funcao(Polinomio& f);
-
-    std::vector<double>& get_iteracoes_de_x(int index);
-    std::vector<std::vector<double>>& get_iteracoes_de_x_todas_raizes();
-
     double get_raiz(int index);
-
+    std::vector<double> get_raizes();
+    std::string get_quebra();
+    int get_total_iteracoes();
+    virtual double get_lambda();
+    double get_media_iteracoes();
+    bool get_raiz_valida() const;
+    int get_max_iteracoes() const;
     virtual std::string get_nome();
     virtual std::string get_nome_abreviado();
     virtual std::string get_classe(int precisao);
+    std::vector<double>& get_iteracoes_de_x(int index);
+    std::vector<std::vector<double>>& get_iteracoes_de_x_todas_raizes();
+    std::vector<std::pair<double, double>> get_isolamento();
+    void set_raiz_valida(bool r);
 
-    virtual double get_lambda();
+    /* Executa o método numérico para cada intervalo do isolamento, guardando
+     * as iterações em iteracoes_de_x
+     */
     void calcula_raizes();
-
-    int get_total_iteracoes();
-    double get_media_iteracoes();
-
-    std::string get_quebra();
-private:
-    /* roda o método numérico salvando informações no vetor iteracoes_de_x */
-    virtual void calcula_raiz(double x0);
-
 }; 
 #endif

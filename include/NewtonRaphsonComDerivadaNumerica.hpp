@@ -7,15 +7,17 @@
 #include "NewtonRaphson.hpp"
 #include "Derivacao.hpp"
 
-class NewtonRaphsonComDerivadaNumerica:public NewtonRaphson{ 
-    public:
-        NewtonRaphsonComDerivadaNumerica(int max_passos, double erro, Polinomio& funcao): NewtonRaphson(max_passos,erro, funcao) {}
-        Derivacao derivador;
+class NewtonRaphsonComDerivadaNumerica : public NewtonRaphson
+{
+public:
+    NewtonRaphsonComDerivadaNumerica(int max_passos, double erro,
+                                     Polinomio &funcao) : NewtonRaphson(max_passos, erro, funcao) {}
+    
+    Derivacao derivador;
 
-        void calcula_raiz(double x0);
-        std::string get_nome();
-        std::string get_nome_abreviado();
+    std::string get_nome();
+    std::string get_nome_abreviado();
 
-        //virtual std::string get_classe(int precisao);
+    void calcula_raiz(double x0);
 };
 #endif

@@ -93,6 +93,12 @@ void Painel::init(std::vector<NewtonRaphson*>& funcoes){
                     std::cout << "R: ";
 
                     std::cin >> j;
+                    if (j > funcoes.size() || j < 0) {
+                        fmt::print("\n!!! {0} !!!\n\n", this->texto_opcao_invalida);
+                        this->init(funcoes);
+                        break;
+                    }
+
                     funcoes.erase(funcoes.begin() + (j - 1));
                     fmt::print("\n!!! {0} !!!\n\n", this->texto_funcao_removida);
                 }
@@ -132,6 +138,13 @@ void Painel::init(std::vector<NewtonRaphson*>& funcoes){
                     }
                     this->output(this->texto_inserir_indice_analisar);
                     std::cin >> j;
+
+                    if (j > funcoes.size() || j < 0) {
+                        fmt::print("\n!!! {0} !!!\n\n", this->texto_opcao_invalida);
+                        this->init(funcoes);
+                        break;
+                    }
+
                     if (funcoes[j - 1]->get_nome_abreviado() == "NR")
                     {
                         std::cout << "NR\n"; //inserir aqui o metodo de analise

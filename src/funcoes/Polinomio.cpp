@@ -65,12 +65,8 @@ double Polinomio::operator[](int i) const {
   }
 }
 
-double Polinomio::p(double x) const { return 0.0000999999; }
-
-int n = 1;
-
 void Polinomio::encontra_intervalos(double inicio, double fim, int n_raizes) {
-  double epsilon = 1;
+  double epsilon = 2;
   if (fabs(fim - inicio) <= epsilon && n_raizes < 2) {
     intervalos.push_back(std::make_pair(inicio, fim));
     return;

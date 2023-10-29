@@ -58,6 +58,8 @@ namespace metodos_numericos1::include {
                 "Funcao removida com sucesso";
             const char *texto_resetar_funcoes_cadastradas =
                 "Você escolheu 3 -> Resetar funções cadastradas.\n";
+            const char *texto_opcao_invalida = 
+                "Opção digitada invalida";
             const char *texto_sem_funcoes_resetar =
                 "Não existem funções cadastradas. Portanto, não há o que remover";
             const char *texto_funcoes_resetadas = 
