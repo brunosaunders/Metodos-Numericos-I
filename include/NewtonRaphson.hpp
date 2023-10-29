@@ -37,7 +37,6 @@ namespace metodos_numericos1::metodos {
         int get_total_iteracoes();
         virtual double get_lambda();
         double get_media_iteracoes();
-        bool get_raiz_valida() const;
         int get_max_iteracoes() const;
         virtual std::string get_nome();
         virtual std::string get_nome_abreviado();

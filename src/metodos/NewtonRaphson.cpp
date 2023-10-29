@@ -10,7 +10,6 @@ NewtonRaphson::NewtonRaphson(int max_iteracoes, double erro, Polinomio& funcao) 
     this->max_iteracoes = max_iteracoes;
     this->erro = erro;
     this->funcao = funcao;
-    this->raiz_valida = true;
 
     if (funcao.intervalos.size() > 0){
         this->isolamento = funcao.intervalos;
@@ -30,14 +29,6 @@ std::vector<std::pair<double, double>> NewtonRaphson::get_isolamento() {
 
 int NewtonRaphson::get_max_iteracoes() const {
     return this->max_iteracoes;
-}
-
-bool NewtonRaphson::get_raiz_valida() const {
-    return this->raiz_valida;
-}
-
-void NewtonRaphson::set_raiz_valida(bool r) {
-    this->raiz_valida = r;
 }
 
 double NewtonRaphson::get_erro() const {
