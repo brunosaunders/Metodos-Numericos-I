@@ -79,7 +79,7 @@ namespace metodos_numericos1::outputs {
             const char *texto_mostrar_isolamento_funcao =
                 "Você escolheu 6 -> Mostrar isolamento de uma função.\n";
             const char *texto_entrada_invalida = 
-                "Entrada inválida. Teste novamente\n";
+                "Entrada inválida. Teste novamente";
 
             void init(std::vector<NewtonRaphson*> funcoes);
 

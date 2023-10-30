@@ -140,16 +140,18 @@ void gera_quadro_funcoes_a3_a2_iguais() {
 
 int main()
 {
-    // Inicializa painel da aplicação;
-    // Painel painel;
-    // std::vector<NewtonRaphson*> funcoes;
-    // painel.init(funcoes);
-
     // gera_quadro_nr_d_a3_fixo_a2_variando();
     // gera_quadro_nr_fl_a3_fixo_lambda_fixo_a2_variando();
     // gera_quadro_nr_fl_a3_variando_lambda_fixo_a2_fixo();
     // gera_quadro_nr_fl_a3_variando_lambda_fixo_a2_fixo();
-    testa_passos();
+    // testa_passos();
+
+    
+    // Inicializa painel da aplicação;
+    Painel painel;
+    std::vector<NewtonRaphson*> funcoes;
+    painel.init(funcoes);
+
     return 0;
 }
 
