@@ -104,11 +104,10 @@ void NewtonRaphson::print_isolamento() {
 }
 
 std::string NewtonRaphson::get_classe(int precisao) {
-    int n_precisao = std::log10(precisao) * (-1);
     Polinomio p = this->get_funcao();
 
     std::stringstream ss;
-    ss << std::fixed << std::setprecision(n_precisao) << this->get_nome_abreviado() << "(a3: " << p[0] << ", a2: " << p[2]/-9 << ", erro: " << this->get_erro() << ")";
+    ss << std::fixed << std::setprecision(precisao) << this->get_nome_abreviado() << "(a3: " << p[0] << ", a2: " << p[2]/-9 << ", erro: " << this->get_erro() << ")";
 
     return ss.str();
 }
