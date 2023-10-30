@@ -26,7 +26,7 @@ void NewtonRaphsonComDerivadaNumerica::calcula_raiz(double x0) {
         }
 
         iteracoes_de_x.push_back(x_k);
-        
+
         if ( (std::abs(this->get_funcao().get_valor_funcao(x_k)) < this->get_erro()) && (std::abs(x_k - x0) < this->get_erro()) ) {
             continuar_iteracao = false; 
         }
@@ -44,4 +44,13 @@ std::string NewtonRaphsonComDerivadaNumerica::get_nome() {
 
 std::string NewtonRaphsonComDerivadaNumerica::get_nome_abreviado() {
     return "NR-D";
+}
+
+std::string NewtonRaphsonComDerivadaNumerica::get_classe(int precision) {
+    Polinomio p = this->get_funcao();
+
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(precision) << this->get_nome_abreviado() << "(a3: " << p[0] << ", a2: " << p[2]/-9 << ", erro: " << this->get_erro() << ")";
+
+    return ss.str();
 }

@@ -21,6 +21,7 @@ namespace metodos_numericos1::metodos {
 
         std::string get_nome();
         std::string get_nome_abreviado();
+        std::string get_classe(int precision);
 
         void calcula_raiz(double x0);
     };

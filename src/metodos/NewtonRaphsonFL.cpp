@@ -32,7 +32,7 @@ void NewtonRaphsonFL::calcula_raiz(double x0) {
     Polinomio derivada = this->get_funcao().get_funcao_derivada();
 
     //Inicialmente xw = x0, pois ambos pontos se jogados na função derivada possuem módulo >= lambda
-    double xw = x0;
+    double xw = x0-0.01;
 
     while (continuar) {
         //Verificar se já passamos do limite de passos(numero máximo)
@@ -81,7 +81,7 @@ std::string NewtonRaphsonFL::get_classe(int precision) {
     Polinomio p = this->get_funcao();
 
     std::stringstream ss;
-    ss << std::fixed << std::setprecision(precision) << this->get_nome_abreviado() << "(a3: " << p[0] << ", a2: " << p[2]/9 << ", lambda: " << this->lambda << ", erro: " << this->get_erro() << ")";
+    ss << std::fixed << std::setprecision(precision) << this->get_nome_abreviado() << "(a3: " << p[0] << ", a2: " << p[2]/-9 << ", lambda: " << this->lambda << ", erro: " << this->get_erro() << ")";
 
     return ss.str();
 }

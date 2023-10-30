@@ -86,7 +86,7 @@ void Passos::exibir_passos_raiz(NewtonRaphson* metodo, int index) {
         }
 
         std::cout << "|";
-        Tabela::formata_numero(k, largura_padrao);
+        Tabela::formata_numero(k, largura_padrao, 0);
         Tabela::formata_numero_cientifico(xk, precisao_fx_xk, largura_padrao);
         Tabela::formata_numero_cientifico(xk_1, precisao_fx_xk, largura_padrao);
         Tabela::formata_numero_cientifico(fxk, precisao_fx_xk, largura_padrao);

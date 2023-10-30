@@ -14,7 +14,7 @@ namespace metodos_numericos1::funcoes {
     class Pendulo:public Polinomio { 
         public:
             /* P(d) = a3 d³ - 9*a2 d² + 3 */
-            Pendulo (double a3,double a2) : Polinomio({a3, 0, -9*a2, 3}){}
+            Pendulo (double a3,double a2);
     }; 
 }
 #endif

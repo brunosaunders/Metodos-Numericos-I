@@ -125,11 +125,11 @@ void QuadroComparativo::exibir_quadro(std::vector<NewtonRaphson*> metodos) {
         std::vector<double> raizes = metodo->get_raizes();
         
         std::cout << "|";
-        Tabela::formata_numero(k, largura_k);
+        Tabela::formata_numero(k, largura_k, 0);
         Tabela::formata_palavra(metodo->get_nome_abreviado(), largura_padrao);
-        Tabela::formata_numero(p[0], largura_padrao);
-        Tabela::formata_numero(p[2]/9, largura_padrao);
-        Tabela::formata_numero(metodo->get_lambda(), largura_padrao);
+        Tabela::formata_numero(p[0], largura_padrao, precisao_max);
+        Tabela::formata_numero(p[2]/-9, largura_padrao, precisao_max);
+        Tabela::formata_numero(metodo->get_lambda(), largura_padrao, precisao_max);
 
         for (int i=0; i < 3; i++) {
             if (i < raizes.size()) {
@@ -139,8 +139,8 @@ void QuadroComparativo::exibir_quadro(std::vector<NewtonRaphson*> metodos) {
             }
         } 
 
-        Tabela::formata_numero(metodo->get_total_iteracoes(), largura_padrao);
-        Tabela::formata_numero(metodo->get_media_iteracoes(), largura_padrao);
+        Tabela::formata_numero(metodo->get_total_iteracoes(), largura_padrao, 0);
+        Tabela::formata_numero(metodo->get_media_iteracoes(), largura_padrao, 0);
         Tabela::formata_palavra(metodo->get_quebra(), largura_padrao);
         std::cout << std::endl;
         k++;

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <cmath>
 
 using namespace metodos_numericos1::metodos;
 
@@ -76,9 +77,6 @@ double NewtonRaphson::get_raiz(int index) {
         ss << "Erro: essa função tem apenas " << this->iteracoes_de_x.size() << " raízes, você tentou acessar a raiz: " << index + 1 << ".\n";
         throw std::domain_error(ss.str());
     }
-    // if (!(this->raiz_valida)) {
-    //     throw std::logic_error("Erro: raiz inválida, pois o método estorou o número máximo de iterações.");
-    // }
 
     if (this->iteracoes_de_x[index].size() < 1) {
         throw std::domain_error("Erro: raiz não calculada, chame calcula_raiz antes de acessar a raiz");
@@ -106,10 +104,11 @@ void NewtonRaphson::print_isolamento() {
 }
 
 std::string NewtonRaphson::get_classe(int precisao) {
+    int n_precisao = std::log10(precisao) * (-1);
     Polinomio p = this->get_funcao();
 
     std::stringstream ss;
-    ss << std::fixed << std::setprecision(precisao) << this->get_nome_abreviado() << "(a3: " << p[0] << ", a2: " << p[2]/9 << ", erro: " << this->get_erro() << ")";
+    ss << std::fixed << std::setprecision(n_precisao) << this->get_nome_abreviado() << "(a3: " << p[0] << ", a2: " << p[2]/-9 << ", erro: " << this->get_erro() << ")";
 
     return ss.str();
 }

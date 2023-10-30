@@ -33,15 +33,15 @@ namespace metodos_numericos1::outputs {
             return count;
         }
 
-        void Tabela::formata_numero(int numero, int largura_total) {
+        void Tabela::formata_numero(int numero, int largura_total, int precisao) {
 
-            std::cout << std::fixed << std::setprecision(1) << std::setw(largura_total) << numero << "|";
+            std::cout << std::fixed << std::setprecision(precisao) << std::setw(largura_total) << numero << "|";
         }
         
-        void Tabela::formata_numero(double numero, int largura_total) {
+        void Tabela::formata_numero(double numero, int largura_total, int precisao) {
             
 
-            std::cout << std::right << std::setprecision(1) << std::setw(largura_total) << numero <<  "|";
+            std::cout << std::right << std::setprecision(precisao) << std::setw(largura_total) << numero <<  "|";
         }
 
         int conta_substrings(const std::string& main_string, const std::string& substring) {
