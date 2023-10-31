@@ -34,7 +34,7 @@ void gera_quadro_nr_a3_fixo_a2_variando()
 
     for (int i = -10; i <= 10; i++) {
         Polinomio p = Pendulo(1, i);
-        metodos.push_back(new NewtonRaphson(100, 0.001, p));
+        metodos.push_back(new NewtonRaphsonFL(100, 0.001, p, 0.05));
     }
     metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(metodos);
 }
@@ -87,7 +87,7 @@ void gera_quadro_nr_d_a3_fixo_a2_variando()
 
     for (int i = -10; i <= 10; i++) {
         Polinomio p = Pendulo(1, i);
-        metodos.push_back(new NewtonRaphsonComDerivadaNumerica(100, 0.001, p));
+        metodos.push_back(new NewtonRaphsonFL(100, 0.001, p, 0.05));
     }
     metodos_numericos1::outputs::QuadroComparativo::exibir_quadro(metodos);
 }

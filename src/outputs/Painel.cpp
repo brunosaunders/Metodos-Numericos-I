@@ -26,7 +26,8 @@ void Painel::print_funcoes_cadastradas(std::vector<NewtonRaphson*> funcoes) {
     std::cout << "------------------------\n";
     for (int i = 0; i < funcoes.size(); i++) 
     {
-        std::cout << i+1 << " -> " << funcoes[i]->get_classe(2) << "\n";
+        int precisao = std::log10(funcoes[i]->get_erro()) * (-1);
+        std::cout << i+1 << " -> " << funcoes[i]->get_classe(precisao) << "\n";
     }
 }
 
@@ -103,10 +104,7 @@ void Painel::init(std::vector<NewtonRaphson*> funcoes){
                 {
                     int j;
                     this->output(this->texto_mostrar_funcoes_cadastradas);
-                    for (int i = 0; i < funcoes.size(); i++) 
-                    {
-                        std::cout << i+1 << " -> " << funcoes[i]->get_classe(2) << "\n";
-                    }
+                    this->print_funcoes_cadastradas(funcoes);
                     this->output(this->texto_inserir_indice_remover);
                     std::cout << "R: ";
 
