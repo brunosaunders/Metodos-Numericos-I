@@ -2,26 +2,26 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <string>
 
 #include "Painel.hpp"
 #include "fmt/core.h"
-#include "Passos.hpp"
 #include "fmt/format.h"
-
+#include "Gauss.hpp"
 
 
 using namespace metodos_numericos1::outputs;
-
+using namespace metodos_numericos1::metodos;
 
 Painel::Painel() {}
 
 
-void Painel::init(std::vector<int> funcoes){
+void Painel::init(std::vector<Gauss*> metodos){
     int escolha_usuario;
     this->output(this->texto_menu_principal);
     std::cout << "R: ";
     std::cin >> escolha_usuario;
-    
+
     switch (escolha_usuario) {
         case 0:
             {
@@ -47,14 +47,10 @@ void Painel::init(std::vector<int> funcoes){
             {
                 // TODO
             }
-        case 6: 
-            {
-                // TODO
-            }
         default: 
             {
                 Painel::formata_avisos(this->texto_entrada_invalida);
-                // this->init(funcoes); // TODO
+                this->init(metodos);
                 break;
             }
     }

@@ -5,86 +5,107 @@
 #include <utility>
 #include <string>
 
+#include "Gauss.hpp"
+
+using namespace metodos_numericos1::metodos;
 
 namespace metodos_numericos1::outputs {
+
     // Implementação de um painel interativo (terminal) em modo texto para interação
     // com usuário.
     class Painel {
         public:
             Painel();
             const char *texto_menu_principal =
-                "---------------------------------------------------------\n"
-                "|              Tela inicial MN-Analyzer v3              |\n"
-                "---------------------------------------------------------\n"
-                "|Escolha uma opção:                                     |\n"
-                "|1 -> Cadastrar uma função e método para análise        |\n"
-                "|2 -> Remover uma função já cadastrada                  |\n"
-                "|3 -> Resetar funçôes cadastradas.                      |\n"
-                "|4 -> Mostrar análise passo a passo de um função.       |\n"
-                "|5 -> Gerar quadro comparativo das funções cadastradas. |\n"
-                "|6 -> Mostrar isolamento de uma função.                 |\n"
-                "|0 -> Sair.                                             |\n"
+                "--------------------------------------------------------------------\n"
+                "|                     Tela inicial MN-Analyzer v3                  |\n"
+                "--------------------------------------------------------------------\n"
+                "|Escolha uma opção:                                                |\n"
+                "|1 -> Cadastrar um sistema linear e método para análise.           |\n"
+                "|2 -> Remover uma sistema linear já cadastrado.                    |\n"
+                "|3 -> Resetar sistemas lineares cadastrados.                       |\n"
+                "|4 -> Mostrar análise de um sistema linear.                        |\n"
+                "|5 -> Mostrar análise de todos sistemas lineares cadastrados.      |\n"
+                "|0 -> Sair.                                                        |\n"
                 "---------------------------------------------------------\n";
-            const char *texto_cadastrar_funcao_metodo_analise =
-                "\nVocê escolheu 1 -> Cadastrar uma função e método para análise.\n\n"
-                "Insira, separados por espaços, a3 a2 precisão max_iterações: ";
+            const char *texto_cadastrar_sistema_linear_metodo_analise =
+                "\nVocê escolheu 1 -> Cadastrar um sistema linear e método para análise.\n\n";
+            
+            const char *texto_inserir_parametro_a = "\n Insira o parâmetro 'a': ";
+            const char *texto_inserir_numero_linhas = "\n Insira o número de linhas do sistema linear: ";
+            const char *texto_inserir_numero_colunas = "\n Insira o número de colunas do sistema linear: ";
+            const char *texto_inserir_matriz = "\n Insira a matriz para análise:\n";
+            const char *texto_inserir_vetor_v = "\n Insira o vetor 'v' de distâncias";
+            
             const char *texto_escolher_metodo =
                 "\n"
                 "---------------------------------------------------\n"
                 "|Agora, escolha o método desejado:                |\n"
                 "---------------------------------------------------\n"
-                "|1 -> Newton Raphson (NR).                        |\n"
-                "|2 -> Newton Raphson com FL (NR-FL).              |\n"
-                "|3 -> Newton Raphson com Derivada Numerica (NR-D).|\n"
+                "|1 -> Gauss Normal.                               |\n"
+                "|2 -> Gauss-Jordan.                               |\n"
                 "---------------------------------------------------\n";
+
             const char *texto_newton_raphson_normal =
-                "Você escolheu 1 -> Newton Raphson (NR).\n";
+                "Você escolheu 1 -> Gauss Normal.\n";
+
             const char *texto_newton_raphson_fl =
-                "Você escolheu 2 -> Newton Raphson com FL (NR-FL).\n";
-            const char *texto_cadastrar_lambda = 
-                "Informe o lambda: ";
-            const char *texto_newton_raphson_derivada_numerica =
-                "Você escolheu 3 -> Newton Raphson com Derivada Numerica (NR-D).\n";
+                "Você escolheu 2 -> Gauss-Jordan.\n";
+
             const char *texto_metodo_cadastrado =
                 "Método cadastrado: ";
-            const char *texto_remover_funcao_cadastrada =
-                "Você escolheu 2 -> Remover uma função já cadastrada.\n";
-            const char *texto_nenhuma_funcao_remover =
-                "Ainda não foram cadastradas funções. Portanto, não é possível remover nenhuma. Tente inserir uma função primeiramente";
+
+            const char *texto_remover_sistema_cadastrado =
+                "Você escolheu 2 -> Remover um sistema já cadastrado.\n";
+
+            const char *texto_nenhum_sistema_para_remover =
+                "Ainda não existe nenhum sistema cadastrado. Portanto, não é possível remover.";
+
             const char *texto_inserir_indice_remover = 
-                "\nInsira o índice de qual função deseja remover:\n";
-            const char *texto_funcao_removida = 
-                "Funcao removida com sucesso";
-            const char *texto_resetar_funcoes_cadastradas =
-                "Você escolheu 3 -> Resetar funções cadastradas.\n";
+                "\nInsira o índice de qual sistema deseja remover:\n";
+
+            const char *texto_sistema_removido = 
+                "Sistema removido com sucesso.";
+
+            const char *texto_resetar_sistemas_cadastrados =
+                "Você escolheu 3 -> Resetar sistemas cadastrados.\n";
+
             const char *texto_opcao_invalida = 
-                "Opção digitada invalida";
-            const char *texto_sem_funcoes_resetar =
-                "Não existem funções cadastradas. Portanto, não há o que remover";
-            const char *texto_funcoes_resetadas = 
-                "Pronto, todas as funções foram removidas";
-            const char *texto_analise_passo_passo_funcao =
-                "Você escolheu 4 -> Mostrar análise passo a passo de um função.\n";
-            const char *texto_sem_funcoes_analisar = 
-                "Ainda não foi cadastrada nenhuma função. Cadastre uma função para prosseguir";
-            const char *texto_mostrar_funcoes_cadastradas =
-                "Estas são as funções cadastradas:\n";
+                "Opção digitada invalida.";
+
+            const char *texto_sistemas_resetados = 
+                "Pronto, todas os sistemas foram removidos.";
+
+            const char *texto_analise_passo_passo_sistema =
+                "Você escolheu 4 -> Mostrar análise de um sistema linear.\n";
+
+            const char *texto_sem_sistemas_analisar = 
+                "Ainda não foi cadastrada nenhum sistema. Cadastre uma sistema para prosseguir.";
+
+            const char *texto_mostrar_sistemas_cadastrados =
+                "Estes são os sistemas cadastrados:\n";
+
             const char *texto_inserir_indice_analisar =
-                "\nInsira o índice de qual função deseja analisar:\n";
-            const char *texto_mostrar_quadro_comparativo_func_cadastradas =
-                "Você escolheu 5 -> Gerar quadro comparativo das funções cadastradas.\n";
-            const char *texto_mostrar_isolamento_funcao =
-                "Você escolheu 6 -> Mostrar isolamento de uma função.\n";
+                "\nInsira o índice de qual sistema deseja analisar:\n";
+
+            const char *texto_analisar_todos_sistemas = "\nVocê escolheu 5 -> Mostrar análise de todos sistemas lineares cadastrados.\n";
+
             const char *texto_entrada_invalida = 
                 "Entrada inválida. Teste novamente";
 
-            void init(std::vector<int> funcoes);
-
-            void print_funcoes_cadastradas(std::vector<int> metodos);
+            void init(std::vector<Gauss*> metodos);
 
             void output(const char *texto_principal) const;
 
             void formata_avisos(const char *texto) const;
+
+            void imprimir_sistema_cadastrado(Gauss* metodo);
+
+            void imprimir_resultado_analise(Gauss* metodo);
+
+            void imprimir_matriz(std::vector<std::vector<double>> matriz);
+            void imprimir_vetor_coluna(std::vector<double> vetor);
+            void imprimir_vetor_linha(std::vector<double> vetor);
     };
 };
 
