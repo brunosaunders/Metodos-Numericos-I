@@ -44,6 +44,7 @@ namespace metodos_numericos1::outputs {
             std::cout << std::right << std::setprecision(precisao) << std::setw(largura_total) << numero <<  "|";
         }
 
+        // Usado para contar quantas vezes uma substring aparece em uma string
         int conta_substrings(const std::string& main_string, const std::string& substring) {
             int count = 0;
             size_t offset = 0;

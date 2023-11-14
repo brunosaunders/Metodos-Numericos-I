@@ -1,16 +1,13 @@
 #ifndef METODOS_NUMERICOS1_INCLUDE_PAINEL_HPP_
 #define METODOS_NUMERICOS1_INCLUDE_PAINEL_HPP_
 
-#include "Polinomio.hpp"
-#include "NewtonRaphson.hpp"
 #include <vector>
 #include <utility>
 #include <string>
 
-using namespace metodos_numericos1::metodos;
 
 namespace metodos_numericos1::outputs {
-    // Implementação de um painel iterativo (terminal) em modo texto para iteração
+    // Implementação de um painel interativo (terminal) em modo texto para interação
     // com usuário.
     class Painel {
         public:
@@ -81,15 +78,13 @@ namespace metodos_numericos1::outputs {
             const char *texto_entrada_invalida = 
                 "Entrada inválida. Teste novamente";
 
-            void init(std::vector<NewtonRaphson*> funcoes);
+            void init(std::vector<int> funcoes);
 
-            void print_funcoes_cadastradas(std::vector<NewtonRaphson*> metodos);
-
-            // Inicialização do painel, a partir dela será feita a iteração com o usuário.
-            //void init();
-            void output() const;
+            void print_funcoes_cadastradas(std::vector<int> metodos);
 
             void output(const char *texto_principal) const;
+
+            void formata_avisos(const char *texto) const;
     };
 };
 

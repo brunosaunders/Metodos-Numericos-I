@@ -4,16 +4,12 @@
 #include <vector>
 #include <string>
 
-#include "NewtonRaphson.hpp"
-
-using namespace metodos_numericos1::metodos;
-
 namespace metodos_numericos1::outputs {
     class Passos {
         public:
-            static void exibir_passos_todas_raizes(NewtonRaphson* metodo);
+            static void exibir_passos_todas_raizes(int metodo);
         private:
-            static void exibir_passos_raiz(NewtonRaphson* metodo, int index);
+            static void exibir_passos_raiz(int metodo, int index);
     };
 }
 
