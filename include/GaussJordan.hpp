@@ -8,7 +8,7 @@ namespace metodos_numericos1::metodos {
 
     class GaussJordan : public Gauss {
         public:
-            void resolve_sistema_linear();
+            void resolve_sistema_linear() override;
     };
 }
 

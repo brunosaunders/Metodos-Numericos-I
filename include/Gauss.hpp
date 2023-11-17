@@ -26,12 +26,13 @@ namespace metodos_numericos1::metodos
         virtual void resolve_sistema_linear();
 
         double get_a();
-        std::vector<double> get_vetor_v();
         std::vector<double> get_vetor_v_inicial();
+        std::vector<std::vector<double>> get_matriz_c_inicial();
+
+        std::vector<double> get_vetor_v();
         std::vector<double> get_vetor_amplitudes();
         std::vector<std::vector<double>> get_matriz_c();
         std::vector<double> get_vetor_d_deslocamentos();
-        std::vector<std::vector<double>> get_matriz_c_inicial();
     };
 }
 
