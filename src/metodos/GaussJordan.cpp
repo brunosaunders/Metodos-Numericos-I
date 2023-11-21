@@ -17,7 +17,7 @@ void GaussJordan::resolve_sistema_linear() {
         }
     }
 
-    int i = n - 1;
+    // Começa pela última linha e coluna da matriz
     for (int i = n - 1; i > 0; i--) {
         double a_ii = matriz_c[i][i];
 
@@ -32,7 +32,7 @@ void GaussJordan::resolve_sistema_linear() {
             vetor_v[j] += vetor_v[i] * fator;
         }
     }
-    
+
     this->set_matriz_c(matriz_c);
     this->set_vetor_v(vetor_v);
 }
