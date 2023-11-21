@@ -35,4 +35,5 @@ void GaussJordan::resolve_sistema_linear() {
 
     this->set_matriz_c(matriz_c);
     this->set_vetor_v(vetor_v);
+    this->set_vetor_d_deslocamentos(vetor_v); // Vetor resultado do sistema
 }

@@ -51,3 +51,7 @@ void Gauss::set_vetor_v(vector<double> v) {
 void Gauss::set_matriz_c(vector<vector<double>> c) {
     this->matriz_c = c;
 }
+
+void Gauss::set_vetor_d_deslocamentos(vector<double> vetor_d_deslocamentos) {
+    this->vetor_d_deslocamentos = vetor_d_deslocamentos;
+}

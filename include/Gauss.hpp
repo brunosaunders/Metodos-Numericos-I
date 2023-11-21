@@ -23,19 +23,20 @@ namespace metodos_numericos1::metodos
                 double a) : a(a), matriz_c_inicial(matriz_c), vetor_v_inicial(vetor_v),
                 vetor_v(vetor_v), matriz_c(matriz_c) {}
 
-        virtual void resolve_sistema_linear();
+            virtual void resolve_sistema_linear();
 
-        double get_a();
-        std::vector<double> get_vetor_v_inicial();
-        std::vector<std::vector<double>> get_matriz_c_inicial();
+            double get_a();
+            std::vector<double> get_vetor_v_inicial();
+            std::vector<std::vector<double>> get_matriz_c_inicial();
 
-        std::vector<double> get_vetor_v();
-        std::vector<double> get_vetor_amplitudes();
-        std::vector<std::vector<double>> get_matriz_c();
-        std::vector<double> get_vetor_d_deslocamentos();
+            std::vector<double> get_vetor_v();
+            std::vector<double> get_vetor_amplitudes();
+            std::vector<std::vector<double>> get_matriz_c();
+            std::vector<double> get_vetor_d_deslocamentos();
 
-        void set_vetor_v(std::vector<double> v);
-        void set_matriz_c(std::vector<std::vector<double>> c);
+            void set_vetor_v(std::vector<double> v);
+            void set_vetor_d_deslocamentos(std::vector<double> vetor_d_deslocamentos);
+            void set_matriz_c(std::vector<std::vector<double>> c);
     };
 }
 
