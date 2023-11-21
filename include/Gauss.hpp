@@ -33,6 +33,9 @@ namespace metodos_numericos1::metodos
         std::vector<double> get_vetor_amplitudes();
         std::vector<std::vector<double>> get_matriz_c();
         std::vector<double> get_vetor_d_deslocamentos();
+
+        void set_vetor_v(std::vector<double> v);
+        void set_matriz_c(std::vector<std::vector<double>> c);
     };
 }
 
