@@ -30,6 +30,6 @@ int main()
     Imprimir::vetor(gauss_jordan->get_vetor_amplitudes()); // Vetor Resposta multiplicado por 'a'
 
     cout << gauss_jordan->get_balanco_quebra() << "\n";
-
+    cout << gauss_jordan->get_determinante_matriz_c() << "\n";
     return 0;
 }

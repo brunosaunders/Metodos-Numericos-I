@@ -1,5 +1,6 @@
 #include "Gauss.hpp"
 #include <stdexcept>
+#include <cmath>
 
 using namespace std;
 using namespace metodos_numericos1::metodos;
@@ -56,6 +57,25 @@ void Gauss::set_vetor_d_deslocamentos(vector<double> vetor_d_deslocamentos) {
     this->vetor_d_deslocamentos = vetor_d_deslocamentos;
 }
 
+int Gauss::get_trocas_de_linha() {
+    return this->trocas_de_linha;
+}
+
+double Gauss::get_determinante_matriz_c() {
+    if (this->vetor_d_deslocamentos.size() == 0) {
+        Gauss::resolve_sistema_linear();
+    }
+
+    vector<vector<double>> matriz_c = this->matriz_c;
+    double det = 1;
+
+    for (int i=0; i < matriz_c.size(); i++) {
+        det *= matriz_c[i][i];
+    }
+    
+    return det * std::pow(-1, this->trocas_de_linha);
+}
+
 bool Gauss::get_balanco_quebra() {
     vector<double> vetor_amplitudes = this->get_vetor_amplitudes();
     if (vetor_amplitudes.size() == 0) {
@@ -67,6 +87,6 @@ bool Gauss::get_balanco_quebra() {
             return true;
         }
     }
-    
+
     return false;
 }

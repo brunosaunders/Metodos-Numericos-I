@@ -10,6 +10,7 @@ namespace metodos_numericos1::metodos
         private:
             double a;
             double amplitude_limite;
+            int trocas_de_linha;
             std::vector<double> vetor_v;
             std::vector<std::vector<double>> matriz_c;
             std::vector<double> vetor_d_deslocamentos;
@@ -22,13 +23,15 @@ namespace metodos_numericos1::metodos
             Gauss(std::vector<std::vector<double>> matriz_c,
                 std::vector<double> vetor_v, 
                 double a, double amp_limite=3.0) : a(a), matriz_c_inicial(matriz_c), vetor_v_inicial(vetor_v),
-                vetor_v(vetor_v), matriz_c(matriz_c), amplitude_limite(amp_limite) {}
+                vetor_v(vetor_v), matriz_c(matriz_c), amplitude_limite(amp_limite), trocas_de_linha(0) {}
 
             virtual void resolve_sistema_linear();
 
             bool get_balanco_quebra();
+            double get_determinante_matriz_c();
 
             double get_a();
+            int get_trocas_de_linha();
             std::vector<double> get_vetor_v_inicial();
             std::vector<std::vector<double>> get_matriz_c_inicial();
 
