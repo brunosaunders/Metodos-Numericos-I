@@ -55,3 +55,18 @@ void Gauss::set_matriz_c(vector<vector<double>> c) {
 void Gauss::set_vetor_d_deslocamentos(vector<double> vetor_d_deslocamentos) {
     this->vetor_d_deslocamentos = vetor_d_deslocamentos;
 }
+
+bool Gauss::get_balanco_quebra() {
+    vector<double> vetor_amplitudes = this->get_vetor_amplitudes();
+    if (vetor_amplitudes.size() == 0) {
+        throw runtime_error("Chame resolve_sistema_linear() antes.");
+    }
+
+    for (auto& valor : vetor_amplitudes) {
+        if (valor > this->amplitude_limite) {
+            return true;
+        }
+    }
+    
+    return false;
+}

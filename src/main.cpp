@@ -22,10 +22,14 @@ int main()
 
     GaussJordan* gauss_jordan = new GaussJordan(matriz_c, vetor_v, 2);
 
-    gauss_jordan->resolve_sistema_linear();
-    Imprimir::vetor(gauss_jordan->get_vetor_v());
-    Imprimir::vetor(gauss_jordan->get_vetor_v_inicial());
-
     Imprimir::matriz(gauss_jordan->get_matriz_c());
+
+    gauss_jordan->resolve_sistema_linear();
+    Imprimir::vetor(gauss_jordan->get_vetor_v_inicial());
+    Imprimir::vetor(gauss_jordan->get_vetor_d_deslocamentos()); // Vetor Resposta
+    Imprimir::vetor(gauss_jordan->get_vetor_amplitudes()); // Vetor Resposta multiplicado por 'a'
+
+    cout << gauss_jordan->get_balanco_quebra() << "\n";
+
     return 0;
 }

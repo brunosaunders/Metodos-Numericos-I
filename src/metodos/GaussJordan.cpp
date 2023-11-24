@@ -1,5 +1,6 @@
 #include "GaussJordan.hpp"
 #include <stdexcept>
+#include <iostream>
 
 using namespace metodos_numericos1::metodos;
 
@@ -35,5 +36,11 @@ void GaussJordan::resolve_sistema_linear() {
 
     this->set_matriz_c(matriz_c);
     this->set_vetor_v(vetor_v);
+
+    // Necessário pois diagonal principal pode não estar normalizada
+    for (int i = n-1; i >= 0; i--) {
+        vetor_v[i] = vetor_v[i] / matriz_c[i][i];
+    }
+
     this->set_vetor_d_deslocamentos(vetor_v); // Vetor resultado do sistema
 }
