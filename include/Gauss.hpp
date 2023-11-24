@@ -2,6 +2,7 @@
 #define METODOS_NUMERICOS1_INCLUDE_GAUSS_HPP_
 
 #include <vector>
+#include <string>
 
 namespace metodos_numericos1::metodos
 {
@@ -27,7 +28,7 @@ namespace metodos_numericos1::metodos
 
             virtual void resolve_sistema_linear();
 
-            bool get_balanco_quebra();
+            std::string get_balanco_quebra();
             double get_determinante_matriz_c();
 
             double get_a();

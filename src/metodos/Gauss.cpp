@@ -72,11 +72,11 @@ double Gauss::get_determinante_matriz_c() {
     for (int i=0; i < matriz_c.size(); i++) {
         det *= matriz_c[i][i];
     }
-    
+
     return det * std::pow(-1, this->trocas_de_linha);
 }
 
-bool Gauss::get_balanco_quebra() {
+string Gauss::get_balanco_quebra() {
     vector<double> vetor_amplitudes = this->get_vetor_amplitudes();
     if (vetor_amplitudes.size() == 0) {
         throw runtime_error("Chame resolve_sistema_linear() antes.");
@@ -84,9 +84,9 @@ bool Gauss::get_balanco_quebra() {
 
     for (auto& valor : vetor_amplitudes) {
         if (valor > this->amplitude_limite) {
-            return true;
+            return "sim";
         }
     }
 
-    return false;
+    return "não";
 }

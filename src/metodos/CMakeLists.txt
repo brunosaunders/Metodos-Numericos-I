@@ -1,4 +1,5 @@
 target_sources(${PROJECT_NAME} PRIVATE
     Gauss.cpp 
     GaussJordan.cpp
+    Cramer.cpp
 )

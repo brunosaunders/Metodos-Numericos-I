@@ -4,4 +4,5 @@ target_sources(${PROJECT_NAME} PRIVATE
     Utils.hpp
     Gauss.hpp
     GaussJordan.hpp
+    Cramer.hpp
 )

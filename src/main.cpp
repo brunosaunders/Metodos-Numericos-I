@@ -6,6 +6,7 @@
 #include "Painel.hpp"
 #include "Utils.hpp"
 #include "GaussJordan.hpp"
+#include "Cramer.hpp"
 
 
 using namespace std;
@@ -23,13 +24,22 @@ int main()
     GaussJordan* gauss_jordan = new GaussJordan(matriz_c, vetor_v, 2);
 
     Imprimir::matriz(gauss_jordan->get_matriz_c());
-
+    
+    cout << "Gauss-Jordan:\n";
     gauss_jordan->resolve_sistema_linear();
     Imprimir::vetor(gauss_jordan->get_vetor_v_inicial());
     Imprimir::vetor(gauss_jordan->get_vetor_d_deslocamentos()); // Vetor Resposta
     Imprimir::vetor(gauss_jordan->get_vetor_amplitudes()); // Vetor Resposta multiplicado por 'a'
+    cout << "Quebra?? -> " << gauss_jordan->get_balanco_quebra() << "\n";
 
-    cout << gauss_jordan->get_balanco_quebra() << "\n";
-    cout << gauss_jordan->get_determinante_matriz_c() << "\n";
+    cout << gauss_jordan->get_determinante_matriz_c() << "\n\n";
+
+    cout << "Cramer agora:\n";
+    Cramer* cramer = new Cramer(matriz_c, vetor_v, 2, 3);
+    cramer->resolve_sistema_linear();
+    cout << "Vetor_d_deslocamentos:\n";
+    Imprimir::vetor(cramer->get_vetor_d_deslocamentos()); // Errado no momento pois resolve_sistema_linear de Gauss não está implementado ainda.
+    cout << "Quebra?? -> " << cramer->get_balanco_quebra() << "\n";
+
     return 0;
 }
