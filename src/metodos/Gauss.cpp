@@ -2,10 +2,11 @@
 #include <stdexcept>
 #include <cmath>
 #include <utility>
+#include <iostream>
 using namespace std;
 using namespace metodos_numericos1::metodos;
 /*Aplica o tecnica de pivoteamento parcial*/
-pair<double,int> selecionar_pivo(vector<vector<double>> matrix, int line, int col, int n) { 
+pair<double,int> selecionar_pivo(vector<vector<double>> &matrix, int line, int col, int n) { 
     double max = abs(matrix[line][col]); 
     double pivo = matrix[line][col];
     int num_linha = line;
@@ -19,7 +20,7 @@ pair<double,int> selecionar_pivo(vector<vector<double>> matrix, int line, int co
     return pair<double,int>(pivo,num_linha); 
 }
 
-void trocar_linhas(vector<vector<double>> matrix,vector<double> v ,int linha1, int linha2, int n) { 
+void trocar_linhas(vector<vector<double>> &matrix,vector<double> &v ,int linha1, int linha2, int n) { 
     double t; 
     for (int i = 0; i < n; i++) { 
         t = matrix[linha1][i]; 
