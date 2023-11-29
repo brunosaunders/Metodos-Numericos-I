@@ -44,6 +44,7 @@ namespace metodos_numericos1::metodos
             void set_vetor_v(std::vector<double> v);
             void set_vetor_d_deslocamentos(std::vector<double> vetor_d_deslocamentos);
             void set_matriz_c(std::vector<std::vector<double>> c);
+            void set_trocas_de_linha(int trocas_de_linha); 
     };
 }
 
