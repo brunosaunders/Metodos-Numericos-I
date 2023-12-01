@@ -1,6 +1,9 @@
 #include "Gauss.hpp"
+#include "exceptions/PivoZeroException.hpp"
+#include <exception>
 #include <stdexcept>
 #include <cmath>
+#include <string>
 #include <utility>
 #include <iostream>
 using namespace std;
@@ -44,8 +47,7 @@ void Gauss::resolve_sistema_linear() {
         dupla  = selecionar_pivo(c_copia, i, i, n);
         double pv = dupla.first; 
         if (pv == 0) {
-            //TODO: Tratar caso em que não possui pivo não nulo na coluna
-            return; 
+            throw  metodos_numericos1::exceptions::PivoZeroException();
         }
         int num_linha = dupla.second;
         if (num_linha != i) {

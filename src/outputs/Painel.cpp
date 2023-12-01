@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 #include <memory>
 #include <string>
@@ -5,6 +6,7 @@
 #include <string>
 
 #include "Painel.hpp"
+#include "exceptions/PivoZeroException.hpp"
 #include "fmt/core.h"
 #include "fmt/format.h"
 #include "Gauss.hpp"
@@ -21,38 +23,41 @@ void Painel::init(std::vector<Gauss*> metodos){
     this->output(this->texto_menu_principal);
     std::cout << "R: ";
     std::cin >> escolha_usuario;
-
-    switch (escolha_usuario) {
-        case 0:
-            {
-                break;
-            }
-        case 1: 
-            {
-                // TODO
-            }
-        case 2: 
-            {
-                // TODO                
-            }
-        case 3: 
-            {
-                // TODO
-            }
-        case 4: 
-            {
-                // TODO
-            }
-        case 5: 
-            {
-                // TODO
-            }
-        default: 
-            {
-                Painel::formata_avisos(this->texto_entrada_invalida);
-                this->init(metodos);
-                break;
-            }
+    try {
+        switch (escolha_usuario) {
+            case 0:
+                {
+                    break;
+                }
+            case 1: 
+                {
+                    // TODO
+                }
+            case 2: 
+                {
+                    // TODO                
+                }
+            case 3: 
+                {
+                    // TODO
+                }
+            case 4: 
+                {
+                    // TODO
+                }
+            case 5: 
+                {
+                    // TODO
+                }
+            default: 
+                {
+                    Painel::formata_avisos(this->texto_entrada_invalida);
+                    this->init(metodos);
+                    break;
+                }
+        }
+    } catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
     }
 }
 

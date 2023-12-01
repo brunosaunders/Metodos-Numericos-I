@@ -3,6 +3,7 @@
 #include <vector> 
 #include <iomanip>
 
+#include "Gauss.hpp"
 #include "Painel.hpp"
 #include "Utils.hpp"
 #include "GaussJordan.hpp"
@@ -17,9 +18,17 @@ using namespace metodos_numericos1::metodos;
 int main()
 {
     Painel painel;
-    vector<vector<double>> matriz_c = {{1, 3, 2, 9}, {0, 3, 1, 1}, {0, 0, 2, 9}, {0, 0, 0, -2}};
+    vector<Gauss *> teste_gauss;
+
+    vector<vector<double>> matriz_c = {{0, 3, 2, 9}, {0, 3, 1, 1}, {0, 0, 2, 9}, {0, 0, 0, -2}};
 
     vector<double> vetor_v = {2, 0, 12, 9};
+
+    Gauss* gauss = new Gauss(matriz_c, vetor_v, 2);
+    teste_gauss.push_back(gauss);
+    painel.init(teste_gauss);
+
+    gauss->resolve_sistema_linear();
 
     GaussJordan* gauss_jordan = new GaussJordan(matriz_c, vetor_v, 2);
 
