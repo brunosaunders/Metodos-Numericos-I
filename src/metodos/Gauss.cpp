@@ -1,12 +1,86 @@
 #include "Gauss.hpp"
+#include "exceptions/PivoZeroException.hpp"
+#include <exception>
 #include <stdexcept>
 #include <cmath>
-
+#include <string>
+#include <utility>
+#include <iostream>
 using namespace std;
 using namespace metodos_numericos1::metodos;
+/*Aplica o tecnica de pivoteamento parcial*/
+pair<double,int> selecionar_pivo(vector<vector<double>> &matrix, int line, int col, int n) { 
+    double max = abs(matrix[line][col]); 
+    double pivo = matrix[line][col];
+    int num_linha = line;
+    for (int i = line +1; i < n; i++) {
+        if(abs(matrix[i][col]) > max){
+            pivo = matrix[i][col]; 
+            max = abs(pivo);
+            num_linha = i; 
+        } 
+    }
+    return pair<double,int>(pivo,num_linha); 
+}
+
+void trocar_linhas(vector<vector<double>> &matrix,vector<double> &v ,int linha1, int linha2, int n) { 
+    double t; 
+    for (int i = 0; i < n; i++) { 
+        t = matrix[linha1][i]; 
+        matrix[linha1][i] = matrix[linha2][i]; 
+        matrix[linha2][i] = t; 
+    }
+    t = v[linha1];  
+    v[linha1] = v[linha2]; 
+    v[linha2] = t; 
+}
 
 void Gauss::resolve_sistema_linear() {
-    // TODO
+    vector<vector<double>> c_copia = get_matriz_c_inicial();        
+    vector<double> v_copia = get_vetor_v_inicial(); 
+    int n = c_copia.size(); 
+    int matrix_trocas_de_linha = 0; 
+
+    //o indice "i" percorre as colunas 
+    for (int i = 0; i < n; i++) {
+        pair<double,int> dupla; 
+        dupla  = selecionar_pivo(c_copia, i, i, n);
+        double pv = dupla.first; 
+        if (pv == 0) {
+            throw  metodos_numericos1::exceptions::PivoZeroException();
+        }
+        int num_linha = dupla.second;
+        if (num_linha != i) {
+            matrix_trocas_de_linha++; 
+            trocar_linhas(c_copia,v_copia, i,num_linha, n);
+        }
+        double m; 
+        //Dada a coluna i, "j" percorre as linhas dessa coluna a partir da linha i+1
+        for (int j = i+1; j < n; j++) { 
+            m = (c_copia[j][i])/(pv); 
+            //"k" percorre as colunas, realizando a operação: L_j <- L_j - m*L_i
+            for (int k = i; k < n; k++){ 
+                c_copia[j][k] = c_copia[j][k] - m*(c_copia[i][k]); 
+            }
+            v_copia[j] = v_copia[j] - v_copia[i]*m; 
+        }
+    }
+
+    /*Cálculo dos d's*/ 
+    vector<double> resultados_d(n); 
+    for (int i = n-1; i >= 0; i--){ 
+        double sum = v_copia[i]; 
+        for (int j = i + 1; j < n; j++){ 
+          sum -= c_copia[i][j]*resultados_d[j]; 
+        }
+        resultados_d[i] = sum/c_copia[i][i]; 
+    }   
+
+    //No fim atualiza o estado dos atributos
+    set_vetor_d_deslocamentos(resultados_d); 
+    set_vetor_v(v_copia);
+    set_matriz_c(c_copia); 
+    set_trocas_de_linha(matrix_trocas_de_linha); 
     return;
 }
 
@@ -89,4 +163,8 @@ string Gauss::get_balanco_quebra() {
     }
 
     return "não";
+}
+
+void Gauss::set_trocas_de_linha(int trocas_de_linha) { 
+    this->trocas_de_linha = trocas_de_linha; 
 }
