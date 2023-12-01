@@ -1,6 +1,8 @@
 #VSCode
 *.vscode
 
+.trabalho-legado
+
 .idea
 cmake-build-debug
 build

@@ -4,6 +4,10 @@
 #include <vector> 
 
 namespace metodos_numericos1::outputs { 
-    void print_vector(std::vector<double> v);
+    class Imprimir {
+        public:
+            static void matriz(std::vector<std::vector<double>> matriz);
+            static void vetor(std::vector<double> v);
+    };
 }; 
 #endif
