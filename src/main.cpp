@@ -17,6 +17,7 @@ using namespace metodos_numericos1::metodos;
 
 int main()
 {
+    /*
     Painel painel;
     vector<Gauss *> teste_gauss;
 
@@ -49,6 +50,27 @@ int main()
     cout << "Vetor_d_deslocamentos:\n";
     Imprimir::vetor(cramer->get_vetor_d_deslocamentos()); // Errado no momento pois resolve_sistema_linear de Gauss não está implementado ainda.
     cout << "Quebra?? -> " << cramer->get_balanco_quebra() << "\n";
+    */
+
+    vector<vector<double>> matriz_c = {{10, 1, 1, 1}, {1, 10, 1, 1}, {1, 1, 10, 1}, {1, 1, 1, 10}};
+    vector<vector<double>> matriz_c2 = {{10, 1}, {1, 10}};
+    vector<vector<double>> matriz_c3 = {{10, 1, 1}, {1, 10, 1}, {1, 1, 10}};
+
+    vector<double> vetor_v = {12, 12, 12, 12};
+    vector<double> vetor_v2 = {12, 12};
+    vector<double> vetor_v3 = {12, 12, 12};
+
+    vector<Metodo *> metodos;
+
+    metodos.push_back(new Gauss(matriz_c, vetor_v, 1));
+    metodos[0]->resolve_sistema_linear();
+    metodos.push_back(new Cramer(matriz_c2, vetor_v2, 1));
+    metodos[1]->resolve_sistema_linear();
+    metodos.push_back(new GaussJordan(matriz_c3, vetor_v3, 1));
+    metodos[2]->resolve_sistema_linear();
+
+    Painel painel;
+    painel.imprimir_quadro_comparativo(metodos, 3);
 
     return 0;
 }

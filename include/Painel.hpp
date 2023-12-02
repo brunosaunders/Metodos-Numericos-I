@@ -93,15 +93,15 @@ namespace metodos_numericos1::outputs {
             const char *texto_entrada_invalida = 
                 "Entrada inválida. Teste novamente";
 
-            void init(std::vector<Gauss*> metodos);
+            void init(std::vector<Metodo*> metodos);
 
             void output(const char *texto_principal) const;
 
             void formata_avisos(const char *texto) const;
 
-            void imprimir_sistema_cadastrado(Gauss* metodo);
+            void imprimir_quadro_comparativo(std::vector<Metodo*> metodos, int precisao) const;
 
-            void imprimir_resultado_analise(Gauss* metodo);
+            void imprimir_sistema_cadastrado(Metodo* metodo);
 
             void imprimir_matriz(std::vector<std::vector<double>> matriz);
             void imprimir_vetor_coluna(std::vector<double> vetor);
