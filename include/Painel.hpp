@@ -88,7 +88,7 @@ namespace metodos_numericos1::outputs {
                 "Opção digitada invalida.";
 
             const char *texto_sistemas_resetados = 
-                "Pronto, todas os sistemas foram removidos.";
+                "Todos os sistemas foram removidos.";
 
             const char *texto_analise_um_sistema =
                 "Você escolheu 4 -> Mostrar análise de um sistema linear.\n";

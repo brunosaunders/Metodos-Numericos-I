@@ -35,6 +35,8 @@ void Painel::init(){
 
     try {
 
+        this->limpar_painel();
+
         repetir_painel = true;
         while (repetir_painel) {
 
@@ -214,8 +216,7 @@ void Painel::init(){
                     if (sistemas.size() > 0) {
 
                         sistemas.clear();
-                        this->limpar_painel();
-                        this->output(this->texto_sistemas_resetados);
+                        this->formata_avisos(this->texto_sistemas_resetados);
 
                     } else {
 
