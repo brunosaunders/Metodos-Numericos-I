@@ -7,33 +7,6 @@
 using namespace std;
 using namespace metodos_numericos1::metodos;
 
-vector<double> Cramer::get_vetor_d_deslocamentos() {
-    return this->vetor_d_deslocamentos;
-}
-
-vector<double> Cramer::get_vetor_amplitudes() {
-    vector<double> vetor_amplitudes = this->get_vetor_d_deslocamentos();
-    for (auto& item : vetor_amplitudes) {
-        item *= this->a;
-    }
-    return vetor_amplitudes;
-}
-
-string Cramer::get_balanco_quebra() {
-    vector<double> vetor_amplitudes = this->get_vetor_amplitudes();
-    if (vetor_amplitudes.size() == 0) {
-        throw runtime_error("Chame resolve_sistema_linear() antes.");
-    }
-
-    for (auto& valor : vetor_amplitudes) {
-        if (valor > this->amplitude_limite) {
-            return "sim";
-        }
-    }
-
-    return "não";
-}
-
 void Cramer::resolve_sistema_linear() {
     int n = this->matriz_c.size();
     vector<double> vetor_v = this->vetor_v;
@@ -58,4 +31,8 @@ void Cramer::resolve_sistema_linear() {
     }
 
     this->vetor_d_deslocamentos = vetor_d_deslocamentos;
+}
+
+std::string Cramer::get_nome_abreviado() {
+    return std::string("C");
 }

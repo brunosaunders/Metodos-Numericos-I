@@ -44,3 +44,7 @@ void GaussJordan::resolve_sistema_linear() {
 
     this->set_vetor_d_deslocamentos(vetor_v); // Vetor resultado do sistema
 }
+
+std::string GaussJordan::get_nome_abreviado() {
+    return std::string("G-J");
+}

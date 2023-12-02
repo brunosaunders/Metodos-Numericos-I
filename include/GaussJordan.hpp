@@ -10,6 +10,7 @@ namespace metodos_numericos1::metodos {
         public:
             GaussJordan(std::vector<std::vector<double>> matriz_c, std::vector<double> vetor_v, double a): Gauss(matriz_c, vetor_v, a) {}
             void resolve_sistema_linear() override;
+            std::string get_nome_abreviado() override;
     };
 }
 
