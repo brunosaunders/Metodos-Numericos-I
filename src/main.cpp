@@ -52,6 +52,9 @@ int main()
     cout << "Quebra?? -> " << cramer->get_balanco_quebra() << "\n";
     */
 
+    Painel painel;
+    painel.init();
+
     vector<vector<double>> matriz_c = {{10, 1, 1, 1}, {1, 10, 1, 1}, {1, 1, 10, 1}, {1, 1, 1, 10}};
     vector<vector<double>> matriz_c2 = {{10, 1}, {1, 10}};
     vector<vector<double>> matriz_c3 = {{10, 1, 1}, {1, 10, 1}, {1, 1, 10}};
@@ -69,8 +72,9 @@ int main()
     metodos.push_back(new GaussJordan(matriz_c3, vetor_v3, 1));
     metodos[2]->resolve_sistema_linear();
 
-    Painel painel;
-    painel.imprimir_quadro_comparativo(metodos, 3);
+    painel.imprimir_quadro_comparativo(metodos);
+
+    painel.imprimir_sistemas_cadastrados(metodos);
 
     return 0;
 }
