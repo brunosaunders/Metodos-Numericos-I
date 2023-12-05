@@ -25,7 +25,7 @@ string Metodo::get_balanco_quebra() {
     }
 
     for (auto& valor : vetor_amplitudes) {
-        if (valor > this->amplitude_limite) {
+        if (std::abs(valor) > this->amplitude_limite) {
             return "sim";
         }
     }
